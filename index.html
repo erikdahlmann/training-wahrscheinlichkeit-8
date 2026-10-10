@@ -422,7 +422,7 @@ function renderExercise(ex, host, opts = {}) {
     <div class="parts"></div>
     <div class="hints"></div>
     <div class="ex-actions">
-      ${ex.parts.some(p => PartTypes[p.t].needsCheck) ? '<button class="btn chk">Prüfen</button>' : ''}
+      ${ex.parts.some(p => { const nc = PartTypes[p.t].needsCheck; return typeof nc === 'function' ? nc(p) : nc; }) ? '<button class="btn chk">Prüfen</button>' : ''}
       ${ex.hints && ex.hints.length ? '<button class="btn soft hbtn">💡 Tipp</button>' : ''}
       ${ex.sol ? '<button class="btn ghost sbtn">Lösung zeigen</button>' : ''}
     </div>
@@ -824,8 +824,8 @@ function buildTree(spec) {
 }
 
 PartTypes.tree = {
-  needsCheck: true,
-  render(spec, body, fb) {
+  needsCheck: (p) => p.errorAt == null,
+  render(spec, body, fb, changed) {
     const { root, leaves } = buildTree(spec);
     const wrap = el('<div class="tree-wrap"></div>'); body.appendChild(wrap);
     const avail = Math.max(300, (body.clientWidth || 700) - 4);
@@ -885,8 +885,8 @@ PartTypes.tree = {
     if (spec.errorAt != null) {
       box.addEventListener('click', e => {
         const b = e.target.closest('button.given'); if (!b || c.state === true) return;
-        if (b.dataset.key === spec.errorAt) { b.style.borderColor = 'var(--ok)'; b.style.background = 'var(--ok-l)'; fb.className = 'fb ok'; fb.innerHTML = spec.okmsg || 'Gefunden!'; c.state = true; }
-        else { b.style.borderColor = 'var(--bad)'; fb.className = 'fb bad'; fb.innerHTML = 'Dieser Ast stimmt. Such weiter.'; c.state = false; }
+        if (b.dataset.key === spec.errorAt) { b.style.borderColor = 'var(--ok)'; b.style.background = 'var(--ok-l)'; fb.className = 'fb ok'; fb.innerHTML = spec.okmsg || 'Gefunden!'; c.state = true; changed && changed(); }
+        else { b.style.borderColor = 'var(--bad)'; fb.className = 'fb bad'; fb.innerHTML = 'Dieser Ast stimmt. Such weiter.'; c.state = false; owlSay(pick(MUT), 'think'); }
       });
       c.check = () => c.state === true;
       return c;
