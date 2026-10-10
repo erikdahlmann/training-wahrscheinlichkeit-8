@@ -1,0 +1,1899 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#fbf6ee">
+<title>Mathe-Training Klasse 8</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A6%89%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#fbf6ee; --card:#ffffff; --ink:#2b2533; --muted:#6c6475; --line:#e9e0d3; --soft:#f5efe5;
+  --pri:#5b45a8; --pri-d:#43337f; --pri-l:#ece6fb;
+  --coral:#e2574c; --coral-l:#fde7e4;
+  --mint:#1f8f6f; --mint-l:#dcf3ea;
+  --sun:#e9a11f; --sun-l:#fdf0d4;
+  --sky:#2f76b8; --sky-l:#e1eefa;
+  --ok:#1d7f53; --ok-l:#e3f5ea; --bad:#b93a29; --bad-l:#fbe9e5;
+  --r:18px; --sh:0 1px 2px rgba(43,37,51,.06),0 6px 20px rgba(43,37,51,.07);
+  --font: ui-rounded,"SF Pro Rounded","Nunito","Segoe UI Variable Display","Segoe UI",system-ui,-apple-system,sans-serif;
+  --num: ui-rounded,"SF Pro Rounded",system-ui,sans-serif;
+  color-scheme: light;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:18px;line-height:1.5;
+  -webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px;border-radius:8px}
+h1,h2,h3{line-height:1.2;margin:0 0 .5em}
+h2{font-size:1.5rem} h3{font-size:1.15rem}
+p{margin:.4em 0 .8em}
+.muted{color:var(--muted)}
+.small{font-size:.88rem}
+
+/* Kopfleiste */
+.top{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:12px;padding:8px 16px;
+  background:rgba(251,246,238,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;font-weight:800;font-size:1.05rem}
+.top .brand svg{width:40px;height:40px}
+.top .sp{flex:1}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:var(--card);border:1px solid var(--line);font-weight:700;font-size:.95rem;white-space:nowrap}
+.pill .st{color:var(--sun)}
+.iconbtn{min-width:44px;min-height:44px;border-radius:12px;border:1px solid var(--line);background:var(--card);cursor:pointer;font-size:1.1rem;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;color:inherit}
+
+main{max-width:980px;margin:0 auto;padding:16px 16px 140px}
+
+/* Startseite */
+.hero{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;background:var(--card);border-radius:var(--r);padding:18px 20px;box-shadow:var(--sh);margin:8px 0 18px}
+.hero svg.owl{width:110px;height:110px}
+.hero h1{font-size:1.65rem;margin-bottom:.2em}
+.hero p{margin:.2em 0}
+.bubble{position:relative;background:var(--pri-l);border-radius:16px;padding:10px 14px;display:inline-block;margin-top:6px}
+.namebox{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.namebox input{font:inherit;padding:8px 12px;border-radius:12px;border:2px solid var(--line);min-height:44px;width:180px}
+
+.map{position:relative;background:linear-gradient(180deg,#eef6f1,#f7f1e6);border-radius:var(--r);padding:12px;box-shadow:var(--sh);overflow:hidden}
+.map svg.road{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.stations{position:relative;display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.stn{display:grid;grid-template-columns:64px 1fr;gap:12px;align-items:center;text-decoration:none;color:inherit;background:var(--card);
+  border-radius:16px;padding:12px 14px;border:2px solid transparent;box-shadow:0 2px 8px rgba(43,37,51,.06);min-height:88px;transition:transform .12s ease,border-color .12s}
+.stn:hover{transform:translateY(-2px);border-color:var(--pri-l)}
+.stn:active{transform:scale(.98)}
+.stn .ic{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--c-l,var(--pri-l))}
+.stn .ic svg{width:44px;height:44px}
+.stn b{display:block;font-size:1.02rem}
+.stn .nr{font-size:.78rem;font-weight:800;letter-spacing:.04em;color:var(--c,var(--pri));text-transform:uppercase}
+.stn .bar{height:8px;border-radius:9px;background:var(--soft);margin-top:6px;overflow:hidden}
+.stn .bar i{display:block;height:100%;background:var(--c,var(--pri));transform-origin:left;border-radius:9px}
+.stn.done{border-color:var(--c,var(--pri))}
+.stn .badge{font-size:.8rem;color:var(--muted)}
+.sec-title{display:flex;align-items:center;gap:10px;margin:22px 4px 10px;font-size:1.05rem;font-weight:800;color:var(--muted)}
+.sec-title::after{content:"";flex:1;height:2px;background:var(--line);border-radius:2px}
+.wide{grid-column:1/-1}
+
+/* Stationsseite */
+.band{border-radius:var(--r);padding:18px 20px;margin:8px 0 16px;background:var(--c,var(--pri));color:#fff;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}
+.band h1{font-size:1.6rem;margin:0}
+.band .nr{opacity:.85;font-weight:800;font-size:.85rem;letter-spacing:.05em;text-transform:uppercase}
+.band svg{width:72px;height:72px}
+.band .prog{font-weight:700;margin-top:4px;opacity:.95}
+.card{background:var(--card);border-radius:var(--r);padding:18px 20px;box-shadow:var(--sh);margin:0 0 16px}
+.card > h2:first-child,.card > h3:first-child{margin-top:0}
+.merk{border-left:6px solid var(--c,var(--pri));background:var(--c-l,var(--pri-l))}
+.merk h3::before{content:"📌 "}
+.fehler{border-left:6px solid var(--coral);background:var(--coral-l)}
+.fehler h3::before{content:"⚠️ "}
+.tipp-box{border-left:6px solid var(--sun);background:var(--sun-l)}
+.formula{font-family:var(--num);font-size:1.1rem;background:rgba(255,255,255,.7);border-radius:10px;padding:8px 12px;display:inline-block;margin:4px 0}
+
+/* Brüche */
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.05;margin:0 2px;font-family:var(--num)}
+.fr > span:first-child{border-bottom:2px solid currentColor;padding:0 3px}
+.fr > span{padding:0 3px;font-size:.92em}
+
+/* Übungen */
+.ex{border:2px solid var(--line);box-shadow:none}
+.ex.solved{border-color:var(--ok);background:linear-gradient(180deg,#fff, #f6fcf8)}
+.ex-head{display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+.ex-head h3{margin:0;font-size:1.12rem;flex:1;min-width:200px}
+.lvl{font-size:.85rem;color:var(--sun);letter-spacing:1px;white-space:nowrap}
+.lvl .off{color:#ddd3c2}
+.check-ic{width:30px;height:30px;border-radius:50%;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:1rem;color:#bbb}
+.ex.solved .check-ic{background:var(--ok);color:#fff}
+.part{margin:12px 0}
+.part-label{margin-bottom:6px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+input.ans{font:inherit;font-family:var(--num);font-size:1.1rem;min-height:48px;width:150px;padding:6px 12px;border-radius:12px;border:2px solid #d9cfbf;background:#fff;color:var(--ink);text-align:center}
+input.ans:focus{border-color:var(--pri);outline:none;box-shadow:0 0 0 4px var(--pri-l)}
+input.ans.ok{border-color:var(--ok);background:var(--ok-l)}
+input.ans.bad{border-color:var(--bad);background:var(--bad-l)}
+input.ans.sm{width:84px;min-height:44px;font-size:1rem;padding:4px 6px}
+.fb{font-size:.95rem;margin-top:6px;min-height:0}
+.fb.ok{color:var(--ok)} .fb.bad{color:var(--bad)}
+.fb:empty{display:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:48px;padding:8px 18px;border-radius:14px;border:0;cursor:pointer;font-weight:800;font-size:1rem;background:var(--pri);color:#fff;text-decoration:none;transition:transform .1s ease, background .15s}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:var(--card);color:var(--pri);border:2px solid var(--pri-l)}
+.btn.soft{background:var(--pri-l);color:var(--pri-d)}
+.btn.warm{background:var(--sun);color:#3d2a00}
+.btn.sm{min-height:40px;padding:6px 12px;font-size:.92rem}
+.btn[disabled]{opacity:.45;cursor:default}
+.ex-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.hint{background:var(--sun-l);border-radius:12px;padding:10px 14px;margin-top:10px}
+.hint::before{content:"💡 ";}
+.sol{background:var(--sky-l);border-radius:12px;padding:12px 16px;margin-top:10px}
+.sol::before{content:"Lösung";display:block;font-weight:800;color:var(--sky);margin-bottom:4px}
+
+/* Auswahl */
+.opts{display:grid;gap:8px}
+.opt{text-align:left;min-height:48px;padding:10px 14px;border-radius:14px;border:2px solid var(--line);background:#fff;cursor:pointer;font-size:1rem;display:flex;gap:10px;align-items:center}
+.opt .k{flex:0 0 28px;height:28px;border-radius:50%;background:var(--soft);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem}
+.opt.sel{border-color:var(--pri);background:var(--pri-l)}
+.opt.ok{border-color:var(--ok);background:var(--ok-l)}
+.opt.bad{border-color:var(--bad);background:var(--bad-l)}
+.opts.cols2{grid-template-columns:1fr 1fr}
+
+/* Reihenfolge */
+.order-list{display:grid;gap:8px}
+.order-item{display:flex;gap:10px;align-items:center;text-align:left;min-height:48px;padding:10px 14px;border-radius:14px;border:2px dashed #d9cfbf;background:#fff;cursor:pointer;font-size:1rem}
+.order-item .n{flex:0 0 32px;height:32px;border-radius:50%;background:var(--soft);display:flex;align-items:center;justify-content:center;font-weight:800}
+.order-item.picked{border-style:solid;border-color:var(--pri);background:var(--pri-l)}
+.order-item.picked .n{background:var(--pri);color:#fff}
+.order-item.ok{border-color:var(--ok);background:var(--ok-l)} .order-item.ok .n{background:var(--ok)}
+
+/* Paare */
+.pairs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pairs .col{display:grid;gap:8px;align-content:start}
+.pair-it{min-height:52px;padding:8px 12px;border-radius:14px;border:2px solid var(--line);background:#fff;cursor:pointer;text-align:left;font-size:.98rem;display:flex;align-items:center;gap:8px}
+.pair-it.sel{border-color:var(--pri);box-shadow:0 0 0 4px var(--pri-l)}
+.pair-it .tag{min-width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:.8rem;color:#fff;background:#bbb}
+.pair-it.ok{border-color:var(--ok)}
+
+/* Tabellen */
+table.t{border-collapse:collapse;margin:8px 0;font-family:var(--num);min-width:100%}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table.t th,table.t td{border:1px solid var(--line);padding:6px 8px;text-align:center}
+table.t th{background:var(--soft);font-weight:800;text-align:left}
+table.t td input.ans{width:78px;min-height:42px;font-size:1rem;padding:2px 4px}
+
+/* Selbstkontrolle */
+.self-model{display:none}
+.self-model.show{display:block}
+.selfbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+
+/* Bildschirmtastatur */
+.keypad{position:fixed;left:50%;bottom:0;transform:translate(-50%,110%);z-index:80;background:#fff;border-radius:20px 20px 0 0;box-shadow:0 -8px 30px rgba(43,37,51,.18);padding:10px 12px calc(12px + env(safe-area-inset-bottom));width:min(440px,100%);transition:transform .2s ease}
+.keypad.show{transform:translate(-50%,0)}
+.keypad .kp-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:.9rem;color:var(--muted)}
+.keypad .kp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.keypad button{min-height:54px;border-radius:14px;border:0;background:var(--soft);font-size:1.3rem;font-weight:700;cursor:pointer;font-family:var(--num)}
+.keypad button:active{background:#e8dfd0}
+.keypad button.ok{background:var(--pri);color:#fff}
+.keypad button.fn{background:var(--pri-l);color:var(--pri-d)}
+
+/* Eule-Toast */
+.toast{position:fixed;right:16px;bottom:16px;z-index:70;display:flex;align-items:flex-end;gap:8px;pointer-events:none;opacity:0;transform:translateY(20px);transition:opacity .25s, transform .25s}
+.toast.show{opacity:1;transform:none}
+.toast .msg{background:#fff;border-radius:16px 16px 4px 16px;padding:10px 14px;box-shadow:var(--sh);max-width:260px;font-weight:700}
+.toast svg{width:70px;height:70px;flex:0 0 70px}
+body.kp-open .toast{bottom:330px}
+
+/* Konfetti */
+canvas.confetti{position:fixed;inset:0;pointer-events:none;z-index:90}
+
+/* Baum */
+.tree-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px}
+.tree{position:relative;margin:0 auto}
+.tree svg{position:absolute;inset:0;overflow:visible}
+.tree .edge{stroke:#b8ad9c;stroke-width:3;fill:none;stroke-linecap:round}
+.tree .edge.mark{stroke:var(--coral);stroke-width:5}
+.tree .node{position:absolute;transform:translate(-50%,-50%);width:40px;height:40px;border-radius:50%;background:#fff;border:2px solid #b8ad9c;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.95rem}
+.tree .node.root{width:14px;height:14px;background:#b8ad9c}
+.tree .lbl{position:absolute;transform:translate(-50%,-50%)}
+.tree .lbl .given{background:#fff;border-radius:8px;padding:1px 4px;font-family:var(--num);font-size:.95rem;display:inline-block}
+.tree .lbl input.ans{width:64px;min-height:40px;font-size:.95rem;padding:2px 4px;border-radius:10px}
+.tree .leaf{position:absolute;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:4px;width:var(--lw,80px)}
+.tree .leafbtn{min-width:56px;min-height:44px;border-radius:12px;border:2px solid var(--line);background:#fff;font-weight:800;cursor:pointer;font-size:.9rem;padding:2px 6px}
+.tree .leafbtn.mark{border-color:var(--coral);background:var(--coral-l);color:#8a2a20}
+.tree .leafbtn[disabled]{cursor:default}
+.tree .leaf input.ans{width:var(--lw,80px);max-width:96px;min-height:40px;font-size:.9rem;padding:2px}
+.tree .lvlname{position:absolute;left:0;font-size:.8rem;color:var(--muted);transform:translateY(-50%)}
+
+/* Simulator */
+.sim-ctrl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
+.seg{display:inline-flex;border-radius:14px;background:var(--soft);padding:4px;gap:4px}
+.seg button{border:0;background:transparent;min-height:42px;padding:6px 12px;border-radius:10px;cursor:pointer;font-weight:700}
+.seg button.on{background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.1);color:var(--pri)}
+.chart{width:100%;height:auto;display:block}
+.minis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.minis .mc{background:var(--soft);border-radius:12px;padding:6px}
+.minis .mc b{font-size:.8rem;display:block;text-align:center}
+
+/* Socke */
+.sock-stage{display:grid;grid-template-columns:minmax(180px,240px) 1fr;gap:16px;align-items:start}
+.sock-stage svg{width:100%;height:auto}
+.steps{display:grid;gap:10px}
+.step{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:8px 10px;border-radius:12px;background:var(--soft)}
+.step.cur{background:var(--pri-l)}
+.step .ball{width:34px;height:34px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:800;color:#fff}
+
+/* Baukasten */
+.builder{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.counter{display:flex;align-items:center;gap:8px}
+.counter button{width:48px;height:48px;border-radius:50%;border:0;background:var(--soft);font-size:1.4rem;font-weight:800;cursor:pointer}
+.counter .v{min-width:34px;text-align:center;font-weight:800;font-size:1.3rem}
+
+/* Geometrie */
+.geo{position:relative;border-radius:14px;overflow:hidden;border:2px solid var(--line);background:#fff;touch-action:none;user-select:none;-webkit-user-select:none}
+.geo canvas{display:block;width:100%;touch-action:none}
+.geo-tools{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.tool{min-height:52px;min-width:52px;padding:6px 12px;border-radius:14px;border:2px solid var(--line);background:#fff;cursor:pointer;font-weight:800;display:inline-flex;align-items:center;gap:6px;font-size:.95rem}
+.tool svg{width:28px;height:28px}
+.tool.on{border-color:var(--pri);background:var(--pri-l);color:var(--pri-d)}
+.geo-msg{min-height:3em;font-size:.95rem;color:var(--muted);margin:4px 2px}
+.geo-split{display:grid;grid-template-columns:1fr 200px;gap:14px;align-items:start}
+@media (max-width:920px){.geo-split{grid-template-columns:1fr}.planfig{display:grid;grid-template-columns:200px 1fr;gap:10px;align-items:center;order:-1}.planfig b{grid-column:1/-1}}
+.planfig{background:var(--soft);border-radius:14px;padding:8px}
+.planfig b{font-size:.85rem;display:block;margin:0 0 4px 4px}
+
+/* Probe-KA */
+.ka-sheet{background:#fff;border-radius:6px;box-shadow:var(--sh);padding:22px 26px;border-top:8px solid var(--pri)}
+.ka-sheet h3{margin-top:1.2em}
+.ka-sheet ol.sub{list-style:lower-alpha;padding-left:1.4em}
+.ka-sheet ol.sub li{margin:.3em 0}
+.timer{font-family:var(--num);font-size:1.6rem;font-weight:800;color:var(--pri)}
+.pts{display:grid;grid-template-columns:1fr auto;gap:8px 12px;align-items:center;border-top:1px solid var(--line);padding:10px 0}
+.pts .stepper{display:flex;align-items:center;gap:6px}
+.pts .stepper button{width:40px;height:40px;border-radius:50%;border:0;background:var(--soft);font-weight:800;font-size:1.2rem;cursor:pointer}
+.pts .stepper .v{min-width:56px;text-align:center;font-weight:800}
+
+.navrow{display:flex;justify-content:space-between;gap:10px;margin-top:20px;flex-wrap:wrap}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border-radius:999px;padding:4px 10px;background:var(--soft);font-size:.85rem;font-weight:700}
+
+.settings label{display:flex;align-items:center;gap:10px;min-height:48px}
+.settings input[type=checkbox]{width:26px;height:26px}
+
+@media (max-width:720px){
+  body{font-size:17px}
+  .stations{grid-template-columns:1fr}
+  .hero{grid-template-columns:1fr;text-align:center}
+  .hero svg.owl{margin:0 auto}
+  .geo-split{grid-template-columns:1fr}
+  .sock-stage{grid-template-columns:1fr}
+  .sock-stage svg{max-width:220px;margin:0 auto}
+  .opts.cols2{grid-template-columns:1fr}
+  .minis{grid-template-columns:repeat(2,1fr)}
+  .top .brand span{display:none}
+  .band svg{width:54px;height:54px}
+  .pairs{grid-template-columns:1fr 1fr;gap:6px}
+  .pair-it{font-size:.9rem}
+  .pts{grid-template-columns:1fr}
+  .tree .lvlname{font-size:.7rem}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media print{.top,.keypad,.toast,.ex-actions,.geo-tools{display:none!important} body{background:#fff}}
+.ball{display:inline-flex;align-items:center;justify-content:center;border-radius:50%;color:#fff;font-weight:800;vertical-align:middle;box-shadow:inset 0 -3px 0 rgba(0,0,0,.15)}
+.balls{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.intro{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}
+.intro .pic{width:120px}
+@media (max-width:720px){.intro{grid-template-columns:1fr}.intro .pic{display:none}}
+
+</style>
+</head>
+<body>
+<main id="main"></main>
+<noscript><p style="padding:20px">Bitte JavaScript einschalten.</p></noscript>
+<script>
+/* ===== Grundlagen ===== */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const el = (html) => { const t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstElementChild; };
+const esc = (s) => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const fr = (a, b) => `<span class="fr"><span>${a}</span><span>${b}</span></span>`;
+const pct = (v, d = 2) => (v * 100).toFixed(d).replace('.', ',') + ' %';
+const dez = (v, d = 2) => (+v.toFixed(d)).toString().replace('.', ',');
+const shuffle = (a) => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const pick = (a) => a[Math.floor(Math.random() * a.length)];
+const TOUCH = window.matchMedia && window.matchMedia('(pointer:coarse)').matches;
+
+/* ===== Speicher ===== */
+const KEY = 'klasse8-training-v1';
+let S = { done: {}, name: '', owl: true, confetti: true, ka: {}, badges: {} };
+try { const raw = localStorage.getItem(KEY); if (raw) S = Object.assign(S, JSON.parse(raw)); } catch (e) { }
+function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { } }
+
+/* ===== Eingaben lesen ===== */
+// liefert {v, kind} oder null; kind: 'frac' | 'dec' | 'pct'
+function parseAns(str) {
+  if (str == null) return null;
+  let s = String(str).trim().replace(/\s+/g, '').replace(/^P\(.*?\)=/i, '').replace(/^[≈=~]/, '').replace(/,/g, '.');
+  if (!s) return null;
+  let m;
+  if ((m = s.match(/^(-?\d+(?:\.\d+)?)%$/))) return { v: +m[1] / 100, kind: 'pct' };
+  if ((m = s.match(/^(-?\d+(?:\.\d+)?)\/(\d+(?:\.\d+)?)$/))) { if (+m[2] === 0) return null; return { v: +m[1] / +m[2], kind: 'frac' }; }
+  if ((m = s.match(/^-?\d+(?:\.\d+)?$/)) || (m = s.match(/^-?\.\d+$/))) return { v: +s, kind: 'dec' };
+  return null;
+}
+
+// prüft einen Zahlenteil. part: {ans, kind:'prob'|'num', tol, wrong:[{v,msg}], exact}
+function judgeNum(part, raw) {
+  const p = parseAns(raw);
+  if (!p) return { ok: false, msg: raw.trim() ? 'Das kann ich nicht lesen. Schreib z. B. 3/10, 0,3 oder 30 %.' : 'Hier fehlt noch etwas.' };
+  const kind = part.kind || 'prob';
+  let v = p.v;
+  if (kind === 'prob') {
+    if (v > 1 && p.kind === 'dec') {
+      if (Math.abs(v / 100 - part.ans) <= (part.tol ?? 0.0051)) return { ok: false, msg: `Fast! Meinst du ${raw.trim()} %? Schreib das %-Zeichen dazu.` };
+      return { ok: false, msg: 'Eine Wahrscheinlichkeit liegt immer zwischen 0 und 1 (also 0 % bis 100 %).' };
+    }
+    if (v > 1 || v < 0) return { ok: false, msg: 'Eine Wahrscheinlichkeit liegt immer zwischen 0 und 1 (also 0 % bis 100 %).' };
+  }
+  const tight = 1e-9;
+  let tol = kind === 'prob' ? (p.kind === 'frac' ? tight : (part.tol ?? 0.0051)) : (part.tol ?? 0.011);
+  if (part.exact) tol = tight;
+  for (const w of (part.wrong || [])) {
+    if (Math.abs(v - w.v) <= Math.min(tol, 0.0006) + tight && Math.abs(w.v - part.ans) > tight) return { ok: false, msg: w.msg };
+  }
+  if (Math.abs(v - part.ans) <= tol) {
+    if (kind === 'prob' && p.kind === 'frac' && part.ans * 100 % 1 !== 0) return { ok: true, msg: '' };
+    return { ok: true, msg: '' };
+  }
+  if (kind === 'prob' && p.kind === 'frac' && Math.abs(v - part.ans) <= 0.0051) return { ok: false, msg: 'Der Bruch ist nah dran, aber nicht genau. Rechne noch einmal exakt.' };
+  if (kind === 'prob' && Math.abs(v - part.ans) <= 0.02) return { ok: false, msg: 'Knapp daneben. Prüfe das Runden (zwei Nachkommastellen bei Prozent).' };
+  return { ok: false, msg: part.miss || pick(['Noch nicht richtig. Schau dir den Tipp an.', 'Das stimmt noch nicht. Rechne Schritt für Schritt.', 'Noch nicht. Was genau ist gefragt?']) };
+}
+
+/* ===== Bildschirmtastatur ===== */
+const Keypad = (() => {
+  let target = null, box = null;
+  function build() {
+    box = el(`<div class="keypad" role="group" aria-label="Zahlentastatur">
+      <div class="kp-top"><span>Bruch: 3/10 · Dezimal: 0,3 · Prozent: 30 %</span><button class="fn" data-k="hide" style="min-height:36px;padding:0 12px;font-size:.9rem">Fertig</button></div>
+      <div class="kp-grid">
+        ${['7', '8', '9', '⌫', '4', '5', '6', '/', '1', '2', '3', '%', '0', ',', 'C', '✓'].map(k => `<button data-k="${k}" class="${k === '✓' ? 'ok' : (['⌫', '/', '%', 'C'].includes(k) ? 'fn' : '')}">${k}</button>`).join('')}
+      </div></div>`);
+    document.body.appendChild(box);
+    box.addEventListener('pointerdown', e => e.preventDefault());
+    box.addEventListener('click', e => {
+      const b = e.target.closest('button'); if (!b || !target) return;
+      const k = b.dataset.k;
+      if (k === 'hide') return hide();
+      if (k === '⌫') target.value = target.value.slice(0, -1);
+      else if (k === 'C') target.value = '';
+      else if (k === '✓') { const t = target; hide(); t.dispatchEvent(new CustomEvent('enter', { bubbles: true })); return; }
+      else target.value += (k === '%' ? ' %' : k);
+      target.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+  }
+  function show(inp) {
+    if (!box) build();
+    target = inp; box.classList.add('show'); document.body.classList.add('kp-open');
+    setTimeout(() => { const r = inp.getBoundingClientRect(); const kh = box.offsetHeight; if (r.bottom > innerHeight - kh - 10) window.scrollBy({ top: r.bottom - (innerHeight - kh - 20), behavior: 'smooth' }); }, 60);
+  }
+  function hide() { if (box) box.classList.remove('show'); document.body.classList.remove('kp-open'); if (target) target.blur(); target = null; }
+  document.addEventListener('focusin', e => { const t = e.target; if (t.matches && t.matches('input.ans') && TOUCH) show(t); });
+  document.addEventListener('pointerdown', e => { if (!box || !box.classList.contains('show')) return; if (e.target.closest('.keypad') || e.target.matches('input.ans')) return; hide(); });
+  return { show, hide };
+})();
+function ansInput(cls = '', ph = '') {
+  return `<input class="ans ${cls}" type="text" ${TOUCH ? 'inputmode="none"' : 'inputmode="decimal"'} autocomplete="off" autocorrect="off" spellcheck="false" placeholder="${ph}">`;
+}
+document.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.matches && e.target.matches('input.ans')) { e.preventDefault(); e.target.dispatchEvent(new CustomEvent('enter', { bubbles: true })); } });
+
+/* ===== Eule und Konfetti ===== */
+const LOB = ['Stark!', 'Genau so!', 'Richtig, das sitzt.', 'Super gemacht!', 'Klasse, weiter so!', 'Yes! Richtig.', 'Sauber gerechnet!'];
+const MUT = ['Fast! Schau noch mal hin.', 'Noch nicht. Der Tipp hilft.', 'Fehler sind zum Lernen da.', 'Probier es noch einmal.'];
+let toastTimer;
+function owlSay(msg, mood = 'happy') {
+  if (!S.owl) return;
+  let t = $('.toast');
+  if (!t) { t = el(`<div class="toast" aria-live="polite"><div class="msg"></div><div class="o"></div></div>`); document.body.appendChild(t); }
+  $('.msg', t).textContent = msg; $('.o', t).innerHTML = owlSVG(mood);
+  t.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 2600);
+}
+function confetti() {
+  if (!S.confetti || matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  const c = el('<canvas class="confetti"></canvas>'); document.body.appendChild(c);
+  const dpr = devicePixelRatio || 1; c.width = innerWidth * dpr; c.height = innerHeight * dpr; const g = c.getContext('2d'); g.scale(dpr, dpr);
+  const cols = ['#5b45a8', '#e2574c', '#1f8f6f', '#e9a11f', '#2f76b8', '#f19ac0'];
+  const P = Array.from({ length: 140 }, () => ({ x: innerWidth / 2 + (Math.random() - .5) * 200, y: innerHeight * .35, vx: (Math.random() - .5) * 14, vy: -Math.random() * 14 - 4, r: Math.random() * 6 + 4, c: pick(cols), a: Math.random() * 6, va: (Math.random() - .5) * .3 }));
+  let f = 0;
+  (function loop() {
+    g.clearRect(0, 0, innerWidth, innerHeight);
+    for (const p of P) { p.vy += .35; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.a += p.va; g.save(); g.translate(p.x, p.y); g.rotate(p.a); g.fillStyle = p.c; g.fillRect(-p.r / 2, -p.r / 4, p.r, p.r / 2); g.restore(); }
+    if (++f < 150) requestAnimationFrame(loop); else c.remove();
+  })();
+}
+
+/* ===== Übungs-Motor =====
+   ex = {id, st:1..3, title, q, parts:[...], hints:[...], sol}
+   part-Typen: num, mc, order, pair, self, tree, geo, table, custom
+*/
+const PartTypes = {};
+function stars(n) { return `<span class="lvl" title="${['', 'leicht', 'mittel', 'Klassenarbeit-Niveau'][n]}">${'★'.repeat(n)}<span class="off">${'★'.repeat(3 - n)}</span></span>`; }
+
+function renderExercise(ex, host, opts = {}) {
+  const card = el(`<section class="card ex" id="ex-${ex.id}">
+    <div class="ex-head"><div class="check-ic">✓</div><h3>${ex.title}</h3>${stars(ex.st || 1)}</div>
+    ${ex.q ? `<div class="q">${ex.q}</div>` : ''}
+    <div class="parts"></div>
+    <div class="hints"></div>
+    <div class="ex-actions">
+      ${ex.parts.some(p => PartTypes[p.t].needsCheck) ? '<button class="btn chk">Prüfen</button>' : ''}
+      ${ex.hints && ex.hints.length ? '<button class="btn soft hbtn">💡 Tipp</button>' : ''}
+      ${ex.sol ? '<button class="btn ghost sbtn">Lösung zeigen</button>' : ''}
+    </div>
+    <div class="solbox"></div></section>`);
+  host.appendChild(card);
+  const ctl = []; const partsEl = $('.parts', card);
+  ex.parts.forEach((p, i) => {
+    const pe = el(`<div class="part">${p.label ? `<div class="part-label">${p.label}</div>` : ''}<div class="pbody"></div><div class="fb"></div></div>`);
+    partsEl.appendChild(pe);
+    const c = PartTypes[p.t].render(p, $('.pbody', pe), $('.fb', pe), () => onPartChange());
+    c.part = p; ctl.push(c);
+  });
+  const isDone = () => !!S.done[ex.id];
+  function markSolved(quiet) {
+    card.classList.add('solved');
+    if (!isDone()) { S.done[ex.id] = 1; save(); if (!quiet) { owlSay(pick(LOB), 'cheer'); } updateProgress(); }
+    opts.onSolved && opts.onSolved();
+  }
+  function onPartChange() {
+    // automatisch fertig, wenn alle Teile ohne Prüfen-Knopf erledigt sind
+    if (ctl.every(c => c.state === true)) markSolved();
+  }
+  function checkAll() {
+    let all = true, anyBad = false;
+    for (const c of ctl) { const r = c.check ? c.check() : c.state === true; if (!r) { all = false; if (c.state === false) anyBad = true; } }
+    if (all) markSolved(); else if (anyBad) owlSay(pick(MUT), 'think');
+  }
+  const chk = $('.chk', card); if (chk) chk.onclick = checkAll;
+  card.addEventListener('enter', (e) => { checkAll(); });
+  let hi = 0;
+  const hb = $('.hbtn', card); if (hb) hb.onclick = () => {
+    if (hi < ex.hints.length) { $('.hints', card).appendChild(el(`<div class="hint">${ex.hints[hi]}</div>`)); hi++; }
+    if (hi >= ex.hints.length) hb.disabled = true;
+  };
+  const sb = $('.sbtn', card); if (sb) sb.onclick = () => {
+    const box = $('.solbox', card);
+    if (box.firstChild) { box.innerHTML = ''; sb.textContent = 'Lösung zeigen'; return; }
+    box.appendChild(el(`<div class="sol">${ex.sol}</div>`)); sb.textContent = 'Lösung ausblenden';
+  };
+  if (isDone()) card.classList.add('solved');
+  return card;
+}
+
+/* Zahl-Eingabe */
+PartTypes.num = {
+  needsCheck: true,
+  render(p, body, fb, changed) {
+    body.innerHTML = `<div class="row">${p.pre ? `<span>${p.pre}</span>` : ''}${ansInput('', p.ph || '')}${p.post ? `<span>${p.post}</span>` : ''}</div>`;
+    const inp = $('input', body);
+    const c = {
+      state: null, check() {
+        const r = judgeNum(p, inp.value);
+        inp.classList.toggle('ok', r.ok); inp.classList.toggle('bad', !r.ok);
+        fb.className = 'fb ' + (r.ok ? 'ok' : 'bad'); fb.innerHTML = r.ok ? (p.okmsg || 'Richtig!') : r.msg;
+        c.state = r.ok; return r.ok;
+      }
+    };
+    inp.addEventListener('input', () => { inp.classList.remove('ok', 'bad'); fb.textContent = ''; c.state = null; });
+    return c;
+  }
+};
+
+/* Tabelle mit Eingabefeldern: p.head (Array), p.rows: [{label, cells:[text | {ans, kind, tol}]}] */
+PartTypes.table = {
+  needsCheck: true,
+  render(p, body, fb) {
+    const fields = [];
+    const t = el(`<div class="tw"><table class="t"><thead><tr><th>${p.corner || ''}</th>${p.head.map(h => `<th style="text-align:center">${h}</th>`).join('')}</tr></thead><tbody></tbody></table></div>`);
+    const tb = $('tbody', t);
+    p.rows.forEach(r => {
+      const tr = el(`<tr><th>${r.label}</th></tr>`);
+      r.cells.forEach(cell => {
+        const td = document.createElement('td');
+        if (cell && typeof cell === 'object') { td.innerHTML = ansInput('sm'); fields.push({ inp: $('input', td), part: cell }); }
+        else td.innerHTML = cell;
+        tr.appendChild(td);
+      });
+      tb.appendChild(tr);
+    });
+    body.appendChild(t);
+    const c = {
+      state: null, check() {
+        let ok = true, msg = '';
+        for (const f of fields) {
+          const r = judgeNum(f.part, f.inp.value);
+          f.inp.classList.toggle('ok', r.ok); f.inp.classList.toggle('bad', !r.ok);
+          if (!r.ok) { ok = false; if (!msg) msg = r.msg; }
+        }
+        fb.className = 'fb ' + (ok ? 'ok' : 'bad'); fb.innerHTML = ok ? (p.okmsg || 'Alle Felder richtig!') : 'Rot markierte Felder stimmen noch nicht. ' + msg;
+        c.state = ok; return ok;
+      }
+    };
+    fields.forEach(f => f.inp.addEventListener('input', () => { f.inp.classList.remove('ok', 'bad'); c.state = null; }));
+    return c;
+  }
+};
+
+/* Auswahl: p.opts, p.ok (Array der richtigen Indizes), p.multi, p.why {i: text} */
+PartTypes.mc = {
+  needsCheck: false,
+  render(p, body, fb, changed) {
+    const L = 'ABCDEFGH';
+    const order = p.keep ? p.opts.map((_, i) => i) : shuffle(p.opts.map((_, i) => i));
+    body.innerHTML = `<div class="opts ${p.cols ? 'cols2' : ''}">${order.map((i, k) => `<button class="opt" data-i="${i}"><span class="k">${L[k]}</span><span>${p.opts[i]}</span></button>`).join('')}</div>${p.multi ? '<div class="row" style="margin-top:8px"><button class="btn sm mcgo">Auswahl prüfen</button><span class="small muted">Mehrere Antworten können richtig sein.</span></div>' : ''}`;
+    const c = { state: null };
+    const sel = new Set();
+    function verdict() {
+      const okSet = new Set(p.ok);
+      const right = sel.size === okSet.size && [...sel].every(i => okSet.has(i));
+      $$('.opt', body).forEach(b => { const i = +b.dataset.i; b.classList.remove('ok', 'bad'); if (sel.has(i)) b.classList.add(okSet.has(i) ? 'ok' : 'bad'); });
+      if (right) { fb.className = 'fb ok'; fb.innerHTML = p.okmsg || 'Richtig!'; c.state = true; $$('.opt', body).forEach(b => b.disabled = true); changed(); }
+      else {
+        const wrongPick = [...sel].find(i => !okSet.has(i));
+        fb.className = 'fb bad';
+        fb.innerHTML = (wrongPick != null && p.why && p.why[wrongPick]) ? p.why[wrongPick] : (p.multi && [...sel].every(i => okSet.has(i)) ? 'Richtig, aber es fehlt noch mindestens eine Antwort.' : 'Noch nicht ganz.');
+        c.state = false; owlSay(pick(MUT), 'think');
+      }
+    }
+    body.addEventListener('click', e => {
+      const b = e.target.closest('.opt'); if (b && !b.disabled) {
+        const i = +b.dataset.i;
+        if (p.multi) { sel.has(i) ? sel.delete(i) : sel.add(i); b.classList.toggle('sel'); b.classList.remove('ok', 'bad'); fb.textContent = ''; }
+        else { sel.clear(); sel.add(i); verdict(); }
+      }
+      if (e.target.closest('.mcgo')) verdict();
+    });
+    return c;
+  }
+};
+
+/* Reihenfolge durch Antippen: p.items in richtiger Reihenfolge */
+PartTypes.order = {
+  needsCheck: false,
+  render(p, body, fb, changed) {
+    const idx = shuffle(p.items.map((_, i) => i));
+    body.innerHTML = `<p class="small muted">Tippe die Karten in der richtigen Reihenfolge an. Nochmal tippen nimmt eine Karte zurück.</p><div class="order-list">${idx.map(i => `<button class="order-item" data-i="${i}"><span class="n"></span><span>${p.items[i]}</span></button>`).join('')}</div><div class="row" style="margin-top:8px"><button class="btn sm ghost oreset">Neu anfangen</button></div>`;
+    const seq = []; const c = { state: null };
+    function paint() {
+      $$('.order-item', body).forEach(b => { const k = seq.indexOf(+b.dataset.i); b.classList.toggle('picked', k >= 0); $('.n', b).textContent = k >= 0 ? k + 1 : ''; b.classList.remove('ok'); });
+    }
+    body.addEventListener('click', e => {
+      if (e.target.closest('.oreset')) { seq.length = 0; paint(); fb.textContent = ''; c.state = null; return; }
+      const b = e.target.closest('.order-item'); if (!b || c.state === true) return;
+      const i = +b.dataset.i; const k = seq.indexOf(i);
+      if (k >= 0) seq.splice(k, 1); else seq.push(i);
+      paint(); fb.textContent = '';
+      if (seq.length === p.items.length) {
+        const firstWrong = seq.findIndex((v, k) => v !== k);
+        if (firstWrong < 0) { $$('.order-item', body).forEach(b => b.classList.add('ok')); fb.className = 'fb ok'; fb.innerHTML = p.okmsg || 'Richtige Reihenfolge!'; c.state = true; changed(); }
+        else { fb.className = 'fb bad'; fb.innerHTML = `Die ersten ${firstWrong} Karten passen${firstWrong === 0 ? ' noch nicht' : ''}. Ab Karte ${firstWrong + 1} stimmt es nicht. Tippe Karten an, um sie zurückzunehmen.`; c.state = false; owlSay(pick(MUT), 'think'); }
+      }
+    });
+    return c;
+  }
+};
+
+/* Paare durch Antippen: p.left, p.right, p.map[li] = ri */
+PartTypes.pair = {
+  needsCheck: false,
+  render(p, body, fb, changed) {
+    const cols = ['#5b45a8', '#e2574c', '#1f8f6f', '#e9a11f', '#2f76b8', '#b04a8f'];
+    const ro = shuffle(p.right.map((_, i) => i));
+    body.innerHTML = `<p class="small muted">Tippe links eine Karte an und dann rechts die passende.</p><div class="pairs"><div class="col L">${p.left.map((t, i) => `<button class="pair-it" data-l="${i}"><span class="tag"></span><span>${t}</span></button>`).join('')}</div><div class="col R">${ro.map(i => `<button class="pair-it" data-r="${i}"><span class="tag"></span><span>${p.right[i]}</span></button>`).join('')}</div></div>`;
+    const link = {}; let curL = null; const c = { state: null };
+    function paint() {
+      $$('[data-l]', body).forEach(b => { const l = +b.dataset.l; const has = link[l] != null; $('.tag', b).style.background = has ? cols[l % 6] : '#ccc'; $('.tag', b).textContent = has ? l + 1 : ''; b.classList.toggle('sel', curL === l); });
+      $$('[data-r]', body).forEach(b => { const r = +b.dataset.r; const l = Object.keys(link).find(k => link[k] === r); $('.tag', b).style.background = l != null ? cols[l % 6] : '#ccc'; $('.tag', b).textContent = l != null ? (+l + 1) : ''; });
+    }
+    body.addEventListener('click', e => {
+      if (c.state === true) return;
+      const bl = e.target.closest('[data-l]'), br = e.target.closest('[data-r]');
+      if (bl) { curL = +bl.dataset.l; paint(); return; }
+      if (br && curL != null) {
+        const r = +br.dataset.r; for (const k in link) if (link[k] === r) delete link[k];
+        link[curL] = r; curL = null; paint();
+        if (Object.keys(link).length === p.left.length) {
+          const wrong = p.left.filter((_, l) => link[l] !== p.map[l]).length;
+          if (!wrong) { fb.className = 'fb ok'; fb.innerHTML = p.okmsg || 'Alle Paare passen!'; c.state = true; $$('.pair-it', body).forEach(b => b.classList.add('ok')); changed(); }
+          else { fb.className = 'fb bad'; fb.innerHTML = `${wrong} ${wrong === 1 ? 'Paar passt' : 'Paare passen'} noch nicht. Tippe links an und wähle neu.`; c.state = false; owlSay(pick(MUT), 'think'); }
+        }
+      }
+    });
+    paint();
+    return c;
+  }
+};
+
+/* Selbstkontrolle für Begründungen */
+PartTypes.self = {
+  needsCheck: false,
+  render(p, body, fb, changed) {
+    body.innerHTML = `<p class="small muted">${p.where || 'Schreib deine Antwort ins Heft oder in deine Notizen. Dann vergleiche.'}</p><button class="btn sm soft show">Musterantwort vergleichen</button><div class="self-model sol" style="margin-top:10px">${p.model}<div class="selfbtns"><button class="btn sm yes">✓ Hatte ich so ähnlich</button><button class="btn sm ghost no">Noch nicht, ich lese es nach</button></div></div>`;
+    const c = { state: null };
+    $('.show', body).onclick = () => $('.self-model', body).classList.add('show');
+    $('.yes', body).onclick = () => { c.state = true; fb.className = 'fb ok'; fb.textContent = 'Prima!'; changed(); };
+    $('.no', body).onclick = () => { c.state = true; fb.className = 'fb ok'; fb.textContent = 'Gut, dass du es nachliest. Beim nächsten Mal klappt es.'; changed(); };
+    return c;
+  }
+};
+
+/* Eigene Bausteine: p.render(body, fb, done) */
+PartTypes.custom = {
+  needsCheck: false,
+  render(p, body, fb, changed) {
+    const c = { state: null };
+    const api = p.render(body, fb, (ok) => { c.state = ok; if (ok) changed(); });
+    if (api && api.check) { c.check = () => { const r = api.check(); c.state = r; return r; }; PartTypes.custom.needsCheck = false; }
+    return c;
+  }
+};
+PartTypes.customCheck = {
+  needsCheck: true,
+  render(p, body, fb, changed) {
+    const c = { state: null };
+    const api = p.render(body, fb, (ok) => { c.state = ok; });
+    c.check = () => { const r = api.check(); c.state = r; return r; };
+    return c;
+  }
+};
+
+/* ===== Stationen und Navigation ===== */
+const STATIONS = []; // {id, nr, title, short, color, colorL, icon, part:'W'|'G', build(host)}
+function station(def) { STATIONS.push(def); }
+const EXIDS = {}; // station id -> [exercise ids]
+function exList(sid, list) { EXIDS[sid] = list.map(e => e.id); return list; }
+function stProgress(sid) { const ids = EXIDS[sid] || []; const d = ids.filter(i => S.done[i]).length; return { d, n: ids.length }; }
+function totalStars() { let d = 0, n = 0; for (const k in EXIDS) { const p = stProgress(k); d += p.d; n += p.n; } return { d, n }; }
+
+function updateProgress() {
+  const t = totalStars();
+  const pill = $('#starpill'); if (pill) pill.innerHTML = `<span class="st">★</span> ${t.d} / ${t.n}`;
+  const cur = STATIONS.find(s => s.id === location.hash.slice(1));
+  if (cur) {
+    const p = stProgress(cur.id); const pe = $('.band .prog'); if (pe) pe.textContent = `${p.d} von ${p.n} Aufgaben geschafft`;
+    if (p.n && p.d === p.n && !S.badges[cur.id]) { S.badges[cur.id] = 1; save(); setTimeout(() => { confetti(); owlSay(`Station geschafft: ${cur.badge}!`, 'cheer'); }, 400); }
+  }
+}
+
+function header() {
+  return `<header class="top"><a class="brand" href="#start" aria-label="Zur Lernkarte">${owlSVG('happy')}<span>Mathe-Training Klasse 8</span></a><div class="sp"></div>
+  <span class="pill" id="starpill"></span><a class="iconbtn" href="#spick" title="Spickzettel" aria-label="Spickzettel">📒</a><a class="iconbtn" href="#einst" title="Einstellungen" aria-label="Einstellungen">⚙️</a></header>`;
+}
+
+function route() {
+  Keypad.hide();
+  const id = location.hash.slice(1) || 'start';
+  const main = $('main'); main.innerHTML = '';
+  window.scrollTo(0, 0);
+  const st = STATIONS.find(s => s.id === id);
+  if (st) {
+    const p = stProgress(st.id);
+    main.style.setProperty('--c', st.color); main.style.setProperty('--c-l', st.colorL);
+    main.appendChild(el(`<div class="band"><div><div class="nr">${st.nr}</div><h1>${st.title}</h1><div class="prog">${p.d} von ${p.n} Aufgaben geschafft</div></div>${st.icon}</div>`));
+    st.build(main);
+    const i = STATIONS.indexOf(st); const prev = STATIONS[i - 1], next = STATIONS[i + 1];
+    main.appendChild(el(`<div class="navrow">${prev ? `<a class="btn ghost" href="#${prev.id}">← ${prev.short}</a>` : '<span></span>'}<a class="btn soft" href="#start">Lernkarte</a>${next ? `<a class="btn" href="#${next.id}">${next.short} →</a>` : '<span></span>'}</div>`));
+  } else if (PAGES[id]) { main.style.removeProperty('--c'); main.style.removeProperty('--c-l'); PAGES[id](main); }
+  else { location.hash = 'start'; return; }
+  updateProgress();
+  try { localStorage.setItem(KEY + '-last', id); } catch (e) { }
+}
+const PAGES = {};
+
+PAGES.start = (main) => {
+  const name = S.name ? `, ${esc(S.name)}` : '';
+  const t = totalStars();
+  const tip = t.d === 0 ? 'Fang am besten oben links an. Du kannst aber jede Station frei wählen.' : (t.d < t.n ? `Du hast schon ${t.d} Sterne gesammelt. Weiter geht’s!` : 'Alles geschafft! Jetzt die Probe-Klassenarbeit?');
+  main.appendChild(el(`<section class="hero">${owlSVG('wave', 'owl')}<div><h1>Hallo${name}! 👋</h1>
+    <p>Hier trainierst du für die Klassenarbeit: <b>Wahrscheinlichkeit</b> und ein bisschen <b>Dreiecke</b>.</p>
+    <div class="bubble">${tip}</div>
+    ${S.name ? '' : `<div class="namebox"><input id="nm" placeholder="Dein Vorname" aria-label="Dein Vorname"><button class="btn sm" id="nmok">Los geht’s</button></div>`}
+    </div></section>`));
+  const nm = $('#nm'); if (nm) { $('#nmok').onclick = () => { S.name = nm.value.trim().slice(0, 20); save(); route(); }; nm.addEventListener('keydown', e => { if (e.key === 'Enter') $('#nmok').click(); }); }
+  const card = (s) => { const p = stProgress(s.id); const pc = p.n ? p.d / p.n : 0; return `<a class="stn ${p.n && p.d === p.n ? 'done' : ''}" href="#${s.id}" style="--c:${s.color};--c-l:${s.colorL}"><div class="ic">${s.icon}</div><div><span class="nr">${s.nr}</span><b>${s.title}</b><div class="badge">${p.d === p.n && p.n ? '🏅 ' + s.badge : `${p.d} / ${p.n} ★ · ca. ${s.min} min`}</div><div class="bar"><i style="transform:scaleX(${pc})"></i></div></div></a>`; };
+  const W = STATIONS.filter(s => s.part === 'W'), G = STATIONS.filter(s => s.part === 'G');
+  const m = el(`<section class="map"><div class="sec-title" style="margin-top:4px">🎲 Teil A · Wahrscheinlichkeit</div><div class="stations">${W.map(card).join('')}</div>
+    <div class="sec-title">📐 Teil B · Dreiecke</div><div class="stations">${G.map(card).join('')}</div>
+    <div class="sec-title">🏁 Ziel</div><div class="stations">
+      <a class="stn" href="#ka" style="--c:#43337f;--c-l:#ece6fb"><div class="ic">${iconFlag()}</div><div><span class="nr">Generalprobe</span><b>Probe-Klassenarbeit</b><div class="badge">Teil 1 ohne Hilfsmittel, Teil 2 mit Taschenrechner · Erwartungshorizont</div></div></a>
+      <a class="stn" href="#spick" style="--c:#e9a11f;--c-l:#fdf0d4"><div class="ic" style="font-size:2rem">📒</div><div><span class="nr">Zum Wiederholen</span><b>Spickzettel</b><div class="badge">Alle Merksätze auf einer Seite</div></div></a>
+    </div></section>`);
+  main.appendChild(m);
+};
+
+PAGES.einst = (main) => {
+  main.appendChild(el(`<section class="card settings"><h2>Einstellungen</h2>
+    <label><input type="checkbox" id="o1" ${S.owl ? 'checked' : ''}> Eule gibt Rückmeldungen</label>
+    <label><input type="checkbox" id="o2" ${S.confetti ? 'checked' : ''}> Konfetti, wenn eine Station geschafft ist</label>
+    <label>Vorname: <input id="o3" class="ans" style="width:200px;text-align:left" value="${esc(S.name || '')}"></label>
+    <p class="small muted">Dein Fortschritt wird nur auf diesem Gerät gespeichert.</p>
+    <div class="row"><button class="btn" id="osave">Speichern</button><button class="btn ghost" id="oreset">Fortschritt löschen</button></div></section>`));
+  $('#o3').removeAttribute('inputmode');
+  $('#osave').onclick = () => { S.owl = $('#o1').checked; S.confetti = $('#o2').checked; S.name = $('#o3').value.trim().slice(0, 20); save(); location.hash = 'start'; };
+  $('#oreset').onclick = () => { if (confirm('Wirklich alle Sterne löschen?')) { S.done = {}; S.badges = {}; S.ka = {}; save(); location.hash = 'start'; } };
+};
+
+function boot() {
+  document.body.insertBefore(el(header()), document.body.firstChild);
+  STATIONS.forEach(s => { if (s.exercises) EXIDS[s.id] = s.exercises.map(e => e.id); });
+  window.addEventListener('hashchange', route);
+  if (!location.hash) { let last = null; try { last = localStorage.getItem(KEY + '-last'); } catch (e) { } location.hash = last || 'start'; }
+  route();
+}
+
+/* ===== Eigene Bilder (SVG) ===== */
+function owlSVG(mood = 'happy', cls = '') {
+  const wingL = mood === 'cheer' ? 'M24 58 Q8 40 14 26 Q22 40 32 50Z' : 'M24 52 Q14 66 22 80 Q28 70 32 60Z';
+  const wingR = (mood === 'cheer' || mood === 'wave') ? 'M76 58 Q92 40 86 26 Q78 40 68 50Z' : 'M76 52 Q86 66 78 80 Q72 70 68 60Z';
+  const py = mood === 'think' ? -3 : 0, px = mood === 'think' ? 2 : 0;
+  const brow = mood === 'think' ? '<path d="M28 30 Q36 25 44 29" stroke="#3a2c63" stroke-width="2.5" fill="none" stroke-linecap="round"/>' : '';
+  const blush = (mood === 'cheer' || mood === 'happy' || mood === 'wave') ? '<ellipse cx="27" cy="52" rx="5" ry="3" fill="#f6a5b8" opacity=".7"/><ellipse cx="73" cy="52" rx="5" ry="3" fill="#f6a5b8" opacity=".7"/>' : '';
+  const eye = (cx) => mood === 'cheer'
+    ? `<path d="M${cx - 8} ${42} Q${cx} ${33} ${cx + 8} ${42}" stroke="#2b2533" stroke-width="3.5" fill="none" stroke-linecap="round"/>`
+    : `<circle cx="${cx}" cy="40" r="12" fill="#fff"/><circle cx="${cx + px}" cy="${41 + py}" r="6" fill="#2b2533"/><circle cx="${cx + px + 2}" cy="${39 + py}" r="2" fill="#fff"/>`;
+  return `<svg class="${cls}" viewBox="0 0 100 100" aria-hidden="true">
+    <ellipse cx="50" cy="94" rx="26" ry="4" fill="#000" opacity=".08"/>
+    <path d="${wingL}" fill="#5b45a8"/><path d="${wingR}" fill="#5b45a8"/>
+    <path d="M26 20 L32 34 L40 26Z M74 20 L68 34 L60 26Z" fill="#5b45a8"/>
+    <ellipse cx="50" cy="56" rx="28" ry="34" fill="#7a62c4"/>
+    <ellipse cx="50" cy="66" rx="18" ry="20" fill="#efe6ff"/>
+    <path d="M42 62 q4 3 8 0 q4 3 8 0 M40 70 q5 3 10 0 q5 3 10 0" stroke="#cbbcef" stroke-width="2" fill="none"/>
+    ${blush}${eye(36)}${eye(64)}${brow}
+    <path d="M45 48 L55 48 L50 56Z" fill="#f2a33a"/>
+    <path d="M40 89 l-3 5 M44 89 l0 5 M48 89 l3 5 M56 89 l-3 5 M60 89 l0 5 M64 89 l3 5" stroke="#f2a33a" stroke-width="2.5" stroke-linecap="round"/>
+    ${mood === 'wave' ? '<text x="86" y="22" font-size="14">✨</text>' : ''}
+  </svg>`;
+}
+function dieFace(n, size = 40, fill = '#fff', pip = '#2b2533') {
+  const P = { 1: [[2, 2]], 2: [[1, 1], [3, 3]], 3: [[1, 1], [2, 2], [3, 3]], 4: [[1, 1], [3, 1], [1, 3], [3, 3]], 5: [[1, 1], [3, 1], [2, 2], [1, 3], [3, 3]], 6: [[1, 1], [3, 1], [1, 2], [3, 2], [1, 3], [3, 3]] }[n];
+  return `<svg viewBox="0 0 40 40" width="${size}" height="${size}" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="${fill}" stroke="#2b2533" stroke-width="2"/>${P.map(([x, y]) => `<circle cx="${x * 10}" cy="${y * 10}" r="3.6" fill="${pip}"/>`).join('')}</svg>`;
+}
+const iconDice = () => `<svg viewBox="0 0 48 48"><g transform="rotate(-12 24 24)"><rect x="6" y="6" width="30" height="30" rx="7" fill="#fff" stroke="#2b2533" stroke-width="2.5"/><circle cx="14" cy="14" r="3" fill="#e2574c"/><circle cx="21" cy="21" r="3" fill="#e2574c"/><circle cx="28" cy="28" r="3" fill="#e2574c"/></g><rect x="26" y="24" width="18" height="18" rx="5" fill="#5b45a8" transform="rotate(14 35 33)"/><circle cx="35" cy="33" r="2.6" fill="#fff"/></svg>`;
+const iconWheel = () => `<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="#fff" stroke="#2b2533" stroke-width="2"/>${[0, 1, 2, 3, 4, 5].map(i => { const a = i * Math.PI / 3, b = (i + 1) * Math.PI / 3; return `<path d="M24 24 L${24 + 19 * Math.cos(a)} ${24 + 19 * Math.sin(a)} A19 19 0 0 1 ${24 + 19 * Math.cos(b)} ${24 + 19 * Math.sin(b)}Z" fill="${['#e2574c', '#e9a11f', '#1f8f6f', '#2f76b8', '#e9a11f', '#1f8f6f'][i]}"/>`; }).join('')}<circle cx="24" cy="24" r="3.5" fill="#2b2533"/><path d="M24 24 L24 9" stroke="#2b2533" stroke-width="3" stroke-linecap="round"/></svg>`;
+const iconTree = () => `<svg viewBox="0 0 48 48" fill="none" stroke-linecap="round"><path d="M24 6 L12 22 M24 6 L36 22 M12 22 L6 40 M12 22 L18 40 M36 22 L30 40 M36 22 L42 40" stroke="#2b2533" stroke-width="2.5"/><path d="M24 6 L36 22 L30 40" stroke="#e2574c" stroke-width="4"/>${[[24, 6], [12, 22], [36, 22], [6, 40], [18, 40], [30, 40], [42, 40]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="3.6" fill="#fff" stroke="#2b2533" stroke-width="2"/>`).join('')}</svg>`;
+const iconSock = () => `<svg viewBox="0 0 48 48"><path d="M14 4 h16 v22 l8 8 a6 6 0 0 1 -8 9 l-14 -12 a6 6 0 0 1 -2 -4z" fill="#f2c0d3" stroke="#2b2533" stroke-width="2.2" stroke-linejoin="round"/><path d="M14 4 h16 v6 h-16z" fill="#e2574c"/><circle cx="20" cy="24" r="4" fill="#5b45a8"/><circle cx="27" cy="30" r="4" fill="#1f8f6f"/></svg>`;
+const iconTarget = () => `<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="19" fill="#fff" stroke="#2b2533" stroke-width="2"/><circle cx="24" cy="24" r="13" fill="#fde7e4"/><circle cx="24" cy="24" r="7" fill="#e2574c"/><path d="M24 24 L40 8" stroke="#2b2533" stroke-width="2.5" stroke-linecap="round"/><path d="M36 6 L42 6 L42 12" stroke="#2b2533" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>`;
+const iconLoupe = () => `<svg viewBox="0 0 48 48"><circle cx="20" cy="20" r="13" fill="#e1eefa" stroke="#2b2533" stroke-width="3"/><path d="M30 30 L42 42" stroke="#2b2533" stroke-width="5" stroke-linecap="round"/><circle cx="16" cy="18" r="3" fill="#fff"/><circle cx="23" cy="23" r="3" fill="#2f76b8"/></svg>`;
+const iconCompass = () => `<svg viewBox="0 0 48 48" fill="none" stroke-linecap="round"><path d="M24 6 L12 42 M24 6 L36 42" stroke="#2b2533" stroke-width="3"/><circle cx="24" cy="7" r="3.5" fill="#e9a11f" stroke="#2b2533" stroke-width="2"/><path d="M8 36 A20 20 0 0 0 40 36" stroke="#5b45a8" stroke-width="2.5" stroke-dasharray="3 3"/></svg>`;
+const iconCongruent = () => `<svg viewBox="0 0 48 48"><path d="M6 38 L22 38 L10 14Z" fill="#fde7e4" stroke="#e2574c" stroke-width="2.5" stroke-linejoin="round"/><path d="M26 34 L42 34 L30 10Z" fill="#dcf3ea" stroke="#1f8f6f" stroke-width="2.5" stroke-linejoin="round" transform="rotate(10 34 22)"/><text x="20" y="11" font-size="11" font-weight="800" fill="#2b2533">≅</text></svg>`;
+const iconFlag = () => `<svg viewBox="0 0 48 48"><path d="M12 6 V44" stroke="#2b2533" stroke-width="3" stroke-linecap="round"/><path d="M13 7 H38 L32 15 L38 23 H13Z" fill="#5b45a8"/><path d="M13 7 h6 v4 h-6z M25 7 h6 v4 h-6z M19 11 h6 v4 h-6z M31 11 h4 v4 h-4z M13 15 h6 v4 h-6z M25 15 h6 v4 h-6z M19 19 h6 v4 h-6z" fill="#fff"/></svg>`;
+
+// Socke mit Kugeln: balls = [{t:'U', c:'#..'}]
+function sockSVG(balls, opts = {}) {
+  const pos = [[62, 120], [98, 126], [80, 150], [116, 154], [54, 152], [96, 178], [130, 184], [70, 182], [112, 102], [56, 94]];
+  const b = balls.map((x, i) => { const [cx, cy] = pos[i % pos.length]; return `<g class="sb"><circle cx="${cx}" cy="${cy}" r="15" fill="${x.c}" stroke="rgba(0,0,0,.25)" stroke-width="1.5"/><circle cx="${cx - 5}" cy="${cy - 6}" r="4" fill="#fff" opacity=".45"/><text x="${cx}" y="${cy + 6}" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="ui-rounded,system-ui">${x.t}</text></g>`; }).join('');
+  return `<svg viewBox="0 0 200 256" aria-label="Socke mit ${balls.length} Kugeln">
+    <path d="M40 20 h90 v120 l40 40 a26 26 0 0 1 -36 38 l-82 -70 a30 30 0 0 1 -12 -22z" fill="#f7d6e2" stroke="#2b2533" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M40 20 h90 v28 h-90z" fill="#e2574c" stroke="#2b2533" stroke-width="3"/>
+    <path d="M40 30 h90 M40 38 h90" stroke="#fff" stroke-width="2.5" opacity=".7"/>
+    <path d="M150 188 a26 26 0 0 0 -16 -8" stroke="#e2574c" stroke-width="6" fill="none" opacity=".5"/>
+    ${b}
+    ${opts.label ? `<text x="100" y="250" text-anchor="middle" font-size="13" fill="#6c6475" font-family="ui-rounded,system-ui">${opts.label}</text>` : ''}
+  </svg>`;
+}
+const BALLC = { U: '#5b45a8', H: '#e2574c', O: '#1f8f6f', M: '#2f76b8', A: '#e9a11f', N: '#b04a8f', S: '#2f76b8', r: '#e2574c', b: '#2f76b8', s: '#2b2533', g: '#e9a11f', w: '#c9c2b8' };
+function ball(t, c, size = 34) { return `<span class="ball" style="background:${c || BALLC[t] || '#888'};width:${size}px;height:${size}px">${t}</span>`; }
+
+// Glücksrad: sectors=[{w, c, t}]
+function wheelSVG(sectors, size = 220, sel = null) {
+  const tot = sectors.reduce((a, s) => a + s.w, 0); let a0 = -Math.PI / 2; const R = 95, cx = 100, cy = 100;
+  const paths = sectors.map((s, i) => {
+    const a1 = a0 + s.w / tot * 2 * Math.PI; const large = (a1 - a0) > Math.PI ? 1 : 0; const am = (a0 + a1) / 2;
+    const d = `M${cx} ${cy} L${cx + R * Math.cos(a0)} ${cy + R * Math.sin(a0)} A${R} ${R} 0 ${large} 1 ${cx + R * Math.cos(a1)} ${cy + R * Math.sin(a1)}Z`;
+    const tx = cx + R * .68 * Math.cos(am), ty = cy + R * .68 * Math.sin(am);
+    const on = sel && sel.has(i);
+    const out = `<g class="sec" data-i="${i}" style="cursor:pointer"><path d="${d}" fill="${s.c}" stroke="#fff" stroke-width="2.5" ${on ? 'opacity="1"' : (sel ? 'opacity=".55"' : '')}/>${on ? `<path d="${d}" fill="none" stroke="#2b2533" stroke-width="4"/>` : ''}${s.t != null ? `<text x="${tx}" y="${ty + 6}" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="ui-rounded,system-ui" pointer-events="none">${s.t}</text>` : ''}</g>`;
+    a0 = a1; return out;
+  }).join('');
+  return `<svg viewBox="0 0 200 200" width="${size}" height="${size}" role="img" aria-label="Glücksrad">${paths}<circle cx="100" cy="100" r="9" fill="#2b2533"/><path d="M100 100 L100 30" stroke="#2b2533" stroke-width="5" stroke-linecap="round"/><path d="M92 38 L100 24 L108 38Z" fill="#2b2533"/></svg>`;
+}
+
+/* ===== Baumdiagramm-Werkstatt =====
+ spec = {
+   depth, levelNames?: [..],
+   branches(path) -> [{lab, p, show}]   // show = Anzeigetext (HTML) für vorgegebene Äste
+   ask: 'all' | 'none' | (path, k) => bool
+   mark?: (leafPath) => bool            // Zielpfade zum Markieren
+   leafAsk?: bool                       // Pfadwahrscheinlichkeit unter markierten Zielpfaden eintragen
+   errorAt?: 'a,b|k'                    // Fehlersuche: falscher Ast (Pfad-Schlüssel + Index)
+   alt?: (path, k, v) => msg|null       // eigene Rückmeldung für typische Fehlwerte
+   leafText?: (path) => string
+ }
+*/
+function buildTree(spec) {
+  const leaves = [];
+  function grow(path, prob, depth) {
+    const node = { path, prob, kids: [] };
+    if (depth < spec.depth) {
+      spec.branches(path).forEach((b, k) => {
+        if (b.p === 0 && spec.dropZero) return;
+        const ch = grow(path.concat(b.lab), prob * b.p, depth + 1);
+        ch.edge = b; ch.k = k; ch.parent = node; node.kids.push(ch);
+      });
+    } else leaves.push(node);
+    return node;
+  }
+  const root = grow([], 1, 0);
+  return { root, leaves };
+}
+
+PartTypes.tree = {
+  needsCheck: true,
+  render(spec, body, fb) {
+    const { root, leaves } = buildTree(spec);
+    const wrap = el('<div class="tree-wrap"></div>'); body.appendChild(wrap);
+    const avail = Math.max(300, (body.clientWidth || 700) - 4);
+    const L = leaves.length, LM = spec.levelNames ? (avail < 500 ? 46 : 64) : 0;
+    const deepAsk = spec.ask === 'all' || (typeof spec.ask === 'function' && leaves.some(n => spec.ask(n.parent.path, n.k)));
+    const lw = Math.max(deepAsk ? 98 : 64, Math.min(deepAsk ? 120 : 104, Math.floor((avail - LM) / L)));
+    const W = Math.max(LM + lw * L, 300), GAP = spec.gap || 104, TOP = 26;
+    const H = TOP + spec.depth * GAP + (spec.leafAsk ? 110 : 64);
+    const box = el(`<div class="tree" style="width:${W}px;height:${H}px;--lw:${lw - 8}px"></div>`); wrap.appendChild(box);
+    leaves.forEach((n, i) => n.x = LM + lw * (i + .5));
+    (function setX(n) { if (n.kids.length) { n.kids.forEach(setX); n.x = n.kids.reduce((a, c) => a + c.x, 0) / n.kids.length; } })(root);
+    const all = []; (function walk(n, d) { n.d = d; n.y = TOP + d * GAP; all.push(n); n.kids.forEach(c => walk(c, d + 1)); })(root, 0);
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(svgNS, 'svg'); svg.setAttribute('width', W); svg.setAttribute('height', H); box.appendChild(svg);
+    const asked = [];
+    const isAsk = (n) => spec.ask === 'all' || (typeof spec.ask === 'function' && spec.ask(n.parent.path, n.k));
+    all.forEach(n => {
+      if (n.parent) {
+        const ln = document.createElementNS(svgNS, 'line');
+        ln.setAttribute('x1', n.parent.x); ln.setAttribute('y1', n.parent.y); ln.setAttribute('x2', n.x); ln.setAttribute('y2', n.y); ln.setAttribute('class', 'edge');
+        svg.appendChild(ln); n.line = ln;
+        // Beschriftung neben dem Ast
+        const t = .55, mx = n.parent.x + (n.x - n.parent.x) * t, my = n.parent.y + (n.y - n.parent.y) * t;
+        const dir = Math.sign(n.x - n.parent.x);
+        const lab = el('<div class="lbl"></div>'); box.appendChild(lab);
+        let content;
+        if (spec.errorAt != null) {
+          content = el(`<button class="given" style="border:2px solid var(--line);min-height:40px;min-width:48px;border-radius:10px;cursor:pointer">${n.edge.show}</button>`);
+          content.dataset.key = n.parent.path.join(',') + '|' + n.k;
+        } else if (isAsk(n)) { content = el(ansInput()); asked.push({ n, inp: content }); }
+        else content = el(`<span class="given">${n.edge.show}</span>`);
+        lab.appendChild(content);
+        requestAnimationFrame(() => { const w = lab.offsetWidth || 56; const off = dir === 0 ? 0 : dir * (w / 2 + 6); lab.style.left = (mx + off) + 'px'; lab.style.top = my + 'px'; });
+        lab.style.left = (mx + dir * 34) + 'px'; lab.style.top = my + 'px';
+      }
+      const nd = el(`<div class="node ${n.parent ? '' : 'root'}" style="left:${n.x}px;top:${n.y}px">${n.parent ? n.edge.lab : ''}</div>`);
+      box.appendChild(nd);
+    });
+    if (spec.levelNames) spec.levelNames.forEach((t, i) => box.appendChild(el(`<div class="lvlname" style="top:${TOP + (i + 1) * GAP}px">${t}</div>`)));
+    // Blätter
+    const marked = new Set(); const leafInputs = new Map();
+    leaves.forEach((n, i) => {
+      const txt = spec.leafText ? spec.leafText(n.path) : n.path.join('');
+      const lf = el(`<div class="leaf" style="left:${n.x}px;top:${n.y + 26}px"><button class="leafbtn" ${spec.mark ? '' : 'disabled'}>${txt}</button></div>`);
+      box.appendChild(lf); n.leafEl = lf;
+      if (spec.mark) $('.leafbtn', lf).onclick = () => {
+        if (marked.has(i)) { marked.delete(i); const li = leafInputs.get(i); if (li) { li.remove(); leafInputs.delete(i); } }
+        else { marked.add(i); if (spec.leafAsk) { const inp = el(ansInput('', 'P = ?')); lf.appendChild(inp); leafInputs.set(i, inp); } }
+        paintMarks(); fb.textContent = '';
+      };
+    });
+    function paintMarks() {
+      all.forEach(n => n.line && n.line.classList.remove('mark'));
+      leaves.forEach((n, i) => { $('.leafbtn', n.leafEl).classList.toggle('mark', marked.has(i)); if (marked.has(i)) { let m = n; while (m.parent) { m.line.classList.add('mark'); m = m.parent; } } });
+    }
+    const c = { state: null };
+    if (spec.errorAt != null) {
+      box.addEventListener('click', e => {
+        const b = e.target.closest('button.given'); if (!b || c.state === true) return;
+        if (b.dataset.key === spec.errorAt) { b.style.borderColor = 'var(--ok)'; b.style.background = 'var(--ok-l)'; fb.className = 'fb ok'; fb.innerHTML = spec.okmsg || 'Gefunden!'; c.state = true; }
+        else { b.style.borderColor = 'var(--bad)'; fb.className = 'fb bad'; fb.innerHTML = 'Dieser Ast stimmt. Such weiter.'; c.state = false; }
+      });
+      c.check = () => c.state === true;
+      return c;
+    }
+    asked.forEach(a => a.inp.addEventListener('input', () => { a.inp.classList.remove('ok', 'bad'); }));
+    c.check = () => {
+      let ok = true; const msgs = [];
+      asked.forEach(({ n, inp }) => {
+        const r = judgeNum({ ans: n.edge.p, kind: 'prob', tol: 0.0051 }, inp.value);
+        inp.classList.toggle('ok', r.ok); inp.classList.toggle('bad', !r.ok);
+        if (!r.ok) {
+          ok = false;
+          const v = (parseAns(inp.value) || {}).v;
+          const alt = spec.alt && v != null ? spec.alt(n.parent.path, n.k, v) : null;
+          if (alt) msgs.push(alt);
+        }
+      });
+      // Summe an Verzweigungen
+      if (!ok && asked.length) {
+        for (const n of all) {
+          if (!n.kids.length) continue;
+          const vals = n.kids.map(k => { const a = asked.find(x => x.n === k); return a ? (parseAns(a.inp.value) || {}).v : k.edge.p; });
+          if (vals.every(v => v != null) && Math.abs(vals.reduce((s, v) => s + v, 0) - 1) > 0.011) { msgs.push('Achtung: An jeder Verzweigung ergeben die Äste zusammen 1 (also 100 %).'); break; }
+        }
+      }
+      if (spec.mark) {
+        const target = new Set(leaves.map((n, i) => spec.mark(n.path) ? i : -1).filter(i => i >= 0));
+        const hit = [...marked].filter(i => target.has(i)).length, extra = [...marked].filter(i => !target.has(i)).length;
+        if (hit !== target.size || extra) {
+          ok = false;
+          msgs.push(extra ? `Mindestens ein markierter Pfad passt nicht zum Ereignis${spec.markLabel ? ' „' + spec.markLabel + '“' : ''}.` : `Du hast ${hit} von ${target.size} passenden Pfaden markiert. Es fehlen noch welche.`);
+        } else if (spec.leafAsk) {
+          let lok = true;
+          leafInputs.forEach((inp, i) => {
+            const r = judgeNum({ ans: leaves[i].prob, kind: 'prob', tol: 0.0051 }, inp.value);
+            inp.classList.toggle('ok', r.ok); inp.classList.toggle('bad', !r.ok); if (!r.ok) lok = false;
+          });
+          if (!lok) { ok = false; msgs.push('Pfadregel: Multipliziere die Wahrscheinlichkeiten entlang des Pfades.'); }
+        }
+      }
+      fb.className = 'fb ' + (ok ? 'ok' : 'bad');
+      fb.innerHTML = ok ? (spec.okmsg || 'Der Baum stimmt!') : (msgs[0] || 'Rot markierte Felder stimmen noch nicht.');
+      c.state = ok; return ok;
+    };
+    return c;
+  }
+};
+
+/* nur anzeigen (für Lösungen und Erklärungen) – liefert HTML-Element */
+function treeView(spec, host) {
+  const fb = el('<div class="fb"></div>');
+  const s = Object.assign({ ask: 'none' }, spec);
+  PartTypes.tree.render(s, host, fb);
+}
+
+/* ===== Simulatoren und interaktive Bausteine ===== */
+function barsSVG(vals, labels, opts = {}) {
+  const W = opts.w || 520, H = opts.h || 220, pad = 30, n = vals.length, bw = (W - pad - 10) / n;
+  const max = opts.max || Math.max(.4, ...vals) * 1.1;
+  const y = (v) => H - 26 - v / max * (H - 46);
+  const cols = opts.cols || Array(n).fill('#5b45a8');
+  let s = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Säulendiagramm">`;
+  for (let t = 0; t <= max + 1e-9; t += (max > .6 ? .2 : .1)) s += `<line x1="${pad}" x2="${W - 6}" y1="${y(t)}" y2="${y(t)}" stroke="#eee6da"/><text x="${pad - 4}" y="${y(t) + 4}" font-size="11" text-anchor="end" fill="#6c6475">${Math.round(t * 100)}%</text>`;
+  if (opts.ref != null) s += `<line x1="${pad}" x2="${W - 6}" y1="${y(opts.ref)}" y2="${y(opts.ref)}" stroke="#e2574c" stroke-width="2" stroke-dasharray="6 5"/><text x="${W - 8}" y="${y(opts.ref) - 5}" font-size="11" text-anchor="end" fill="#e2574c">${opts.refLabel || ''}</text>`;
+  vals.forEach((v, i) => {
+    const x = pad + 6 + i * bw;
+    s += `<rect x="${x}" y="${y(v)}" width="${bw - 12}" height="${Math.max(0, H - 26 - y(v))}" rx="5" fill="${cols[i]}"/>`;
+    if (!opts.noVal) s += `<text x="${x + (bw - 12) / 2}" y="${y(v) - 5}" font-size="12" text-anchor="middle" font-weight="700" fill="#2b2533">${(v * 100).toFixed(opts.dec ?? 1).replace('.', ',')}%</text>`;
+    s += `<text x="${x + (bw - 12) / 2}" y="${H - 8}" font-size="14" text-anchor="middle" font-weight="800" fill="#2b2533">${labels[i]}</text>`;
+  });
+  return s + '</svg>';
+}
+function rollWeighted(w) { const t = w.reduce((a, b) => a + b, 0); let r = Math.random() * t; for (let i = 0; i < w.length; i++) { r -= w[i]; if (r < 0) return i; } return w.length - 1; }
+
+/* Würfel-Simulator mit Gesetz der großen Zahlen */
+function diceSim(host) {
+  const box = el(`<section class="card"><h3>🎲 Würfel-Labor</h3>
+    <p>Würfle mit einem fairen oder einem <b>gezinkten</b> Würfel. Achte darauf, wie die Säulen sich bei wenigen und bei vielen Würfen verhalten.</p>
+    <div class="sim-ctrl"><div class="seg" role="group"><button data-d="fair" class="on">fairer Würfel</button><button data-d="zink">gezinkter Würfel</button></div></div>
+    <div class="sim-ctrl"><button class="btn sm" data-n="1">+1</button><button class="btn sm" data-n="10">+10</button><button class="btn sm" data-n="100">+100</button><button class="btn sm" data-n="1000">+1000</button><button class="btn sm ghost" data-n="0">Neu</button><span class="pill" id="dn">0 Würfe</span></div>
+    <div class="dchart"></div><div class="tw dtab"></div></section>`);
+  host.appendChild(box);
+  const W = { fair: [1, 1, 1, 1, 1, 1], zink: [.1, .1, .1, .1, .25, .35] };
+  let mode = 'fair', cnt = [0, 0, 0, 0, 0, 0];
+  function paint() {
+    const n = cnt.reduce((a, b) => a + b, 0);
+    $('#dn', box).textContent = n + (n === 1 ? ' Wurf' : ' Würfe');
+    $('.dchart', box).innerHTML = barsSVG(cnt.map(c => n ? c / n : 0), [1, 2, 3, 4, 5, 6], { ref: 1 / 6, refLabel: '1/6 ≈ 16,7 %', max: .6, cols: ['#5b45a8', '#5b45a8', '#5b45a8', '#5b45a8', '#e2574c', '#e2574c'].map((c, i) => mode === 'fair' ? '#5b45a8' : '#8d7bc9') });
+    $('.dtab', box).innerHTML = `<table class="t"><tr><th>Augenzahl</th>${[1, 2, 3, 4, 5, 6].map(i => `<th style="text-align:center">${i}</th>`).join('')}</tr><tr><th>absolute Häufigkeit</th>${cnt.map(c => `<td>${c}</td>`).join('')}</tr><tr><th>relative Häufigkeit</th>${cnt.map(c => `<td>${n ? pct(c / n, 1) : '–'}</td>`).join('')}</tr></table>`;
+  }
+  box.addEventListener('click', e => {
+    const d = e.target.closest('[data-d]'); if (d) { mode = d.dataset.d; $$('[data-d]', box).forEach(b => b.classList.toggle('on', b === d)); cnt = [0, 0, 0, 0, 0, 0]; paint(); }
+    const b = e.target.closest('[data-n]'); if (b) { const k = +b.dataset.n; if (!k) cnt = [0, 0, 0, 0, 0, 0]; for (let i = 0; i < k; i++) cnt[rollWeighted(W[mode])]++; paint(); }
+  });
+  paint();
+}
+
+/* Vier Versuchsreihen nebeneinander */
+function friendsRuns(host) {
+  const box = el(`<section class="card"><h3>👭 Vier Freundinnen würfeln mit demselben fairen Würfel</h3>
+    <p>Jede würfelt gleich oft. Vergleiche die vier Diagramme. Wann sehen sie sich ähnlich?</p>
+    <div class="sim-ctrl"><div class="seg"><button data-k="10" class="on">je 10 Würfe</button><button data-k="100">je 100</button><button data-k="2000">je 2000</button></div><button class="btn sm soft" data-again="1">Nochmal würfeln</button></div>
+    <div class="minis"></div><p class="small muted fr-note"></p></section>`);
+  host.appendChild(box);
+  let k = 10; const names = ['Lena', 'Mia', 'Zoe', 'Emma'];
+  function paint() {
+    $('.minis', box).innerHTML = names.map(nm => { const c = [0, 0, 0, 0, 0, 0]; for (let i = 0; i < k; i++) c[Math.floor(Math.random() * 6)]++; return `<div class="mc"><b>${nm}</b>${barsSVG(c.map(v => v / k), [1, 2, 3, 4, 5, 6], { w: 240, h: 150, max: .5, ref: 1 / 6, noVal: true })}</div>`; }).join('');
+    $('.fr-note', box).textContent = k === 10 ? 'Bei 10 Würfen sieht jedes Diagramm anders aus. Das ist normaler Zufall und noch kein Hinweis auf einen gezinkten Würfel.' : (k === 100 ? 'Bei 100 Würfen schwanken die Säulen noch deutlich um 16,7 %.' : 'Bei 2000 Würfen liegen fast alle Säulen nah an der roten Linie. Ganz genau trifft es trotzdem keine.');
+  }
+  box.addEventListener('click', e => { const b = e.target.closest('[data-k]'); if (b) { k = +b.dataset.k; $$('[data-k]', box).forEach(x => x.classList.toggle('on', x === b)); paint(); } if (e.target.closest('[data-again]')) paint(); });
+  paint();
+}
+
+/* Glücksrad: Felder für ein Ereignis antippen, dann Wahrscheinlichkeit eintragen */
+function wheelEventPart(cfg) {
+  // cfg: {sectors, target:Set-Indizes, ans, label}
+  return {
+    t: 'customCheck', render(body, fb) {
+      const sel = new Set();
+      body.innerHTML = `<div class="row" style="align-items:flex-start;gap:18px"><div class="wh"></div><div style="flex:1;min-width:220px"><p class="small muted">Tippe alle Felder an, die zum Ereignis gehören.</p><div class="row">P = ${ansInput()}</div></div></div>`;
+      const paint = () => $('.wh', body).innerHTML = wheelSVG(cfg.sectors, 230, sel);
+      paint();
+      $('.wh', body).addEventListener('click', e => { const s = e.target.closest('.sec'); if (!s) return; const i = +s.dataset.i; sel.has(i) ? sel.delete(i) : sel.add(i); paint(); fb.textContent = ''; });
+      const inp = $('input', body);
+      return {
+        check() {
+          const okSel = sel.size === cfg.target.size && [...sel].every(i => cfg.target.has(i));
+          const r = judgeNum({ ans: cfg.ans, kind: 'prob', wrong: cfg.wrong }, inp.value);
+          inp.classList.toggle('ok', r.ok); inp.classList.toggle('bad', !r.ok);
+          if (!okSel) { fb.className = 'fb bad'; fb.textContent = sel.size < cfg.target.size ? 'Es gehören noch mehr Felder zum Ereignis.' : 'Mindestens ein angetipptes Feld gehört nicht zum Ereignis.'; return false; }
+          fb.className = 'fb ' + (r.ok ? 'ok' : 'bad'); fb.innerHTML = r.ok ? 'Richtig: günstige Felder durch alle Felder.' : r.msg; return r.ok;
+        }
+      };
+    }
+  };
+}
+
+/* Socke: Pfad Schritt für Schritt (erst vorhersagen, dann ziehen)
+   cfg = {balls:'UUHH', word:'UHU', back:false} */
+function sockPathPart(cfg) {
+  return {
+    t: 'custom', render(body, fb, done) {
+      let bag, step, probs;
+      body.innerHTML = `<div class="sock-stage"><div class="sk"></div><div><div class="steps"></div><div class="row" style="margin-top:10px"><button class="btn sm ghost again">Nochmal von vorn</button></div></div></div>`;
+      function reset() { bag = cfg.balls.split(''); step = 0; probs = []; paint(); }
+      function paint() {
+        $('.sk', body).innerHTML = sockSVG(bag.map(t => ({ t, c: BALLC[t] })), { label: `${bag.length} Kugeln in der Socke` });
+        const st = $('.steps', body); st.innerHTML = '';
+        cfg.word.split('').forEach((ch, i) => {
+          const row = el(`<div class="step ${i === step ? 'cur' : ''}"><b>${i + 1}. Zug:</b> ${ball(ch)} <span>P(${ch}) =</span> ${i < step ? `<b>${probs[i]}</b> ✓` : (i === step ? ansInput('sm') + '<button class="btn sm go">ziehen</button>' : '<span class="muted">…</span>')}</div>`);
+          st.appendChild(row);
+        });
+        if (step === cfg.word.length) {
+          const last = el(`<div class="step cur"><b>Pfadregel:</b>&nbsp;P(${cfg.word}) = ${probs.join(' · ')} = ${ansInput('sm')} <button class="btn sm go2">prüfen</button></div>`);
+          st.appendChild(last);
+        }
+        const inp = $('.step.cur input', body); if (inp && !TOUCH) inp.focus();
+      }
+      body.addEventListener('click', e => {
+        if (e.target.closest('.again')) { reset(); fb.textContent = ''; return; }
+        if (e.target.closest('.go')) {
+          const ch = cfg.word[step]; const n = bag.filter(x => x === ch).length; const inp = $('.step.cur input', body);
+          const r = judgeNum({ ans: n / bag.length, kind: 'prob', tol: 0.0051 }, inp.value);
+          if (!r.ok) { inp.classList.add('bad'); fb.className = 'fb bad'; fb.innerHTML = `Zähle: Wie viele ${ch} sind gerade in der Socke, und wie viele Kugeln insgesamt? ${r.msg.startsWith('Eine') ? r.msg : ''}`; return; }
+          probs.push(fr(n, bag.length).replace('class="fr"', 'class="fr"'));
+          fb.className = 'fb ok'; fb.innerHTML = cfg.back ? `Richtig! Die Kugel ${ch} kommt danach <b>zurück</b> in die Socke.` : `Richtig! Die Kugel ${ch} bleibt <b>draußen</b>. Jetzt ist eine Kugel weniger drin.`;
+          if (!cfg.back) bag.splice(bag.indexOf(ch), 1);
+          step++; paint();
+        }
+        if (e.target.closest('.go2')) {
+          let p = 1, b = cfg.balls.split('');
+          for (const ch of cfg.word) { p *= b.filter(x => x === ch).length / b.length; if (!cfg.back) b.splice(b.indexOf(ch), 1); }
+          const inp = $('.step.cur input', body); const r = judgeNum({ ans: p, kind: 'prob' }, inp.value);
+          inp.classList.toggle('ok', r.ok); inp.classList.toggle('bad', !r.ok);
+          fb.className = 'fb ' + (r.ok ? 'ok' : 'bad'); fb.innerHTML = r.ok ? `Super! P(${cfg.word}) ${cfg.back ? 'mit' : 'ohne'} Zurücklegen = ${pct(p)}.` : 'Multipliziere die drei Brüche: Zähler mal Zähler, Nenner mal Nenner. ' + (r.msg.startsWith('Knapp') ? r.msg : '');
+          if (r.ok) done(true);
+        }
+      });
+      body.addEventListener('enter', e => { e.stopPropagation(); const b = $('.go', body) || $('.go2', body); if (b) b.click(); });
+      reset();
+    }
+  };
+}
+
+/* Kugelsack-Baukasten: schwarz/weiß ohne Zurücklegen */
+function sackBuilderPart(cfg) {
+  // cfg: {p1, p2, color:'schwarz'}
+  return {
+    t: 'custom', render(body, fb, done) {
+      let s = 1, w = 1;
+      body.innerHTML = `<div class="builder"><div class="sk2" style="width:170px"></div><div><div class="counter">⚫ schwarz <button data-c="s-">−</button><span class="v vs"></span><button data-c="s+">+</button></div><div class="counter">⚪ weiß&nbsp;&nbsp;&nbsp;&nbsp; <button data-c="w-">−</button><span class="v vw"></span><button data-c="w+">+</button></div></div>
+        <div class="live" style="flex:1;min-width:220px"></div></div>`;
+      function paint() {
+        $('.vs', body).textContent = s; $('.vw', body).textContent = w;
+        $('.sk2', body).innerHTML = sockSVG([...Array(s).fill({ t: '', c: '#2b2533' }), ...Array(w).fill({ t: '', c: '#e9e4dc' })].slice(0, 10), { label: `${s + w} Kugeln` });
+        const p1 = s / (s + w), p2 = s > 0 && s + w > 1 ? (s - 1) / (s + w - 1) : 0;
+        const ok1 = Math.abs(p1 - cfg.p1) < 1e-9, ok2 = Math.abs(p2 - cfg.p2) < 1e-9;
+        $('.live', body).innerHTML = `<div class="step ${ok1 ? '' : 'cur'}">1. Zug schwarz: ${fr(s, s + w)} = <b>${pct(p1, 1)}</b> ${ok1 ? '✓' : ''}</div><div class="step ${ok2 ? '' : 'cur'}" style="margin-top:6px">2. Zug schwarz (wenn der 1. schwarz war): ${s + w > 1 ? fr(Math.max(s - 1, 0), s + w - 1) : '–'} = <b>${pct(p2, 1)}</b> ${ok2 ? '✓' : ''}</div><p class="small muted">Ziel: ${pct(cfg.p1, 0)} und danach ${pct(cfg.p2, 0)}. ${s + w > 10 ? 'Die Socke zeigt nur 10 Kugeln.' : ''}</p>`;
+        if (ok1 && ok2) { fb.className = 'fb ok'; fb.innerHTML = `Geschafft: ${s} schwarze und ${w} weiße Kugeln.`; done(true); }
+        else fb.textContent = '';
+      }
+      body.addEventListener('click', e => { const b = e.target.closest('[data-c]'); if (!b) return; const k = b.dataset.c; if (k === 's+') s = Math.min(20, s + 1); if (k === 's-') s = Math.max(0, s - 1); if (k === 'w+') w = Math.min(20, w + 1); if (k === 'w-') w = Math.max(0, w - 1); if (s + w === 0) w = 1; paint(); });
+      paint();
+    }
+  };
+}
+
+/* Trefferpositionen für „genau einmal“ */
+function positionsDemo(host, n = 4, p = '0,7', q = '0,3') {
+  const box = el(`<section class="card tipp-box"><h3>🔎 Warum „genau einmal“ n Pfade hat</h3><p>${n} Würfe, Treffer T mit ${p}, daneben D mit ${q}. Genau ein Treffer kann im 1., 2., … oder ${n}. Wurf passieren:</p><div class="pos"></div><p>Jeder dieser ${n} Pfade hat dieselbe Wahrscheinlichkeit ${p} · ${q}<sup>${n - 1}</sup>. Darum: <span class="formula">P(genau 1 Treffer) = ${n} · ${p} · ${q}<sup>${n - 1}</sup></span></p></section>`);
+  host.appendChild(box);
+  $('.pos', box).innerHTML = Array.from({ length: n }, (_, k) => `<div class="row" style="gap:6px;margin:4px 0">${Array.from({ length: n }, (_, j) => `<span class="ball" style="width:36px;height:36px;border-radius:10px;background:${j === k ? '#1f8f6f' : '#c9c2b8'}">${j === k ? 'T' : 'D'}</span>`).join('')}<span class="small muted">&nbsp;${Array.from({ length: n }, (_, j) => j === k ? p : q).join(' · ')}</span></div>`).join('');
+}
+
+/* ===== Konstruktions-Zeichenfeld: Lineal, Zirkel, Geodreieck, Punkt =====
+ task = { kind:'sss'|'sws'|'wsw', a, b, c, alpha, beta, gamma, msg? }
+ Modell in cm, y nach unten.
+*/
+const GEO_TOOLS = {
+  seg: { name: 'Lineal', ic: `<svg viewBox="0 0 28 28"><rect x="2" y="9" width="24" height="10" rx="2" fill="#fdf0d4" stroke="#2b2533" stroke-width="1.6"/><path d="M6 9v4M10 9v3M14 9v4M18 9v3M22 9v4" stroke="#2b2533" stroke-width="1.4"/></svg>`, help: 'Lineal: Zieh mit dem Finger eine Strecke. Die Länge steht dabei. Startest oder endest du nahe an einem Punkt, rastet sie dort ein.' },
+  arc: { name: 'Zirkel', ic: `<svg viewBox="0 0 28 28" fill="none" stroke-linecap="round"><path d="M14 4 L7 24 M14 4 L21 24" stroke="#2b2533" stroke-width="2"/><circle cx="14" cy="4" r="2.2" fill="#e9a11f" stroke="#2b2533" stroke-width="1.4"/><path d="M4 21 A12 12 0 0 0 24 21" stroke="#5b45a8" stroke-width="1.8" stroke-dasharray="2 2"/></svg>`, help: 'Zirkel: Setz den Finger auf einen Punkt (Zirkelspitze) und zieh nach außen. Lass los, wenn der Radius stimmt.' },
+  ang: { name: 'Geodreieck', ic: `<svg viewBox="0 0 28 28"><path d="M2 22 H26 L14 6Z" fill="#e1eefa" stroke="#2b2533" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 22 A6 6 0 0 1 20 22" fill="none" stroke="#2f76b8" stroke-width="1.4"/><path d="M14 22 V18" stroke="#2b2533" stroke-width="1.4"/></svg>`, help: 'Geodreieck: Tipp auf den Scheitelpunkt einer Strecke und zieh. Die Gradzahl wird angezeigt. Beim Loslassen entsteht der Schenkel.' },
+  pt: { name: 'Punkt', ic: `<svg viewBox="0 0 28 28"><path d="M6 6 L22 22 M22 6 L6 22" stroke="#2b2533" stroke-width="2" stroke-linecap="round"/><circle cx="14" cy="14" r="4" fill="#e2574c"/></svg>`, help: 'Punkt: Tipp auf einen Schnittpunkt von Kreisbögen oder Linien. Der neue Punkt bekommt einen Namen.' },
+};
+
+PartTypes.geo = {
+  needsCheck: true,
+  render(task, body, fb) {
+    const ui = el(`<div>
+      <div class="geo-tools">${Object.entries(GEO_TOOLS).map(([k, t]) => `<button class="tool" data-t="${k}">${t.ic}${t.name}</button>`).join('')}
+        <button class="tool" data-a="undo">↶ Zurück</button><button class="tool" data-a="clear">🗑 Neu</button></div>
+      <div class="geo-msg" aria-live="polite"></div>
+      <div class="geo-split"><div class="geo"><canvas></canvas></div>
+        <div class="planfig"><b>Planfigur</b>${planfigSVG(task)}<p class="small muted" style="margin:6px 4px">Kästchen = 0,5 cm.<br>Die gegebenen Größen sind farbig.</p></div></div>
+    </div>`);
+    body.appendChild(ui);
+    const cv = $('canvas', ui), g = cv.getContext('2d'), msg = $('.geo-msg', ui), host = $('.geo', ui);
+    let M = { pts: [], segs: [], arcs: [], rays: [] }, hist = [], tool = 'seg', drag = null, done = false;
+    let PX = 40, W = 600, H = 400;
+    const NAMES = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+    const setTool = (t) => { tool = t; $$('.tool[data-t]', ui).forEach(b => b.classList.toggle('on', b.dataset.t === t)); msg.textContent = GEO_TOOLS[t].help; };
+    setTool('seg');
+    msg.textContent = task.start || 'Fang mit dem Lineal an: Zeichne zuerst die Strecke c von A nach B (unten links beginnen).';
+    ui.addEventListener('click', e => {
+      const b = e.target.closest('.tool'); if (!b) return;
+      if (b.dataset.t) setTool(b.dataset.t);
+      if (b.dataset.a === 'undo' && hist.length) { M = JSON.parse(hist.pop()); done = false; draw(); }
+      if (b.dataset.a === 'clear') { if (M.pts.length) hist.push(JSON.stringify(M)); M = { pts: [], segs: [], arcs: [], rays: [] }; done = false; draw(); }
+    });
+    function resize() {
+      W = host.clientWidth || 600; PX = Math.max(26, Math.min(44, W / 15)); H = Math.round(Math.min(Math.max(W * .62, 300), 470));
+      const d = devicePixelRatio || 1; cv.width = W * d; cv.height = H * d; cv.style.height = H + 'px'; g.setTransform(d, 0, 0, d, 0, 0); draw();
+    }
+    const toPx = (p) => [p.x * PX, p.y * PX];
+    const toCm = (x, y) => ({ x: x / PX, y: y / PX });
+    const dist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+    const nextName = () => NAMES.find(n => !M.pts.some(p => p.n === n)) || ('P' + M.pts.length);
+    const nearPt = (c, r = 26 / PX) => { let best = -1, bd = r; M.pts.forEach((p, i) => { const d = dist(p, c); if (d < bd) { bd = d; best = i; } }); return best; };
+    const snapGrid = (c) => ({ x: Math.round(c.x * 2) / 2, y: Math.round(c.y * 2) / 2 });
+    const r1 = (v) => Math.round(v * 10) / 10;
+    const fmt = (v) => r1(v).toFixed(1).replace('.', ',');
+    const norm = (a) => { while (a < -Math.PI) a += 2 * Math.PI; while (a > Math.PI) a -= 2 * Math.PI; return a; };
+    const inArc = (arc, ang) => { const d = norm(ang - arc.m); return Math.abs(d) <= arc.h + 1e-6; };
+
+    // Linienobjekte als Parameterform
+    function lines() {
+      const L = [];
+      M.segs.forEach(s => { const a = M.pts[s.a], b = M.pts[s.b]; L.push({ o: a, d: { x: b.x - a.x, y: b.y - a.y }, t0: 0, t1: 1 }); });
+      M.rays.forEach(r => { const o = M.pts[r.o]; L.push({ o, d: { x: Math.cos(r.ang), y: Math.sin(r.ang) }, t0: 0, t1: r.len }); });
+      return L;
+    }
+    function circles() { return M.arcs.map(a => ({ c: M.pts[a.c], r: a.r, arc: a })); }
+    function intersections() {
+      const out = [], L = lines(), C = circles(), eps = 1e-6;
+      for (let i = 0; i < C.length; i++) for (let j = i + 1; j < C.length; j++) {
+        const A = C[i], B = C[j]; const d = dist(A.c, B.c); if (d < eps || d > A.r + B.r || d < Math.abs(A.r - B.r)) continue;
+        const a = (A.r * A.r - B.r * B.r + d * d) / (2 * d), h = Math.sqrt(Math.max(0, A.r * A.r - a * a));
+        const mx = A.c.x + a * (B.c.x - A.c.x) / d, my = A.c.y + a * (B.c.y - A.c.y) / d;
+        for (const s of [1, -1]) { const p = { x: mx + s * h * (B.c.y - A.c.y) / d, y: my - s * h * (B.c.x - A.c.x) / d }; if (inArc(A.arc, Math.atan2(p.y - A.c.y, p.x - A.c.x)) && inArc(B.arc, Math.atan2(p.y - B.c.y, p.x - B.c.x))) out.push(p); }
+      }
+      for (const l of L) for (const c of C) {
+        const fx = l.o.x - c.c.x, fy = l.o.y - c.c.y; const a = l.d.x ** 2 + l.d.y ** 2, b = 2 * (fx * l.d.x + fy * l.d.y), cc = fx * fx + fy * fy - c.r * c.r;
+        const D = b * b - 4 * a * cc; if (D < 0) continue;
+        for (const s of [1, -1]) { const t = (-b + s * Math.sqrt(D)) / (2 * a); if (t < l.t0 - eps || t > l.t1 + eps) continue; const p = { x: l.o.x + t * l.d.x, y: l.o.y + t * l.d.y }; if (inArc(c.arc, Math.atan2(p.y - c.c.y, p.x - c.c.x))) out.push(p); }
+      }
+      for (let i = 0; i < L.length; i++) for (let j = i + 1; j < L.length; j++) {
+        const P = L[i], Q = L[j]; const den = P.d.x * Q.d.y - P.d.y * Q.d.x; if (Math.abs(den) < 1e-9) continue;
+        const t = ((Q.o.x - P.o.x) * Q.d.y - (Q.o.y - P.o.y) * Q.d.x) / den, u = ((Q.o.x - P.o.x) * P.d.y - (Q.o.y - P.o.y) * P.d.x) / den;
+        if (t < P.t0 - eps || t > P.t1 + eps || u < Q.t0 - eps || u > Q.t1 + eps) continue;
+        out.push({ x: P.o.x + t * P.d.x, y: P.o.y + t * P.d.y });
+      }
+      return out.filter(p => !M.pts.some(q => dist(p, q) < 0.05));
+    }
+    function addPt(c) { M.pts.push({ n: nextName(), x: c.x, y: c.y }); return M.pts.length - 1; }
+
+    // Zeichnen
+    function draw() {
+      g.clearRect(0, 0, W, H);
+      g.fillStyle = '#fff'; g.fillRect(0, 0, W, H);
+      g.strokeStyle = 'rgba(70,110,160,.16)'; g.lineWidth = 1; g.beginPath();
+      for (let x = 0; x <= W; x += PX / 2) { g.moveTo(Math.round(x) + .5, 0); g.lineTo(Math.round(x) + .5, H); }
+      for (let y = 0; y <= H; y += PX / 2) { g.moveTo(0, Math.round(y) + .5); g.lineTo(W, Math.round(y) + .5); }
+      g.stroke();
+      if (done) { const tri = ['A', 'B', 'C'].map(n => M.pts.find(p => p.n === n)); g.fillStyle = 'rgba(233,161,31,.22)'; g.beginPath(); tri.forEach((p, i) => i ? g.lineTo(...toPx(p)) : g.moveTo(...toPx(p))); g.closePath(); g.fill(); }
+      g.lineCap = 'round';
+      M.arcs.forEach(a => { const [x, y] = toPx(M.pts[a.c]); g.strokeStyle = '#7a6f8f'; g.lineWidth = 1.6; g.beginPath(); g.arc(x, y, a.r * PX, a.m - a.h, a.m + a.h); g.stroke(); });
+      M.rays.forEach(r => { const [x, y] = toPx(M.pts[r.o]); g.strokeStyle = '#7a6f8f'; g.lineWidth = 1.6; g.beginPath(); g.moveTo(x, y); g.lineTo(x + Math.cos(r.ang) * r.len * PX, y + Math.sin(r.ang) * r.len * PX); g.stroke(); });
+      M.segs.forEach(s => { const [x1, y1] = toPx(M.pts[s.a]), [x2, y2] = toPx(M.pts[s.b]); g.strokeStyle = '#2b2533'; g.lineWidth = 2.6; g.beginPath(); g.moveTo(x1, y1); g.lineTo(x2, y2); g.stroke(); });
+      M.pts.forEach(p => { const [x, y] = toPx(p); g.fillStyle = '#e2574c'; g.beginPath(); g.arc(x, y, 5, 0, 7); g.fill(); g.fillStyle = '#2b2533'; g.font = '700 17px ui-rounded,system-ui'; g.fillText(p.n, x + 7, y - 8); });
+      if (drag) drawDrag();
+    }
+    function label(x, y, t) { g.font = '800 16px ui-rounded,system-ui'; const w = g.measureText(t).width + 14; g.fillStyle = '#5b45a8'; g.beginPath(); g.roundRect ? g.roundRect(x - w / 2, y - 14, w, 26, 9) : g.rect(x - w / 2, y - 14, w, 26); g.fill(); g.fillStyle = '#fff'; g.textAlign = 'center'; g.fillText(t, x, y + 5); g.textAlign = 'left'; }
+    function drawDrag() {
+      const d = drag;
+      if (d.t === 'seg') {
+        const [x1, y1] = toPx(d.a), [x2, y2] = toPx(d.b); const ang = Math.atan2(y2 - y1, x2 - x1), len = Math.hypot(x2 - x1, y2 - y1);
+        g.save(); g.translate(x1, y1); g.rotate(ang);
+        g.fillStyle = 'rgba(253,240,212,.75)'; g.strokeStyle = 'rgba(43,37,51,.5)'; g.lineWidth = 1; g.fillRect(-10, 4, Math.max(len, 0) + 30, 26); g.strokeRect(-10, 4, Math.max(len, 0) + 30, 26);
+        g.strokeStyle = 'rgba(43,37,51,.6)'; for (let k = 0; k * PX / 10 <= len + 20; k++) { const x = k * PX / 10; g.beginPath(); g.moveTo(x, 4); g.lineTo(x, 4 + (k % 10 === 0 ? 11 : (k % 5 === 0 ? 8 : 5))); g.stroke(); }
+        g.restore();
+        g.strokeStyle = '#2b2533'; g.lineWidth = 2.6; g.beginPath(); g.moveTo(x1, y1); g.lineTo(x2, y2); g.stroke();
+        label((x1 + x2) / 2, (y1 + y2) / 2 - 26, fmt(dist(d.a, d.b)) + ' cm');
+      }
+      if (d.t === 'arc') {
+        const c = M.pts[d.c]; const [cx, cy] = toPx(c); const R = d.r * PX; const [px, py] = [cx + Math.cos(d.ang) * R, cy + Math.sin(d.ang) * R];
+        g.setLineDash([4, 6]); g.strokeStyle = 'rgba(91,69,168,.35)'; g.lineWidth = 1.2; g.beginPath(); g.arc(cx, cy, R, 0, 7); g.stroke(); g.setLineDash([]);
+        g.strokeStyle = '#5b45a8'; g.lineWidth = 2; g.beginPath(); g.arc(cx, cy, R, d.ang - 1.2, d.ang + 1.2); g.stroke();
+        // Zirkelbeine
+        const nx = -Math.sin(d.ang), ny = Math.cos(d.ang); const hx = (cx + px) / 2 - nx * R * .45 * (d.flip || 1), hy = (cy + py) / 2 - ny * R * .45 * (d.flip || 1);
+        g.strokeStyle = '#6c6475'; g.lineWidth = 5; g.beginPath(); g.moveTo(cx, cy); g.lineTo(hx, hy); g.lineTo(px, py); g.stroke();
+        g.fillStyle = '#e9a11f'; g.beginPath(); g.arc(hx, hy, 7, 0, 7); g.fill();
+        label(hx, hy - 22, 'r = ' + fmt(d.r) + ' cm');
+      }
+      if (d.t === 'ang') {
+        const o = M.pts[d.o]; const [ox, oy] = toPx(o); const R = 4.2 * PX;
+        // Geodreieck als Halbkreis-Skala auf der Seite des Fingers
+        g.save(); g.translate(ox, oy); g.rotate(d.base); if (d.side < 0) g.scale(1, -1);
+        g.fillStyle = 'rgba(225,238,250,.82)'; g.strokeStyle = 'rgba(47,118,184,.8)'; g.lineWidth = 1.5;
+        g.beginPath(); g.moveTo(-R * 1.15, 0); g.lineTo(R * 1.15, 0); g.lineTo(0, R * 1.15); g.closePath(); g.fill(); g.stroke();
+        g.beginPath(); g.arc(0, 0, R * .78, 0, Math.PI); g.stroke();
+        for (let k = 0; k <= 180; k += 5) { const a = k * Math.PI / 180; const r0 = R * (k % 10 ? .72 : .68); g.beginPath(); g.moveTo(Math.cos(a) * r0, Math.sin(a) * r0); g.lineTo(Math.cos(a) * R * .78, Math.sin(a) * R * .78); g.stroke(); }
+        g.restore();
+        g.fillStyle = '#2f76b8'; g.font = '600 11px ui-rounded,system-ui'; g.textAlign = 'center';
+        for (let k = 0; k <= 180; k += 30) { const a = d.base + d.side * k * Math.PI / 180; g.fillText(k, ox + Math.cos(a) * R * .58, oy + Math.sin(a) * R * .58 + 4); }
+        g.textAlign = 'left';
+        const a = d.base + d.side * d.deg * Math.PI / 180;
+        g.strokeStyle = '#5b45a8'; g.lineWidth = 2; g.beginPath(); g.moveTo(ox, oy); g.lineTo(ox + Math.cos(a) * 14 * PX, oy + Math.sin(a) * 14 * PX); g.stroke();
+        g.strokeStyle = '#e2574c'; g.lineWidth = 3; g.beginPath(); if (d.side > 0) g.arc(ox, oy, PX * .9, d.base, a); else g.arc(ox, oy, PX * .9, a, d.base); g.stroke();
+        label(ox + Math.cos(a) * R * 1.05, oy + Math.sin(a) * R * 1.05, d.deg + '°');
+      }
+    }
+
+    // Eingabe
+    function pos(e) { const r = cv.getBoundingClientRect(); return toCm(e.clientX - r.left, e.clientY - r.top); }
+    cv.addEventListener('pointerdown', e => {
+      e.preventDefault(); cv.setPointerCapture(e.pointerId); const c = pos(e);
+      if (tool === 'seg') { const i = nearPt(c); drag = { t: 'seg', ai: i, a: i >= 0 ? M.pts[i] : snapGrid(c), b: i >= 0 ? M.pts[i] : snapGrid(c) }; }
+      else if (tool === 'arc') { const i = nearPt(c, 34 / PX); if (i < 0) { msg.textContent = 'Setz die Zirkelspitze genau auf einen Punkt (zum Beispiel A oder B).'; return; } drag = { t: 'arc', c: i, r: 0, ang: 0 }; }
+      else if (tool === 'ang') {
+        const i = nearPt(c, 34 / PX); if (i < 0) { msg.textContent = 'Leg das Geodreieck an einen Punkt an: Tipp auf den Scheitelpunkt (zum Beispiel B).'; return; }
+        const s = M.segs.find(s => s.a === i || s.b === i); if (!s) { msg.textContent = 'An diesem Punkt gibt es noch keine Strecke, an die du das Geodreieck anlegen kannst.'; return; }
+        const other = M.pts[s.a === i ? s.b : s.a], o = M.pts[i];
+        drag = { t: 'ang', o: i, base: Math.atan2(other.y - o.y, other.x - o.x), side: 1, deg: 0 };
+      }
+      else if (tool === 'pt') {
+        const X = intersections(); let best = null, bd = 30 / PX; X.forEach(p => { const d = dist(p, c); if (d < bd) { bd = d; best = p; } });
+        if (!best) { msg.textContent = X.length ? 'Tipp etwas genauer auf einen Schnittpunkt.' : 'Hier gibt es noch keinen Schnittpunkt. Zeichne zuerst Kreisbögen oder Schenkel, die sich schneiden.'; return; }
+        hist.push(JSON.stringify(M)); const i = addPt(best); msg.textContent = `Punkt ${M.pts[i].n} gesetzt. ${M.pts[i].n === 'C' ? 'Verbinde C jetzt mit dem Lineal mit A und mit B.' : ''}`; draw();
+      }
+      draw();
+    });
+    cv.addEventListener('pointermove', e => {
+      if (!drag) return; const c = pos(e);
+      if (drag.t === 'seg') {
+        const j = nearPt(c);
+        if (j >= 0 && j !== drag.ai) drag.b = M.pts[j], drag.bi = j;
+        else {
+          drag.bi = -1; let ang = Math.atan2(c.y - drag.a.y, c.x - drag.a.x); let len = r1(dist(drag.a, c));
+          // auf Schenkel einrasten
+          if (drag.ai >= 0) for (const r of M.rays) if (r.o === drag.ai && Math.abs(norm(ang - r.ang)) < 0.12) ang = r.ang;
+          if (Math.abs(norm(ang)) < 0.06) ang = 0; if (Math.abs(norm(ang - Math.PI)) < 0.06) ang = Math.PI;
+          drag.b = { x: drag.a.x + Math.cos(ang) * len, y: drag.a.y + Math.sin(ang) * len };
+        }
+      }
+      if (drag.t === 'arc') { const o = M.pts[drag.c]; drag.r = r1(dist(o, c)); drag.ang = Math.atan2(c.y - o.y, c.x - o.x); drag.flip = (c.x < o.x) ? -1 : 1; }
+      if (drag.t === 'ang') {
+        const o = M.pts[drag.o]; const a = Math.atan2(c.y - o.y, c.x - o.x); const rel = norm(a - drag.base);
+        drag.side = rel >= 0 ? 1 : -1; drag.deg = Math.min(180, Math.round(Math.abs(rel) * 180 / Math.PI));
+      }
+      draw();
+    });
+    const up = () => {
+      if (!drag) return; const d = drag; drag = null;
+      if (d.t === 'seg') {
+        if (dist(d.a, d.b) < 0.3) { draw(); return; }
+        hist.push(JSON.stringify(M));
+        const ai = d.ai >= 0 ? d.ai : addPt(d.a); const bi = d.bi >= 0 ? d.bi : addPt(d.b);
+        if (!M.segs.some(s => (s.a === ai && s.b === bi) || (s.a === bi && s.b === ai))) M.segs.push({ a: ai, b: bi });
+        msg.textContent = `Strecke ${M.pts[ai].n}${M.pts[bi].n} = ${fmt(dist(M.pts[ai], M.pts[bi]))} cm gezeichnet.`;
+      }
+      if (d.t === 'arc' && d.r >= 0.3) { hist.push(JSON.stringify(M)); M.arcs.push({ c: d.c, r: d.r, m: d.ang, h: 1.2 }); msg.textContent = `Kreisbogen um ${M.pts[d.c].n} mit r = ${fmt(d.r)} cm gezeichnet.`; }
+      if (d.t === 'ang' && d.deg > 0 && d.deg < 180) { hist.push(JSON.stringify(M)); M.rays.push({ o: d.o, ang: d.base + d.side * d.deg * Math.PI / 180, len: 14, deg: d.deg }); msg.textContent = `Schenkel mit ${d.deg}° an ${M.pts[d.o].n} gezeichnet.`; }
+      draw();
+    };
+    cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', () => { drag = null; draw(); });
+    let lastW = 0; const ro = new ResizeObserver(() => { const w = host.clientWidth; if (w && w !== lastW) { lastW = w; resize(); } }); ro.observe(host); if (host.clientWidth) { lastW = host.clientWidth; resize(); }
+
+    const c = { state: null };
+    c.check = () => {
+      const P = (n) => M.pts.find(p => p.n === n);
+      const A = P('A'), B = P('B'), C = P('C');
+      const T = triSides(task);
+      const has = (p, q) => M.segs.some(s => { const n1 = M.pts[s.a].n, n2 = M.pts[s.b].n; return (n1 === p && n2 === q) || (n1 === q && n2 === p); });
+      let m = '';
+      if (!A || !B) m = 'Zeichne zuerst die Strecke c von A nach B.';
+      else if (Math.abs(dist(A, B) - T.c) > 0.15) m = `Die Strecke AB soll c = ${dez(T.c, 1)} cm lang sein. Bei dir ist sie ${fmt(dist(A, B))} cm.`;
+      else if (!C) m = task.kind === 'sss' ? 'Es fehlt noch Punkt C. Zeichne zwei Kreisbögen (um A mit b, um B mit a) und setz C auf den Schnittpunkt.' : 'Es fehlt noch Punkt C. Setz ihn auf den Schnittpunkt.';
+      else {
+        const ac = dist(A, C), bc = dist(B, C);
+        if (task.kind === 'sws') { const ray = M.rays.find(r => M.pts[r.o].n === 'B'); if (ray && Math.abs(ray.deg - task.beta) > 1) m = `Dein Winkel bei B ist ${ray.deg}°. Gebraucht wird β = ${task.beta}°.`; }
+        if (!m && Math.abs(bc - T.a) > 0.15) m = `C liegt noch nicht richtig: BC soll a = ${dez(T.a, 1)} cm lang sein, bei dir ${fmt(bc)} cm.`;
+        else if (!m && Math.abs(ac - T.b) > 0.15) m = `C liegt noch nicht richtig: AC soll ${task.kind === 'sss' ? 'b = ' + dez(T.b, 1) + ' cm' : 'zu den anderen Angaben passen'} (bei dir ${fmt(ac)} cm).`;
+        else if (!m && (!has('A', 'C') || !has('B', 'C'))) m = 'Fast fertig: Verbinde C mit dem Lineal noch mit A und mit B.';
+      }
+      if (m) { fb.className = 'fb bad'; fb.textContent = m; c.state = false; return false; }
+      done = true; draw();
+      fb.className = 'fb ok'; fb.innerHTML = task.okmsg || 'Dreieck richtig konstruiert! 🎉';
+      c.state = true; return true;
+    };
+    return c;
+  }
+};
+
+// fehlende Seiten aus der Aufgabe berechnen
+function triSides(t) {
+  const rad = Math.PI / 180;
+  if (t.kind === 'sss') return { a: t.a, b: t.b, c: t.c };
+  if (t.kind === 'sws') { const b = Math.sqrt(t.a * t.a + t.c * t.c - 2 * t.a * t.c * Math.cos(t.beta * rad)); return { a: t.a, b, c: t.c }; }
+  if (t.kind === 'wsw') { const g = 180 - t.alpha - t.beta; const k = t.c / Math.sin(g * rad); return { a: k * Math.sin(t.alpha * rad), b: k * Math.sin(t.beta * rad), c: t.c }; }
+}
+function triAngles(s) {
+  const d = 180 / Math.PI; const al = Math.acos((s.b * s.b + s.c * s.c - s.a * s.a) / (2 * s.b * s.c)) * d, be = Math.acos((s.a * s.a + s.c * s.c - s.b * s.b) / (2 * s.a * s.c)) * d;
+  return { alpha: al, beta: be, gamma: 180 - al - be };
+}
+// Planfigur: Skizze mit farbig markierten gegebenen Größen
+function planfigSVG(t) {
+  const s = triSides(t);
+  const x = (s.b * s.b - s.a * s.a + s.c * s.c) / (2 * s.c), y = Math.sqrt(Math.max(0, s.b * s.b - x * x));
+  const pts = [{ x: 0, y: 0 }, { x: s.c, y: 0 }, { x, y }];
+  const minX = Math.min(0, x), maxX = Math.max(s.c, x), k = Math.min(120 / (maxX - minX), 95 / y);
+  const P = (p) => [40 + (p.x - minX) * k + (120 - (maxX - minX) * k) / 2, 125 - p.y * k];
+  const [A, B, C] = pts.map(P);
+  const G = [(A[0] + B[0] + C[0]) / 3, (A[1] + B[1] + C[1]) / 3];
+  const col = '#e2574c', ink = '#2b2533';
+  const giv = { a: t.kind === 'sss' || t.kind === 'sws', b: t.kind === 'sss', c: true, alpha: t.kind === 'wsw', beta: t.kind === 'sws' || t.kind === 'wsw' };
+  const out = (M, dist) => { const dx = M[0] - G[0], dy = M[1] - G[1], l = Math.hypot(dx, dy) || 1; return [M[0] + dx / l * dist, M[1] + dy / l * dist, dx / l]; };
+  const txt = (pos, t, on) => { const anchor = pos[2] > .35 ? 'start' : (pos[2] < -.35 ? 'end' : 'middle'); return `<text x="${pos[0]}" y="${pos[1] + 5}" font-size="13" font-weight="800" text-anchor="${anchor}" fill="${on ? col : ink}" font-family="ui-rounded,system-ui">${t}</text>`; };
+  const side = (P1, P2, on) => `<line x1="${P1[0]}" y1="${P1[1]}" x2="${P2[0]}" y2="${P2[1]}" stroke="${on ? col : ink}" stroke-width="${on ? 4 : 2}" stroke-linecap="round"/>`;
+  const mid = (P1, P2) => [(P1[0] + P2[0]) / 2, (P1[1] + P2[1]) / 2];
+  const arcAt = (V, Q, R, on) => { if (!on) return ''; const a1 = Math.atan2(Q[1] - V[1], Q[0] - V[0]), a2 = Math.atan2(R[1] - V[1], R[0] - V[0]); const r = 18; const sw = ((a2 - a1) + 4 * Math.PI) % (2 * Math.PI) < Math.PI ? 1 : 0; return `<path d="M${V[0] + r * Math.cos(a1)} ${V[1] + r * Math.sin(a1)} A${r} ${r} 0 0 ${sw} ${V[0] + r * Math.cos(a2)} ${V[1] + r * Math.sin(a2)}" fill="none" stroke="${col}" stroke-width="3"/>`; };
+  const v = (k, val, u) => giv[k] ? ` = ${dez(val, 1)}${u}` : '';
+  return `<svg viewBox="-14 0 228 160" width="100%">
+    ${side(A, B, giv.c)}${side(B, C, giv.a)}${side(A, C, giv.b)}
+    ${arcAt(A, B, C, giv.alpha)}${arcAt(B, C, A, giv.beta)}
+    ${txt(out(A, 12), 'A')}${txt(out(B, 12), 'B')}${txt(out(C, 12), 'C')}
+    ${txt(out(mid(A, B), 12), 'c' + v('c', t.c, ' cm'), giv.c)}
+    ${txt(out(mid(B, C), 10), 'a' + v('a', t.a, ' cm'), giv.a)}
+    ${txt(out(mid(A, C), 10), 'b' + v('b', t.b || 0, ' cm'), giv.b)}
+    ${giv.alpha ? `<text x="${A[0] + 24}" y="${A[1] - 6}" font-size="12" font-weight="800" fill="${col}" font-family="ui-rounded,system-ui">α = ${t.alpha}°</text>` : ''}${giv.beta ? `<text x="${B[0] - 24}" y="${B[1] - 6}" font-size="12" font-weight="800" text-anchor="end" fill="${col}" font-family="ui-rounded,system-ui">β = ${t.beta}°</text>` : ''}
+  </svg>`;
+}
+
+/* ===== Teil A: Wahrscheinlichkeit ===== */
+const card = (main, html, cls = '') => main.appendChild(el(`<section class="card ${cls}">${html}</section>`));
+const exs = (main, list) => list.forEach(e => renderExercise(e, main));
+const head = (main, t) => main.appendChild(el(`<div class="sec-title">${t}</div>`));
+const balls = (str) => `<div class="balls">${str.split('').map(t => ball(t)).join('')}</div>`;
+
+/* ---------- W1 Häufigkeiten ---------- */
+const W1 = [
+  {
+    id: 'w1-1', st: 1, title: 'Relative Häufigkeit berechnen',
+    q: `<p>Ben wirft eine Reißzwecke 50-mal. Sie landet 18-mal auf dem Kopf.</p>`,
+    parts: [{ t: 'num', label: 'Wie groß ist die relative Häufigkeit für „Kopf“?', ans: 18 / 50, wrong: [{ v: 18 / 32, msg: 'Du hast durch die Würfe „nicht Kopf“ geteilt. Teile durch die Anzahl <b>aller</b> Würfe.' }] }],
+    hints: ['relative Häufigkeit = absolute Häufigkeit : Anzahl aller Versuche', '18 : 50 = 36 : 100'],
+    sol: `18 : 50 = ${fr(18, 50)} = 0,36 = 36 %.`
+  },
+  {
+    id: 'w1-2', st: 2, title: 'Tabelle ausfüllen und schätzen',
+    q: `<p>Paula würfelt 200-mal mit einem Würfel, der ein bisschen schief aussieht.</p>`,
+    parts: [
+      {
+        t: 'table', label: 'Trage die relativen Häufigkeiten in Prozent ein (ohne Taschenrechner: durch 200 teilen heißt halbieren und durch 100 teilen).', corner: 'Augenzahl', head: [1, 2, 3, 4, 5, 6],
+        rows: [{ label: 'absolute Häufigkeit', cells: [22, 30, 31, 29, 41, 47] }, { label: 'relative Häufigkeit', cells: [22, 30, 31, 29, 41, 47].map(v => ({ ans: v / 200, tol: 0.0006 })) }]
+      },
+      {
+        t: 'mc', label: 'Welche Schätzung der Wahrscheinlichkeiten passt am besten?', ok: [0],
+        opts: ['1: 11 %, 2: 15 %, 3: 15 %, 4: 15 %, 5: 21 %, 6: 23 %', 'Alle sechs Zahlen je 16,7 %', '1: 22 %, 2: 30 %, 3: 31 %, 4: 29 %, 5: 41 %, 6: 47 %', '1: 11 %, 2: 15 %, 3: 16 %, 4: 15 %, 5: 25 %, 6: 28 %'],
+        why: { 1: 'Bei 200 Würfen sind 11 % und 23,5 % ein großer Unterschied. Das spricht gegen einen fairen Würfel.', 2: 'Das sind die absoluten Häufigkeiten. Zusammen wären das weit über 100 %.', 3: 'Rechne nach: Zusammen ergibt das 110 %. Alle Wahrscheinlichkeiten zusammen müssen 100 % sein.' }
+      }
+    ],
+    hints: ['Beispiel: 22 von 200 sind 11 von 100, also 11 %.', 'Eine Schätzung orientiert sich an den relativen Häufigkeiten. Alle Werte zusammen ergeben 100 %.'],
+    sol: `relative Häufigkeiten: 11 %, 15 %, 15,5 %, 14,5 %, 20,5 %, 23,5 %.<br>Gute Schätzung: runden und auf 100 % achten, zum Beispiel 11 %, 15 %, 15 %, 15 %, 21 %, 23 %.`
+  },
+  {
+    id: 'w1-3', st: 3, title: 'Wem glaubst du?',
+    q: `<p><b>Jonas</b> würfelt 12-mal. Die 3 kommt kein einziges Mal. Er sagt: „Der Würfel ist gezinkt, die 3 kommt nie!“</p><p><b>Lea</b> würfelt 300-mal. Jede Zahl kommt zwischen 45- und 55-mal. Sie sagt: „Der Würfel ist in Ordnung.“</p>`,
+    parts: [{
+      t: 'mc', multi: true, label: 'Welche Argumente stimmen? Wähle alle richtigen aus.', ok: [0, 1, 4],
+      opts: ['Bei nur 12 Würfen kann es leicht passieren, dass eine Zahl gar nicht vorkommt.', 'Leas Ergebnis beruht auf viel mehr Würfen. Darauf kann man sich eher verlassen (Gesetz der großen Zahlen).', 'Jonas hat recht: Nach 12 Würfen muss jede Zahl genau zweimal gekommen sein.', 'Lea hat damit bewiesen, dass der Würfel ganz sicher fair ist.', 'Ganz sicher ist man nie. 300 Würfe sind aber ein viel besserer Hinweis als 12.'],
+      why: { 2: 'Der Würfel hat kein Gedächtnis. „Zweimal“ ist nur der erwartete Wert, nicht garantiert.', 3: 'Auch 300 Würfe sind kein Beweis. Man kann nur sagen: Die Daten sprechen nicht gegen einen fairen Würfel.' }
+    }, { t: 'self', label: 'Formuliere jetzt eine Stellungnahme in zwei bis drei Sätzen, wie in der Klassenarbeit.', model: 'Ich glaube eher Lea. Bei 12 Würfen sind die Ergebnisse noch stark vom Zufall abhängig; dass eine Zahl fehlt, ist dann nicht ungewöhnlich. Lea hat 300-mal gewürfelt. Bei so vielen Würfen liegen die relativen Häufigkeiten meist nah an den Wahrscheinlichkeiten (alle etwa 1/6 ≈ 16,7 %), und das ist bei ihr der Fall. Ganz sicher ist das aber nicht.' }],
+    hints: ['Denk an das Würfel-Labor: Wie sehen die Säulen bei 10 Würfen aus, wie bei 1000?'],
+  },
+  {
+    id: 'w1-4', st: 1, title: 'Hat der Würfel ein Gedächtnis?',
+    q: `<p>Mit einem fairen Würfel kam fünfmal hintereinander die 6.</p>`,
+    parts: [{
+      t: 'mc', label: 'Was gilt für den nächsten Wurf?', ok: [0],
+      opts: [`P(6) ist wieder ${fr(1, 6)}.`, 'Die 6 ist jetzt unwahrscheinlicher. Sie war oft genug dran.', 'Die 6 ist jetzt wahrscheinlicher. Sie ist gerade „heiß“.'],
+      why: { 1: 'Der Würfel weiß nicht, was vorher passiert ist. Jeder Wurf beginnt neu.', 2: 'Der Würfel weiß nicht, was vorher passiert ist. Jeder Wurf beginnt neu.' }
+    }]
+  },
+  {
+    id: 'w1-5', st: 3, title: 'Wie viele Kugeln jeder Farbe?',
+    q: `<p>In einem Beutel sind 20 Kugeln: rot, gelb und blau. Man zieht eine Kugel, notiert die Farbe und legt sie zurück.</p>
+      <div class="tw"><table class="t"><tr><th>Experiment</th><th>rot</th><th>gelb</th><th>blau</th></tr><tr><th>A: 20 Züge</th><td>11</td><td>6</td><td>3</td></tr><tr><th>B: 400 Züge</th><td>198</td><td>121</td><td>81</td></tr></table></div>`,
+    parts: [
+      { t: 'table', label: 'Berechne die relativen Häufigkeiten in Prozent.', corner: 'Experiment', head: ['rot', 'gelb', 'blau'], rows: [{ label: 'A', cells: [{ ans: .55, tol: .0006 }, { ans: .3, tol: .0006 }, { ans: .15, tol: .0006 }] }, { label: 'B', cells: [{ ans: 198 / 400, tol: .0006 }, { ans: 121 / 400, tol: .0006 }, { ans: 81 / 400, tol: .0006 }] }] },
+      {
+        t: 'mc', label: 'Welcher Inhalt passt am besten?', ok: [0],
+        opts: ['10 rote, 6 gelbe, 4 blaue', '11 rote, 6 gelbe, 3 blaue', '7 rote, 7 gelbe, 6 blaue', '198 rote, 121 gelbe, 81 blaue'],
+        why: { 1: 'Das passt zu Experiment A. A hat nur 20 Züge, B mit 400 Zügen ist verlässlicher.', 2: 'Dann müssten alle Farben etwa gleich oft kommen. Rot kommt aber fast doppelt so oft wie gelb.', 3: 'Im Beutel sind nur 20 Kugeln. Rechne mit den Anteilen: 49,5 % von 20 sind etwa 10.' }
+      },
+      { t: 'self', label: 'Begründe deine Vermutung in einem Satz.', model: 'Experiment B hat viel mehr Züge. Die relativen Häufigkeiten (etwa 50 %, 30 %, 20 %) liegen deshalb vermutlich nah an den echten Anteilen. 50 % von 20 sind 10 rote, 30 % sind 6 gelbe, 20 % sind 4 blaue Kugeln. Sicher wissen kann man es nur durch Nachsehen.' }
+    ],
+    hints: ['relative Häufigkeit = Anzahl : Gesamtzahl der Züge, z. B. 198 : 400 = 0,495 = 49,5 %.', 'Nimm das Experiment mit den meisten Zügen und rechne die Prozente in Kugeln von 20 um.'],
+    sol: 'A: 55 %, 30 %, 15 %. B: 49,5 %, 30,25 %, 20,25 %. Vermutung nach B: 10 rote, 6 gelbe, 4 blaue Kugeln.'
+  }
+];
+station({
+  id: 'w1', part: 'W', nr: 'Station 1', title: 'Häufigkeiten und Schätzen', short: 'Häufigkeiten', color: '#1f8f6f', colorL: '#dcf3ea', icon: iconDice(), min: 15, badge: 'Würfel-Profi', exercises: W1,
+  build(main) {
+    card(main, `<div class="intro"><div><h2>Worum geht’s?</h2>
+      <p>Bei einem <b>Zufallsexperiment</b> kann man das Ergebnis nicht vorhersagen. Man kann aber zählen, wie oft etwas passiert.</p>
+      <p><b>absolute Häufigkeit</b> = wie oft ein Ergebnis vorkam (z. B. 18-mal).<br><b>relative Häufigkeit</b> = absolute Häufigkeit : Anzahl aller Versuche (z. B. 18 : 50 = 36 %).</p></div><div class="pic">${dieFace(5, 110)}</div></div>`);
+    diceSim(main);
+    friendsRuns(main);
+    card(main, `<h3>Merke</h3><p><b>Gesetz der großen Zahlen:</b> Je mehr Versuche, desto näher liegen die relativen Häufigkeiten meistens an den Wahrscheinlichkeiten. Bei wenigen Versuchen schwankt alles stark.</p>
+      <p><b>Wahrscheinlichkeiten schätzen:</b> relative Häufigkeiten aus <b>vielen</b> Versuchen nehmen und auf Symmetrie achten (gleiche Seiten = gleiche Wahrscheinlichkeit). Alle Wahrscheinlichkeiten zusammen ergeben 1 = 100 %.</p>`, 'merk');
+    head(main, '✏️ Übungen');
+    exs(main, W1);
+    card(main, `<h3>Typische Fehler</h3><ul><li>Durch die falsche Zahl teilen: immer durch die <b>Gesamtzahl</b> aller Versuche.</li><li>„Nach 6 Würfen kommt jede Zahl einmal.“ Nein: Das ist nur im Mittel so.</li><li>Aus wenigen Würfen sichere Schlüsse ziehen. Wenige Versuche sagen wenig.</li></ul>`, 'fehler');
+  }
+});
+
+/* ---------- W2 Laplace ---------- */
+const PRIM = new Set([2, 3, 5, 7]);
+const WHEEL10 = Array.from({ length: 10 }, (_, i) => ({ w: 1, t: i, c: ['#2f76b8', '#5b45a8', '#1f8f6f', '#e9a11f', '#e2574c'][i % 5] }));
+const W2 = [
+  Object.assign({ id: 'w2-1', st: 1, title: 'Glücksrad: Primzahl', q: '<p>Das Glücksrad hat 10 gleich große Felder mit den Zahlen 0 bis 9.</p>' , hints: ['Primzahlen haben genau zwei Teiler: 1 und sich selbst. 0 und 1 sind keine Primzahlen.', 'Die Primzahlen hier sind 2, 3, 5, 7.'], sol: 'Günstig: 2, 3, 5, 7. P(Primzahl) = ' + fr(4, 10) + ' = 40 %.' }, { parts: [Object.assign(wheelEventPart({ sectors: WHEEL10, target: PRIM, ans: .4 }), { label: 'Ereignis: „Die Zahl ist eine Primzahl.“' })] }),
+  Object.assign({ id: 'w2-2', st: 1, title: 'Glücksrad: größer als 6', q: '<p>Gleiches Glücksrad wie eben.</p>', sol: 'Günstig: 7, 8, 9. P = ' + fr(3, 10) + ' = 30 %.' }, { parts: [Object.assign(wheelEventPart({ sectors: WHEEL10, target: new Set([7, 8, 9]), ans: .3, wrong: [{ v: .4, msg: 'Die 6 gehört nicht dazu: „größer als 6“ heißt 7, 8, 9.' }] }), { label: 'Ereignis: „Die Zahl ist größer als 6.“' })] }),
+  {
+    id: 'w2-3', st: 1, title: 'Die Farben-Falle',
+    q: `<p>Im Glas liegen 2 rote, 5 blaue und 3 gelbe Kugeln. Du ziehst blind eine Kugel.</p>${balls('rrbbbbbggg'.replace(/g/g, 'g'))}`,
+    parts: [
+      { t: 'num', label: 'P(rot) =', ans: .2, wrong: [{ v: 1 / 3, msg: 'Es gibt zwar drei Farben, aber nicht gleich viele Kugeln jeder Farbe. Zähle Kugeln, nicht Farben!' }, { v: 2 / 8, msg: 'Teile durch <b>alle</b> Kugeln im Glas (10).' }] },
+      { t: 'num', label: 'P(nicht blau) =', ans: .5, wrong: [{ v: 2 / 3, msg: 'Zähle Kugeln, nicht Farben: 5 von 10 Kugeln sind nicht blau.' }] }
+    ],
+    hints: ['P = Anzahl der günstigen Kugeln : Anzahl aller Kugeln.', '„nicht blau“ = rot oder gelb.'],
+    sol: `P(rot) = ${fr(2, 10)} = 20 %. P(nicht blau) = ${fr(5, 10)} = 50 % (oder 1 − P(blau)).`
+  },
+  {
+    id: 'w2-4', st: 2, title: 'Was heißt Laplace?',
+    q: '<p>Ein <b>Laplace-Würfel</b> mit 8 Seiten (Oktaeder) wird geworfen.</p>',
+    parts: [
+      {
+        t: 'mc', label: 'Welche Erklärung passt?', ok: [0],
+        opts: [`Jede der 8 Seiten fällt mit derselben Wahrscheinlichkeit, also je ${fr(1, 8)}.`, 'Bei 8 Würfen kommt jede Zahl genau einmal.', 'Ein Laplace-Würfel ist ein Würfel mit 8 Seiten.', 'Die höchste Zahl kommt am seltensten.'],
+        why: { 1: 'Das wäre schön, aber Zufall garantiert das nicht.', 2: 'Die Seitenzahl ist egal. Wichtig ist: Alle Ergebnisse sind gleich wahrscheinlich.', 3: 'Bei einem Laplace-Würfel sind alle Seiten gleich wahrscheinlich.' }
+      },
+      { t: 'num', label: 'P(Zahl größer als 5) =', ans: 3 / 8, wrong: [{ v: 4 / 8, msg: '„größer als 5“ heißt 6, 7, 8. Die 5 zählt nicht mit.' }] }
+    ],
+    sol: `Laplace: alle Ergebnisse gleich wahrscheinlich. Größer als 5: 6, 7, 8 → P = ${fr(3, 8)} = 37,5 %.`
+  },
+  {
+    id: 'w2-5', st: 2, title: 'Summenregel beim Lego-Achter',
+    q: `<p>Beim Würfeln mit einem Legostein (Achter) gelten diese Wahrscheinlichkeiten:</p><div class="tw"><table class="t"><tr><th>Augenzahl</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr><tr><th>P</th><td>10 %</td><td>0,5 %</td><td>47 %</td><td>32 %</td><td>0,5 %</td><td>10 %</td></tr></table></div><p>Der Legostein ist <b>kein</b> Laplace-Würfel. Darum kann man nicht einfach „günstig durch möglich“ rechnen.</p>`,
+    parts: [
+      { t: 'num', label: 'P(Augenzahl kleiner als 5) =', ans: .895, tol: .0006, wrong: [{ v: 4 / 6, msg: 'Das wäre bei einem Laplace-Würfel richtig. Hier musst du die Wahrscheinlichkeiten aus der Tabelle addieren.' }] },
+      { t: 'num', label: 'P(gerade Augenzahl) =', ans: .425, tol: .0006, wrong: [{ v: .5, msg: 'Addiere die Werte für 2, 4 und 6 aus der Tabelle.' }] }
+    ],
+    hints: ['Summenregel: Wahrscheinlichkeiten der passenden Ergebnisse addieren.', 'kleiner als 5: 1, 2, 3, 4 → 10 % + 0,5 % + 47 % + 32 %'],
+    sol: 'P(< 5) = 10 % + 0,5 % + 47 % + 32 % = 89,5 %. P(gerade) = 0,5 % + 32 % + 10 % = 42,5 %.'
+  },
+  {
+    id: 'w2-6', st: 2, title: 'Erwartete Anzahl',
+    q: '<p>Jana trifft beim Freiwurf mit einer Wahrscheinlichkeit von 70 %. Sie wirft 30-mal.</p>',
+    parts: [
+      { t: 'num', kind: 'num', label: 'Wie viele Treffer erwartest du?', ans: 21, tol: 0.01, post: 'Treffer', wrong: [{ v: 9, msg: 'Das sind die erwarteten Fehlwürfe. Gefragt sind die Treffer.' }] },
+      { t: 'mc', label: 'Trifft Jana dann sicher genau so oft?', ok: [1], opts: ['Ja, das ist ja ausgerechnet.', 'Nein. Das ist der Wert, den man im Mittel erwartet. Es können auch mehr oder weniger Treffer sein.'], why: { 0: 'Ausgerechnet ist nur der Erwartungswert. Der Zufall kann davon abweichen.' } }
+    ],
+    hints: ['erwartete Anzahl = Anzahl der Versuche · Wahrscheinlichkeit', '30 · 0,7'],
+    sol: '30 · 0,7 = 21 Treffer werden erwartet. Das ist kein garantierter Wert.'
+  },
+  {
+    id: 'w2-7', st: 1, title: 'Gegenereignis',
+    q: '<p>Das Gegenereignis Ā enthält alle Ergebnisse, die <b>nicht</b> zu A gehören. Es gilt P(Ā) = 1 − P(A).</p>',
+    parts: [
+      { t: 'num', label: 'Laplace-Würfel: P(keine 6) =', ans: 5 / 6 },
+      { t: 'num', label: 'Glücksrad mit P(rot) = 35 %: P(nicht rot) =', ans: .65 }
+    ],
+    sol: `P(keine 6) = 1 − ${fr(1, 6)} = ${fr(5, 6)} ≈ 83,3 %. P(nicht rot) = 100 % − 35 % = 65 %.`
+  }
+];
+station({
+  id: 'w2', part: 'W', nr: 'Station 2', title: 'Laplace und Summenregel', short: 'Laplace', color: '#c98410', colorL: '#fdf0d4', icon: iconWheel(), min: 15, badge: 'Glücksrad-Champion', exercises: W2,
+  build(main) {
+    card(main, `<div class="intro"><div><h2>Worum geht’s?</h2>
+      <p>Bei manchen Zufallsexperimenten sind alle Ergebnisse <b>gleich wahrscheinlich</b>: fairer Würfel, Münze, Glücksrad mit gleich großen Feldern, gleich große Kugeln. Das nennt man <b>Laplace-Experiment</b>.</p>
+      <p>Dann muss man nicht ausprobieren, sondern kann zählen.</p></div><div class="pic">${wheelSVG(WHEEL10, 120)}</div></div>`);
+    card(main, `<h3>Merke</h3><p><b>Laplace-Regel:</b> <span class="formula">P(Ereignis) = Anzahl der günstigen Ergebnisse : Anzahl aller möglichen Ergebnisse</span></p>
+      <p><b>Summenregel:</b> Gehören mehrere Ergebnisse zu einem Ereignis, addiert man ihre Wahrscheinlichkeiten.</p>
+      <p><b>Gegenereignis:</b> P(Ā) = 1 − P(A).</p><p><b>Erwartete Anzahl</b> bei n Versuchen: n · P.</p>`, 'merk');
+    head(main, '✏️ Übungen');
+    exs(main, W2);
+    card(main, `<h3>Typische Fehler</h3><ul><li>Farben statt Kugeln zählen: 2 rote und 8 blaue Kugeln heißt <b>nicht</b> P(rot) = 50 %.</li><li>Laplace-Regel bei ungleichen Feldern oder Legosteinen anwenden. Dann gilt sie nicht.</li><li>„größer als 6“ und „mindestens 6“ verwechseln.</li></ul>`, 'fehler');
+  }
+});
+
+/* ---------- W3 Baumdiagramm ---------- */
+const coin = () => [{ lab: 'W', p: .5, show: fr(1, 2) }, { lab: 'Z', p: .5, show: fr(1, 2) }];
+const bern = (a, b, p, ps, qs) => () => [{ lab: a, p, show: ps }, { lab: b, p: 1 - p, show: qs }];
+const loseTree = (path) => { const g = 3 - path.filter(x => x === 'G').length, n = 7 - path.filter(x => x === 'N').length, t = g + n; return [{ lab: 'G', p: g / t, show: fr(g, t) }, { lab: 'N', p: n / t, show: fr(n, t) }]; };
+const W3 = [
+  {
+    id: 'w3-1', st: 1, title: 'Zweimal Münze werfen',
+    q: '<p>Eine Münze wird zweimal geworfen: W = Wappen, Z = Zahl.</p>',
+    parts: [
+      { t: 'tree', label: '1) Trage an jedem Ast die Wahrscheinlichkeit ein. 2) Tippe unten alle Pfade an, die zu „genau einmal Wappen“ gehören. 3) Trage unter jedem markierten Pfad seine Wahrscheinlichkeit ein.', depth: 2, levelNames: ['1. Wurf', '2. Wurf'], branches: coin, ask: 'all', mark: p => p.filter(x => x === 'W').length === 1, markLabel: 'genau einmal Wappen', leafAsk: true },
+      { t: 'num', label: 'P(genau einmal Wappen) =', ans: .5, wrong: [{ v: .25, msg: 'Das ist nur ein Pfad. Es gibt zwei passende Pfade: WZ und ZW. Addiere!' }] }
+    ],
+    hints: ['Bei einer Münze gilt an jedem Ast ' + fr(1, 2) + '.', 'Pfadregel: entlang des Pfades multiplizieren. Summenregel: die passenden Pfade addieren.'],
+    sol: `P(WZ) = ${fr(1, 2)} · ${fr(1, 2)} = ${fr(1, 4)}, P(ZW) = ${fr(1, 4)}. Zusammen ${fr(1, 4)} + ${fr(1, 4)} = ${fr(1, 2)} = 50 %.`
+  },
+  {
+    id: 'w3-2', st: 2, title: 'Zwei Freiwürfe',
+    q: '<p>Mia trifft beim Freiwurf mit 60 %. Sie wirft zweimal. T = Treffer, F = Fehlwurf.</p>',
+    parts: [
+      { t: 'tree', label: 'Fülle den Baum aus. Markiere dann alle Pfade zu „mindestens ein Treffer“ und trage ihre Wahrscheinlichkeiten ein.', depth: 2, levelNames: ['1. Wurf', '2. Wurf'], branches: bern('T', 'F', .6, '0,6', '0,4'), ask: 'all', mark: p => p.includes('T'), markLabel: 'mindestens ein Treffer', leafAsk: true },
+      { t: 'num', label: 'P(mindestens ein Treffer) =', ans: .84, wrong: [{ v: .36, msg: 'Das ist nur P(TT). „Mindestens einer“ heißt: einer oder zwei Treffer.' }, { v: .16, msg: 'Das ist P(FF), also das Gegenereignis „kein Treffer“.' }] }
+    ],
+    hints: ['Am Ast für F steht 1 − 0,6 = 0,4.', 'Passende Pfade: TT, TF, FT. Oder schneller: 1 − P(FF).'],
+    sol: 'P(TT) = 0,36, P(TF) = 0,24, P(FT) = 0,24 → zusammen 0,84 = 84 %. Kontrolle über das Gegenereignis: 1 − 0,4 · 0,4 = 1 − 0,16 = 0,84.'
+  },
+  {
+    id: 'w3-3', st: 2, title: 'Finde den Fehler',
+    q: '<p>Im Topf sind 3 Gewinne (G) und 7 Nieten (N). Anja zieht zwei Lose <b>ohne Zurücklegen</b>. Ein Ast ist falsch beschriftet.</p>',
+    parts: [{ t: 'tree', label: 'Tippe den falschen Ast an.', depth: 2, levelNames: ['1. Los', '2. Los'], branches: (path) => { const r = loseTree(path); if (path[0] === 'N') r[0] = { lab: 'G', p: 3 / 10, show: fr(3, 10) }; return r; }, errorAt: 'N|0', okmsg: `Genau! Nach einer Niete sind nur noch 9 Lose im Topf, davon 3 Gewinne. Richtig wäre ${fr(3, 9)}. Kontrolle: ${fr(3, 9)} + ${fr(6, 9)} = 1.` }],
+    hints: ['Prüfe an jeder Verzweigung: Ergeben die beiden Äste zusammen 1?']
+  },
+  {
+    id: 'w3-4', st: 3, title: 'Wirkt das Mittel?',
+    q: '<p>Ein Mittel gegen Heuschnupfen wirkt bei 70 % aller Personen. Drei Personen nehmen es. Stell dir vor, sie nehmen es nacheinander. W = wirkt, N = wirkt nicht.</p>',
+    parts: [
+      { t: 'tree', label: 'Fülle die Äste der ersten beiden Stufen aus. Markiere alle Pfade, bei denen das Mittel bei <b>genau einer</b> Person wirkt, und trage ihre Wahrscheinlichkeiten ein.', depth: 3, levelNames: ['1. Person', '2. Person', '3. Person'], branches: bern('W', 'N', .7, '0,7', '0,3'), ask: (path) => path.length < 2, mark: p => p.filter(x => x === 'W').length === 1, markLabel: 'wirkt bei genau einer Person', leafAsk: true },
+      { t: 'num', label: 'P(wirkt bei allen drei) =', ans: .343, tol: .0006, wrong: [{ v: .21, msg: 'Multipliziere: 0,7 · 0,7 · 0,7.' }] },
+      { t: 'num', label: 'P(wirkt bei genau einer) =', ans: .189, tol: .0006, wrong: [{ v: .063, msg: 'Das ist nur ein Pfad. Es gibt drei passende Pfade (WNN, NWN, NNW).' }] },
+      { t: 'num', kind: 'num', label: 'In Gruppen zu je 30 Personen: Bei wie vielen erwartest du eine Wirkung?', ans: 21, post: 'Personen' }
+    ],
+    hints: ['P(WWW) = 0,7 · 0,7 · 0,7', 'Jeder Pfad mit genau einem W hat die Wahrscheinlichkeit 0,7 · 0,3 · 0,3 = 0,063.', 'Erwartete Anzahl = 30 · 0,7'],
+    sol: 'P(WWW) = 0,7³ = 0,343 = 34,3 %.<br>P(genau eine) = 3 · 0,7 · 0,3 · 0,3 = 3 · 0,063 = 0,189 = 18,9 %.<br>Erwartung: 30 · 0,7 = 21 Personen.'
+  },
+  {
+    id: 'w3-5', st: 1, title: 'Multiplizieren oder addieren?',
+    parts: [{ t: 'pair', left: ['Wahrscheinlichkeiten entlang <b>eines</b> Pfades', 'Wahrscheinlichkeiten <b>mehrerer</b> Pfade, die zum Ereignis gehören', 'Alle Äste an einer Verzweigung', 'Wahrscheinlichkeit des Gegenereignisses'], right: ['multiplizieren (Pfadregel)', 'addieren (Summenregel)', 'ergeben zusammen 1', '1 − P(Ereignis)'], map: [0, 1, 2, 3] }]
+  }
+];
+station({
+  id: 'w3', part: 'W', nr: 'Station 3', title: 'Baumdiagramm und Pfadregel', short: 'Baumdiagramm', color: '#5b45a8', colorL: '#ece6fb', icon: iconTree(), min: 20, badge: 'Baum-Meisterin', exercises: W3,
+  build(main) {
+    card(main, `<h2>Worum geht’s?</h2><p>Passieren mehrere Zufallsexperimente nacheinander, zeichnet man ein <b>Baumdiagramm</b>. Jeder Weg von oben nach unten ist ein <b>Pfad</b> und gehört zu einem Ergebnis.</p>
+      <p>Beispiel: 3 Gewinne und 7 Nieten im Topf, zwei Lose ohne Zurücklegen.</p><div class="ex1"></div>`);
+    treeView({ depth: 2, levelNames: ['1. Los', '2. Los'], branches: loseTree }, $('.ex1', main.lastChild));
+    card(main, `<h3>Merke</h3><p><b>Pfadregel:</b> Die Wahrscheinlichkeit eines Pfades ist das <b>Produkt</b> der Wahrscheinlichkeiten entlang des Pfades. Beispiel: P(GG) = ${fr(3, 10)} · ${fr(2, 9)} = ${fr(6, 90)} = ${fr(1, 15)}.</p>
+      <p><b>Summenregel:</b> Gehören mehrere Pfade zu einem Ereignis, <b>addiert</b> man ihre Wahrscheinlichkeiten.</p>
+      <p><b>Kontrolle:</b> An jeder Verzweigung ergeben die Äste zusammen 1. Alle Pfade zusammen ergeben auch 1.</p>`, 'merk');
+    head(main, '✏️ Übungen');
+    exs(main, W3);
+    card(main, `<h3>Typische Fehler</h3><ul><li>Entlang eines Pfades addieren statt multiplizieren.</li><li>Bei „genau einer“ nur einen Pfad nehmen. Meist gibt es mehrere!</li><li>Brüche multiplizieren: Zähler mal Zähler, Nenner mal Nenner.</li></ul>`, 'fehler');
+  }
+});
+
+/* ---------- W4 Zurücklegen ---------- */
+const bagTree = (start) => (path) => { const left = { ...start }; path.forEach(x => left[x]--); const t = Object.values(left).reduce((a, b) => a + b, 0); return Object.keys(start).map(k => ({ lab: k, p: left[k] / t, show: fr(left[k], t) })); };
+const W4 = [
+  Object.assign({ id: 'w4-1', st: 1, title: 'AHA mit Zurücklegen', q: '<p>In der Socke: 2 Kugeln mit A und 3 Kugeln mit H. Du ziehst dreimal und legst die Kugel jedes Mal <b>zurück</b>. Gewinn bei „AHA“.</p><p class="small muted">Gib vor jedem Zug die Wahrscheinlichkeit für den gebrauchten Buchstaben an. Dann wird gezogen.</p>', sol: `P(AHA) = ${fr(2, 5)} · ${fr(3, 5)} · ${fr(2, 5)} = ${fr(12, 125)} = 9,6 %.` }, { parts: [sockPathPart({ balls: 'AAHHH', word: 'AHA', back: true })] }),
+  Object.assign({ id: 'w4-2', st: 2, title: 'AHA ohne Zurücklegen', q: '<p>Gleiche Socke, aber die gezogene Kugel bleibt jetzt <b>draußen</b>.</p>', sol: `P(AHA) = ${fr(2, 5)} · ${fr(3, 4)} · ${fr(1, 3)} = ${fr(6, 60)} = ${fr(1, 10)} = 10 %.`, hints: ['Nach jedem Zug ist eine Kugel weniger in der Socke: Der Nenner wird kleiner.', 'Auch der Zähler kann sich ändern: Ist schon ein A draußen, gibt es nur noch ein A.'] }, { parts: [sockPathPart({ balls: 'AAHHH', word: 'AHA', back: false })] }),
+  {
+    id: 'w4-3', st: 1, title: 'Vorhersagen: Was ist jetzt drin?',
+    q: `<p>In der Socke sind 3 rote und 1 blaue Kugel. ${balls('rrrb')} Du ziehst <b>ohne Zurücklegen</b> eine rote Kugel.</p>`,
+    parts: [{ t: 'num', label: 'Wie groß ist jetzt P(rot) für den nächsten Zug?', ans: 2 / 3, wrong: [{ v: 3 / 4, msg: 'Das wäre mit Zurücklegen richtig. Hier ist die rote Kugel draußen.' }, { v: .5, msg: 'Fast: Im Zähler stimmt es (2 rote). Aber es sind nur noch 3 Kugeln drin, nicht 4.' }, { v: 1, msg: 'Es ist noch eine blaue Kugel in der Socke.' }] }],
+    sol: `Noch drin: 2 rote, 1 blaue. P(rot) = ${fr(2, 3)}.`
+  },
+  {
+    id: 'w4-4', st: 2, title: 'Baum ohne Zurücklegen',
+    q: '<p>Im Beutel sind 4 weiße (w) und 2 rote (r) Kugeln. Du ziehst zwei Kugeln nacheinander ohne Zurücklegen.</p>',
+    parts: [
+      { t: 'tree', label: 'Fülle den Baum aus. Markiere die Pfade zu „eine weiße und eine rote Kugel“ und trage ihre Wahrscheinlichkeiten ein.', depth: 2, levelNames: ['1. Zug', '2. Zug'], branches: bagTree({ w: 4, r: 2 }), ask: 'all', mark: p => p.includes('w') && p.includes('r'), markLabel: 'eine weiße und eine rote', leafAsk: true, alt: (path, k, v) => path.length === 1 && Math.abs(v - [4, 2][k] / 6) < 1e-6 ? 'Ohne Zurücklegen: Nach dem 1. Zug sind nur noch 5 Kugeln im Beutel.' : null },
+      { t: 'num', label: 'P(eine weiße und eine rote) =', ans: 8 / 15, wrong: [{ v: 4 / 15, msg: 'Das ist nur ein Pfad. Es gibt zwei: wr und rw.' }] }
+    ],
+    hints: ['Wurde zuerst w gezogen, sind noch 3 w und 2 r drin.', 'P(wr) = ' + fr(4, 6) + ' · ' + fr(2, 5)],
+    sol: `P(wr) = ${fr(4, 6)} · ${fr(2, 5)} = ${fr(8, 30)}, P(rw) = ${fr(2, 6)} · ${fr(4, 5)} = ${fr(8, 30)}. Zusammen ${fr(16, 30)} = ${fr(8, 15)} ≈ 53,3 %.`
+  },
+  {
+    id: 'w4-5', st: 3, title: 'Ein A mehr: lohnt sich das?',
+    q: '<p>Zur Socke (2 A, 3 H) kommt ein weiteres A dazu. Jetzt sind 3 A und 3 H drin. Gewinn weiterhin bei „AHA“.</p>',
+    parts: [
+      { t: 'num', label: 'P(AHA) <b>mit</b> Zurücklegen =', ans: 1 / 8 },
+      { t: 'num', label: 'P(AHA) <b>ohne</b> Zurücklegen =', ans: 3 / 20, wrong: [{ v: 1 / 8, msg: 'Ohne Zurücklegen ändern sich die Nenner: 6, dann 5, dann 4.' }] },
+      { t: 'mc', label: 'Vergleiche mit vorher (9,6 % mit und 10 % ohne Zurücklegen). Was stimmt?', ok: [0], opts: ['In beiden Fällen wird AHA wahrscheinlicher.', 'Nur mit Zurücklegen wird AHA wahrscheinlicher.', 'Nur ohne Zurücklegen wird AHA wahrscheinlicher.', 'Es ändert sich nichts.'], why: { 1: 'Vergleiche 15 % mit 10 %.', 2: 'Vergleiche 12,5 % mit 9,6 %.', 3: 'Rechne beide Fälle nach: 12,5 % statt 9,6 % und 15 % statt 10 %.' } }
+    ],
+    hints: [`Mit Zurücklegen: ${fr(3, 6)} · ${fr(3, 6)} · ${fr(3, 6)}`, `Ohne Zurücklegen: ${fr(3, 6)} · ${fr(3, 5)} · ${fr(2, 4)}`],
+    sol: `Mit: ${fr(1, 2)} · ${fr(1, 2)} · ${fr(1, 2)} = ${fr(1, 8)} = 12,5 % (vorher 9,6 %).<br>Ohne: ${fr(3, 6)} · ${fr(3, 5)} · ${fr(2, 4)} = ${fr(18, 120)} = ${fr(3, 20)} = 15 % (vorher 10 %).<br>In beiden Fällen steigt die Gewinnchance.`
+  }
+];
+station({
+  id: 'w4', part: 'W', nr: 'Station 4', title: 'Mit und ohne Zurücklegen', short: 'Zurücklegen', color: '#d2483d', colorL: '#fde7e4', icon: iconSock(), min: 15, badge: 'Socken-Detektivin', exercises: W4,
+  build(main) {
+    card(main, `<div class="intro"><div><h2>Worum geht’s?</h2>
+      <p><b>Mit Zurücklegen:</b> Die Kugel kommt zurück. Die Wahrscheinlichkeiten bleiben bei jedem Zug gleich.</p>
+      <p><b>Ohne Zurücklegen:</b> Die Kugel bleibt draußen. Der <b>Nenner</b> wird bei jedem Zug um 1 kleiner. Der <b>Zähler</b> hängt davon ab, was schon gezogen wurde.</p></div><div class="pic">${sockSVG([{ t: 'A', c: BALLC.A }, { t: 'A', c: BALLC.A }, { t: 'H', c: BALLC.H }, { t: 'H', c: BALLC.H }, { t: 'H', c: BALLC.H }])}</div></div>`);
+    card(main, `<h3>Merke</h3><p>Bei einem Wort braucht man nur <b>einen Pfad</b>. Man multipliziert für jeden Buchstaben: Anzahl dieses Buchstabens in der Socke durch Anzahl aller Kugeln in der Socke <b>zu diesem Zeitpunkt</b>.</p>`, 'merk');
+    head(main, '✏️ Übungen');
+    exs(main, W4);
+    card(main, `<h3>Typische Fehler</h3><ul><li>Ohne Zurücklegen den Nenner nicht verkleinern.</li><li>Vergessen, dass ein gezogener Buchstabe auch im Zähler fehlt.</li></ul>`, 'fehler');
+  }
+});
+
+/* ---------- W5 Genau, mindestens, keiner ---------- */
+const W5 = [
+  { id: 'w5-1', st: 1, title: 'Pfade finden: genau ein Treffer', q: '<p>Tim schießt dreimal auf die Torwand. Er trifft mit 60 %. T = Treffer, D = daneben.</p>', parts: [{ t: 'tree', label: 'Tippe alle Pfade an, die zu „genau ein Treffer“ gehören.', depth: 3, levelNames: ['1.', '2.', '3.'], branches: bern('T', 'D', .6, '0,6', '0,4'), ask: 'none', mark: p => p.filter(x => x === 'T').length === 1, markLabel: 'genau ein Treffer', okmsg: 'Richtig: TDD, DTD und DDT. Drei Pfade!' }] },
+  { id: 'w5-2', st: 2, title: 'Pfade finden: mindestens ein Treffer', q: '<p>Gleiche Situation.</p>', parts: [{ t: 'tree', label: 'Tippe alle Pfade an, die zu „mindestens ein Treffer“ gehören.', depth: 3, levelNames: ['1.', '2.', '3.'], branches: bern('T', 'D', .6, '0,6', '0,4'), ask: 'none', mark: p => p.includes('T'), markLabel: 'mindestens ein Treffer', okmsg: 'Richtig: 7 Pfade. Nur DDD fehlt. Darum rechnet man schneller 1 − P(DDD).' }, { t: 'num', label: 'Rechne schnell über das Gegenereignis: P(mindestens ein Treffer) = 1 − 0,4 · 0,4 · 0,4 =', ans: 1 - .064, tol: .0006 }] },
+  { id: 'w5-3', st: 2, title: 'Gegenereignisse zuordnen', q: '<p>Drei Schüsse auf die Torwand.</p>', parts: [{ t: 'pair', left: ['kein Treffer', 'drei Treffer', 'genau ein Treffer', 'höchstens ein Treffer'], right: ['mindestens ein Treffer', 'mindestens einmal daneben', 'kein Treffer oder mindestens zwei Treffer', 'mindestens zwei Treffer'], map: [0, 1, 2, 3] }], hints: ['Das Gegenereignis enthält alle anderen Ergebnisse. Zähle die Treffer: 0, 1, 2 oder 3.'] },
+  {
+    id: 'w5-4', st: 3, title: 'Oktaeder 5-mal werfen',
+    q: '<p>Ein Laplace-Würfel mit 8 Seiten (Zahlen 1 bis 8) wird 5-mal geworfen. Runde auf zwei Nachkommastellen in Prozent.</p>',
+    parts: [
+      { t: 'num', label: 'P(keine 8) =', ans: Math.pow(7 / 8, 5), tol: .0006, wrong: [{ v: 7 / 8, msg: 'Das ist nur ein Wurf. Fünf Würfe: (7/8)⁵.' }] },
+      { t: 'num', label: 'P(mindestens eine 8) =', ans: 1 - Math.pow(7 / 8, 5), tol: .0006, wrong: [{ v: 5 / 8, msg: 'Nicht 5 · 1/8! Nutze das Gegenereignis: 1 − P(keine 8).' }] },
+      { t: 'num', label: 'P(genau eine 8) =', ans: 5 * (1 / 8) * Math.pow(7 / 8, 4), tol: .0006, wrong: [{ v: (1 / 8) * Math.pow(7 / 8, 4), msg: 'Das ist nur ein Pfad. Die 8 kann im 1., 2., 3., 4. oder 5. Wurf kommen: mal 5!' }] }
+    ],
+    hints: ['Keine 8: Bei jedem Wurf ' + fr(7, 8) + '. Pfadregel: (7/8)⁵.', 'Mindestens eine 8 = Gegenereignis von keine 8.', 'Genau eine 8: 5 Pfade mit je ' + fr(1, 8) + ' · (' + fr(7, 8) + ')⁴.'],
+    sol: `keine 8: (${fr(7, 8)})⁵ ≈ ${pct(Math.pow(7 / 8, 5))}<br>mindestens eine 8: 1 − (${fr(7, 8)})⁵ ≈ ${pct(1 - Math.pow(7 / 8, 5))}<br>genau eine 8: 5 · ${fr(1, 8)} · (${fr(7, 8)})⁴ ≈ ${pct(5 / 8 * Math.pow(7 / 8, 4))}`
+  },
+  {
+    id: 'w5-5', st: 2, title: 'Sechsmal würfeln',
+    q: '<p>Nina sagt: „Wenn ich sechsmal würfle, kommt die 6 sicher mindestens einmal. Denn 6 · ' + fr(1, 6) + ' = 1.“</p>',
+    parts: [
+      { t: 'mc', label: 'Hat Nina recht?', ok: [1], opts: ['Ja, 6 · 1/6 = 1 = 100 %.', 'Nein. 6 · 1/6 = 1 ist die erwartete <b>Anzahl</b> an Sechsen, keine Wahrscheinlichkeit.'], why: { 0: 'Es kann passieren, dass in sechs Würfen gar keine 6 kommt.' } },
+      { t: 'num', label: 'Berechne P(mindestens eine 6 bei 6 Würfen) =', ans: 1 - Math.pow(5 / 6, 6), tol: .0006 }
+    ],
+    sol: `1 − (${fr(5, 6)})⁶ ≈ ${pct(1 - Math.pow(5 / 6, 6))}. Also nur etwa zwei Drittel, nicht 100 %.`
+  },
+  {
+    id: 'w5-6', st: 3, title: 'Dosenwerfen',
+    q: '<p>Lisa trifft beim Dosenwerfen mit 40 %. Sie wirft viermal.</p>',
+    parts: [
+      { t: 'num', label: 'P(mindestens ein Treffer) =', ans: 1 - Math.pow(.6, 4), tol: .0006, wrong: [{ v: Math.pow(.6, 4), msg: 'Das ist P(kein Treffer). Gesucht ist das Gegenereignis.' }, { v: 1 - Math.pow(.4, 4), msg: 'Kein Treffer heißt: viermal daneben, also 0,6 · 0,6 · 0,6 · 0,6.' }] },
+      { t: 'num', label: 'P(genau ein Treffer) =', ans: 4 * .4 * Math.pow(.6, 3), tol: .0006, wrong: [{ v: .4 * Math.pow(.6, 3), msg: 'Der Treffer kann in jedem der vier Würfe passieren: mal 4.' }] }
+    ],
+    sol: `mindestens einer: 1 − 0,6⁴ = 1 − 0,1296 = 0,8704 ≈ 87,04 %.<br>genau einer: 4 · 0,4 · 0,6³ = 0,3456 = 34,56 %.`
+  }
+];
+station({
+  id: 'w5', part: 'W', nr: 'Station 5', title: 'Genau, mindestens, keiner', short: 'Clever rechnen', color: '#2f76b8', colorL: '#e1eefa', icon: iconTarget(), min: 20, badge: 'Rechen-Ass', exercises: W5,
+  build(main) {
+    card(main, `<h2>Worum geht’s?</h2><p>Bei vielen Stufen wird der Baum riesig. Mit drei Tricks geht es schneller:</p>
+      <ul><li><b>keinmal:</b> nur ein Pfad, z. B. (${fr(5, 6)})⁶ für „keine 6 bei 6 Würfen“.</li><li><b>mindestens einmal:</b> Gegenereignis von „keinmal“ → <span class="formula">1 − P(keinmal)</span></li><li><b>genau einmal:</b> so viele Pfade wie Würfe, alle gleich wahrscheinlich → <span class="formula">n · p · q<sup>n−1</sup></span></li></ul>
+      <p class="small muted">p = Wahrscheinlichkeit für Treffer, q = 1 − p, n = Anzahl der Versuche. Das gilt, wenn p bei jedem Versuch gleich bleibt.</p>`);
+    positionsDemo(main, 4, '0,7', '0,3');
+    head(main, '✏️ Übungen');
+    exs(main, W5);
+    card(main, `<h3>Typische Fehler</h3><ul><li>„mindestens eine 6 bei 6 Würfen = 6 · 1/6 = 100 %“. Falsch! Immer 1 − P(keine).</li><li>Bei „genau einmal“ den Faktor n vergessen.</li><li>„keiner“ und „mindestens einer“ als Gegenereignis von „alle“ halten.</li></ul>`, 'fehler');
+  }
+});
+
+/* ---------- W6 Detektiv ---------- */
+const W6 = [
+  {
+    id: 'w6-1', st: 2, title: 'Wie ist das Glücksrad eingeteilt?',
+    q: `<p>Ein Glücksrad hat 10 gleich große Felder in den Farben rot, blau und grün. Man sieht es nicht. Nach 500 Drehungen gilt:</p><div class="tw"><table class="t"><tr><th>Farbe</th><th>rot</th><th>blau</th><th>grün</th></tr><tr><th>absolut</th><td>152</td><td>248</td><td>100</td></tr></table></div>`,
+    parts: [
+      { t: 'num', kind: 'num', label: 'Vermutlich rote Felder:', ans: 3, tol: 0 },
+      { t: 'num', kind: 'num', label: 'Vermutlich blaue Felder:', ans: 5, tol: 0 },
+      { t: 'num', kind: 'num', label: 'Vermutlich grüne Felder:', ans: 2, tol: 0 }
+    ],
+    hints: ['Relative Häufigkeiten: 152 : 500 = 30,4 %, 248 : 500 = 49,6 %, 100 : 500 = 20 %.', 'Ein Feld sind 10 %.'],
+    sol: '30,4 % ≈ 30 % → 3 Felder rot, 49,6 % ≈ 50 % → 5 Felder blau, 20 % → 2 Felder grün. Bei 500 Drehungen ist die Schätzung recht verlässlich, aber nicht sicher.'
+  },
+  Object.assign({ id: 'w6-2', st: 2, title: 'Baue die Socke', q: '<p>Stelle eine Socke mit schwarzen und weißen Kugeln zusammen. Es wird <b>ohne Zurücklegen</b> gezogen. Beim 1. Zug soll schwarz mit 60 % kommen. Wenn das klappt, soll schwarz beim 2. Zug nur noch mit 50 % kommen.</p>', hints: ['Probier kleine Anzahlen. 60 % = ' + fr(3, 5) + '.'], sol: `3 schwarze und 2 weiße: ${fr(3, 5)} = 60 %, danach ${fr(2, 4)} = 50 %.` }, { parts: [sackBuilderPart({ p1: .6, p2: .5 })] }),
+  {
+    id: 'w6-3', st: 3, title: 'Socke ohne Baukasten',
+    q: '<p>Jetzt ohne Ausprobieren am Bildschirm: Beim 1. Zug soll schwarz mit 75 % kommen, beim 2. Zug (nach schwarz, ohne Zurücklegen) mit ' + fr(2, 3) + '.</p>',
+    parts: [{ t: 'num', kind: 'num', label: 'schwarze Kugeln:', ans: 3, tol: 0 }, { t: 'num', kind: 'num', label: 'weiße Kugeln:', ans: 1, tol: 0 }],
+    hints: ['75 % = ' + fr(3, 4) + ' = ' + fr(6, 8) + ' = …', 'Teste ' + fr(3, 4) + ': Nach einer schwarzen sind noch 2 schwarze von 3 Kugeln übrig.'],
+    sol: `3 schwarze, 1 weiße: ${fr(3, 4)} = 75 %, danach ${fr(2, 3)}. (Mit ${fr(6, 8)} klappt es nicht: danach ${fr(5, 7)}.)`
+  }
+];
+station({
+  id: 'w6', part: 'W', nr: 'Station 6', title: 'Detektiv-Aufgaben', short: 'Detektiv', color: '#a3427f', colorL: '#f8e3ef', icon: iconLoupe(), min: 15, badge: 'Meisterdetektivin', exercises: W6,
+  build(main) {
+    card(main, `<h2>Worum geht’s?</h2><p>Hier geht es rückwärts: Aus Versuchsergebnissen schließt du auf den Inhalt. Oder du baust selbst eine Socke, die bestimmte Wahrscheinlichkeiten liefert.</p><p>So eine Aufgabe kam auch in der Klassenarbeit vor.</p>`);
+    card(main, `<h3>Merke</h3><p>Rückschluss: die relativen Häufigkeiten aus dem <b>größten</b> Experiment nehmen und in Anzahlen umrechnen. Ein sicherer Beweis ist das nicht.</p><p>Socke bauen: systematisch probieren. Erst die erste Bedingung (z. B. 60 % = ${fr(3, 5)} = ${fr(6, 10)} …), dann für jede Möglichkeit die zweite prüfen.</p>`, 'merk');
+    head(main, '✏️ Übungen');
+    exs(main, W6);
+  }
+});
+
+/* ===== Teil B: Dreiecke ===== */
+const SSS = { kind: 'sss', a: 4, b: 5, c: 6 };
+const SWS = { kind: 'sws', c: 5, beta: 50, a: 4, start: 'Fang mit dem Lineal an: Zeichne die Strecke c = 5 cm von A nach B.' };
+const G1 = [
+  {
+    id: 'g1-1', st: 1, title: 'Konstruktionsbeschreibung ordnen',
+    q: '<p>Lea will das Dreieck mit a = 4 cm, b = 5 cm und c = 6 cm konstruieren. Bring ihre Schritte in die richtige Reihenfolge.</p>',
+    parts: [{ t: 'order', items: ['Planfigur skizzieren und die gegebenen Seiten farbig markieren.', 'Strecke c = 6 cm zeichnen. Die Endpunkte heißen A und B.', 'Kreisbogen um A mit r = b = 5 cm und Kreisbogen um B mit r = a = 4 cm zeichnen.', 'Den Schnittpunkt der beiden Kreisbögen C nennen.', 'C mit A und mit B verbinden.'] }]
+  },
+  {
+    id: 'g1-2', st: 2, title: 'Konstruiere: a = 4 cm, b = 5 cm, c = 6 cm',
+    q: '<p>Drei Seiten sind gegeben (sss). Konstruiere das Dreieck mit Lineal und Zirkel. Achte darauf: a liegt A gegenüber, also zwischen B und C.</p>',
+    parts: [
+      Object.assign({ t: 'geo' }, SSS),
+      { t: 'num', kind: 'num', label: 'Miss den Winkel γ bei C: Wähle das Geodreieck, tippe auf C und zieh auf die andere Seite. γ ≈', ans: 82.8, tol: 2, post: '°' }
+    ],
+    hints: ['Kreisbogen um A: Radius ist b = 5 cm (die Seite von A nach C). Kreisbogen um B: Radius a = 4 cm.', 'Mit dem Punkt-Werkzeug auf den Schnittpunkt tippen. Dann C mit A und B verbinden.'],
+    sol: 'Strecke AB = 6 cm, Kreisbogen um A mit 5 cm, Kreisbogen um B mit 4 cm, Schnittpunkt C, verbinden. Es gibt zwei Schnittpunkte (oberhalb und unterhalb von AB). Beide Dreiecke sind deckungsgleich. γ ≈ 83°.'
+  },
+  {
+    id: 'g1-3', st: 2, title: 'Konstruiere: c = 5 cm, β = 50°, a = 4 cm',
+    q: '<p>Zwei Seiten und der Winkel dazwischen sind gegeben (sws). Der Winkel β liegt bei B.</p>',
+    parts: [
+      Object.assign({ t: 'geo' }, SWS),
+      { t: 'num', kind: 'num', label: 'Wie lang ist b? Miss beim Verbinden von A und C. b ≈', ans: triSides(SWS).b, tol: .15, post: 'cm' }
+    ],
+    hints: ['Erst c = 5 cm zeichnen. Dann das Geodreieck an B anlegen und 50° abtragen.', 'Auf dem neuen Schenkel a = 4 cm abtragen: Zirkel um B mit r = 4 cm, Schnittpunkt ist C.'],
+    sol: `Strecke AB = 5 cm. Bei B mit dem Geodreieck 50° antragen. Kreisbogen um B mit r = 4 cm schneidet den Schenkel in C. C mit A verbinden. Gemessen: b ≈ ${dez(triSides(SWS).b, 1)} cm.`
+  }
+];
+station({
+  id: 'g1', part: 'G', nr: 'Station 7', title: 'Dreiecke konstruieren', short: 'Konstruieren', color: '#137a8a', colorL: '#dcf1f3', icon: iconCompass(), min: 20, badge: 'Zirkel-Ass', exercises: G1,
+  build(main) {
+    card(main, `<h2>So gehst du vor</h2><ol><li>Planfigur skizzieren (Ecken A, B, C gegen den Uhrzeigersinn).</li><li>Gegebene Seiten und Winkel farbig markieren.</li><li>Reihenfolge der Schritte überlegen.</li><li>Konstruieren.</li></ol>
+      <p class="small muted">Seite a liegt gegenüber von A, b gegenüber von B, c gegenüber von C. Der Winkel α liegt bei A, β bei B, γ bei C.</p>
+      <p><b>Werkzeuge im Zeichenfeld:</b> Lineal (Strecke ziehen), Zirkel (Spitze auf einen Punkt, nach außen ziehen), Geodreieck (auf einen Eckpunkt tippen und drehen), Punkt (auf einen Schnittpunkt tippen). „Zurück“ macht den letzten Schritt rückgängig.</p>`);
+    head(main, '✏️ Übungen');
+    exs(main, G1);
+    card(main, `<h3>Typische Fehler</h3><ul><li>Radien vertauschen: Um A kommt die Seite, die von A ausgeht und nicht gegenüberliegt (b oder c).</li><li>Den Winkel am falschen Eckpunkt antragen.</li><li>Ecken im Uhrzeigersinn beschriften.</li></ul>`, 'fehler');
+  }
+});
+
+const KSATZ = `<div class="row" style="gap:14px;margin:8px 0">${[['sss', 'drei Seiten', [1, 1, 1], []], ['sws', 'zwei Seiten und der Winkel dazwischen', [1, 0, 1], [1]], ['wsw', 'eine Seite und die beiden anliegenden Winkel', [0, 0, 1], [0, 1]], ['Ssw', 'zwei Seiten und der Winkel, der der längeren Seite gegenüberliegt', [1, 1, 0], [0]]].map(([n, t, s, w]) => `<div style="flex:1;min-width:150px;background:#fff;border-radius:12px;padding:8px"><svg viewBox="0 0 120 70" width="100%"><path d="M10 62 L110 62" stroke="${s[2] ? '#e2574c' : '#2b2533'}" stroke-width="${s[2] ? 4 : 2}"/><path d="M110 62 L44 10" stroke="${s[0] ? '#e2574c' : '#2b2533'}" stroke-width="${s[0] ? 4 : 2}"/><path d="M10 62 L44 10" stroke="${s[1] ? '#e2574c' : '#2b2533'}" stroke-width="${s[1] ? 4 : 2}"/>${w.includes(0) ? '<path d="M26 62 A16 16 0 0 0 19 49" fill="none" stroke="#e2574c" stroke-width="3"/>' : ''}${w.includes(1) ? '<path d="M94 62 A16 16 0 0 1 97 52" fill="none" stroke="#e2574c" stroke-width="3"/>' : ''}</svg><b>${n}</b><div class="small">${t}</div></div>`).join('')}</div>`;
+const G2 = [
+  {
+    id: 'g2-1', st: 1, title: 'Welcher Kongruenzsatz passt?',
+    parts: [{ t: 'pair', left: ['a = 5 cm, b = 6 cm, c = 7 cm', 'b = 4 cm, c = 6 cm, α = 40°', 'c = 5 cm, α = 50°, β = 60°', 'a = 6 cm, b = 4 cm, α = 70°'], right: ['sss', 'sws', 'wsw', 'Ssw'], map: [0, 1, 2, 3] }],
+    hints: ['α liegt bei A, also zwischen den Seiten b und c. α liegt der Seite a gegenüber.'],
+    sol: 'b, c und α: α liegt zwischen b und c → sws. c mit α und β: beide Winkel liegen an c → wsw. a, b und α: α liegt a gegenüber, a ist die längere Seite → Ssw.'
+  },
+  {
+    id: 'g2-2', st: 2, title: 'Eindeutig oder nicht?',
+    parts: [{
+      t: 'mc', multi: true, label: 'Bei welchen Angaben gibt es (bis auf die Lage) genau ein Dreieck? Wähle alle aus.', ok: [0, 3, 4],
+      opts: ['a = 4 cm, b = 5 cm, c = 6 cm', 'α = 40°, β = 60°, γ = 80°', 'a = 3 cm, b = 5 cm, α = 30°', 'c = 6 cm, α = 45°, β = 55°', 'a = 4 cm, c = 5 cm, β = 50°'],
+      why: { 1: 'Drei Winkel legen nur die Form fest, nicht die Größe. Es gibt große und kleine Dreiecke mit diesen Winkeln.', 2: 'Hier liegt α der <b>kürzeren</b> Seite a gegenüber. Dann kann es zwei verschiedene Dreiecke geben (Ssw gilt nur bei der längeren Seite).' }
+    }]
+  },
+  {
+    id: 'g2-3', st: 1, title: 'Gibt es dieses Dreieck?',
+    q: '<p>Zwei Seiten zusammen müssen immer länger sein als die dritte (Dreiecksungleichung).</p>',
+    parts: [{ t: 'mc', multi: true, label: 'Welche Dreiecke gibt es? Wähle alle aus.', ok: [1, 3], opts: ['3 cm, 4 cm, 8 cm', '4 cm, 5 cm, 6 cm', '2 cm, 3 cm, 5 cm', '5 cm, 5 cm, 9 cm'], why: { 0: '3 + 4 = 7 ist kleiner als 8. Die Kreisbögen treffen sich nicht.', 2: '2 + 3 = 5 ist nicht länger als 5. Die Seiten würden flach aufeinander liegen.' } }]
+  }
+];
+station({
+  id: 'g2', part: 'G', nr: 'Station 8', title: 'Kongruenz', short: 'Kongruenz', color: '#5e8a1f', colorL: '#eaf3dc', icon: iconCongruent(), min: 10, badge: 'Deckungsgleich-Profi', exercises: G2,
+  build(main) {
+    card(main, `<h2>Worum geht’s?</h2><p>Zwei Figuren sind <b>kongruent</b> (deckungsgleich), wenn man sie durch Verschieben, Drehen oder Spiegeln genau aufeinanderlegen kann. Dann sind alle Seiten und Winkel gleich.</p>
+      <p>Ein Dreieck ist <b>eindeutig konstruierbar</b>, wenn alle Dreiecke mit diesen Angaben kongruent sind.</p>`);
+    card(main, `<h3>Kongruenzsätze</h3><p>Zwei Dreiecke sind kongruent, wenn sie übereinstimmen in …</p>${KSATZ}`, 'merk');
+    head(main, '✏️ Übungen');
+    exs(main, G2);
+  }
+});
+
+/* ===== Probe-Klassenarbeit ===== */
+const KA = [
+  {
+    nr: 1, teil: 1, title: 'Ist der Würfel in Ordnung?',
+    text: `<p>Mia und Ben prüfen, ob ein Spielwürfel gezinkt ist.</p>
+      <p><b>Mia</b> würfelt 12-mal: 1: 4× · 2: 1× · 3: 2× · 4: 2× · 5: 1× · 6: 2×. Sie sagt: „Der Würfel ist gezinkt, die 1 kommt viel zu oft!“</p>
+      <p><b>Ben</b> würfelt 200-mal: 1: 31× · 2: 35× · 3: 33× · 4: 34× · 5: 30× · 6: 37×. Er sagt: „Der Würfel ist fair.“</p>
+      <ol class="sub"><li>Nimm Stellung zu den beiden Aussagen. Wem glaubst du eher? Nenne Argumente.</li><li>Fertige für Bens Ergebnis eine Tabelle mit absoluter und relativer Häufigkeit an.</li><li>Schätze die Wahrscheinlichkeiten für die Augenzahlen in einer weiteren Tabellenzeile. Begründe kurz.</li></ol>`,
+    eh: [['a', 3, 'Mia: nur 12 Würfe, große Zufallsschwankungen, 4-mal die 1 ist dabei nicht ungewöhnlich (1 P.). Ben: 200 Würfe, Gesetz der großen Zahlen, rel. Häufigkeiten alle nah an 16,7 % (1 P.). Eher Ben glauben, aber kein sicherer Beweis (1 P.).'], ['b', 3, 'rel. Häufigkeiten: 15,5 % · 17,5 % · 16,5 % · 17 % · 15 % · 18,5 % (Abzug bei Rechenfehlern).'], ['c', 2, 'Schätzung je ca. ' + fr(1, 6) + ' ≈ 16,7 %, weil alle Werte nah daran liegen und der Würfel symmetrisch ist. Summe 100 %.']],
+    res: [{ t: 'table', label: 'b) relative Häufigkeiten bei Ben', corner: 'Augenzahl', head: [1, 2, 3, 4, 5, 6], rows: [{ label: 'relativ', cells: [31, 35, 33, 34, 30, 37].map(v => ({ ans: v / 200, tol: .0006 })) }] }]
+  },
+  {
+    nr: 2, teil: 1, title: 'Freiwürfe',
+    text: `<p>Tom trifft beim Freiwurf mit einer Wahrscheinlichkeit von 80 %. Er wirft dreimal.</p>
+      <ol class="sub"><li>Zeichne ein Baumdiagramm zur Situation.</li><li>Berechne die Wahrscheinlichkeit, dass Tom alle drei Würfe trifft.</li><li>Markiere die passenden Pfade rot und berechne die Wahrscheinlichkeit, dass Tom trotz seiner guten Quote nur genau einmal trifft.</li><li>Wie viele Treffer erwartest du, wenn Tom 25 Freiwürfe wirft? Notiere eine Rechnung.</li></ol>`,
+    eh: [['a', 3, 'Dreistufiger Baum mit T und F, alle Äste mit 0,8 bzw. 0,2 beschriftet, 8 Ergebnisse.'], ['b', 2, 'P(TTT) = 0,8 · 0,8 · 0,8 = 0,512 = 51,2 %.'], ['c', 3, 'Pfade TFF, FTF, FFT markiert (1 P.). Je 0,8 · 0,2 · 0,2 = 0,032 (1 P.). Summe 3 · 0,032 = 0,096 = 9,6 % (1 P.).'], ['d', 2, '25 · 0,8 = 20 Treffer erwartet (Mittelwert, nicht garantiert).']],
+    res: [{ t: 'num', label: 'b) P(alle drei) =', ans: .512, tol: .0006 }, { t: 'num', label: 'c) P(genau ein Treffer) =', ans: .096, tol: .0006 }, { t: 'num', kind: 'num', label: 'd) erwartete Treffer:', ans: 20 }],
+    tree: { depth: 3, levelNames: ['1.', '2.', '3.'], branches: () => [{ lab: 'T', p: .8, show: '0,8' }, { lab: 'F', p: .2, show: '0,2' }] }
+  },
+  {
+    nr: 3, teil: 1, title: 'OHO aus der Dose',
+    text: `<p>In einer Dose liegen vier Kugeln: zwei mit O und zwei mit H. Man zieht dreimal eine Kugel und legt die Buchstaben in der gezogenen Reihenfolge hin.</p>
+      <ol class="sub"><li>Berechne die Wahrscheinlichkeit für das Wort OHO, wenn jede Kugel nach dem Ziehen zurückgelegt wird.</li><li>Berechne die Wahrscheinlichkeit für OHO, wenn die gezogenen Kugeln draußen bleiben.</li><li>Zu Beginn kommt eine weitere O-Kugel in die Dose. Wird OHO dadurch wahrscheinlicher? Rechne und antworte für beide Methoden.</li></ol>`,
+    eh: [['a', 2, fr(2, 4) + ' · ' + fr(2, 4) + ' · ' + fr(2, 4) + ' = ' + fr(1, 8) + ' = 12,5 %.'], ['b', 2, fr(2, 4) + ' · ' + fr(2, 3) + ' · ' + fr(1, 2) + ' = ' + fr(4, 24) + ' = ' + fr(1, 6) + ' ≈ 16,7 %.'], ['c', 4, 'Mit Zurücklegen: ' + fr(3, 5) + ' · ' + fr(2, 5) + ' · ' + fr(3, 5) + ' = ' + fr(18, 125) + ' = 14,4 % > 12,5 % (2 P.). Ohne: ' + fr(3, 5) + ' · ' + fr(2, 4) + ' · ' + fr(2, 3) + ' = ' + fr(1, 5) + ' = 20 % > 16,7 % (1 P.). Antwort: in beiden Fällen wahrscheinlicher (1 P.).']],
+    res: [{ t: 'num', label: 'a) mit Zurücklegen:', ans: 1 / 8 }, { t: 'num', label: 'b) ohne Zurücklegen:', ans: 1 / 6 }, { t: 'num', label: 'c) mit weiterem O, mit Zurücklegen:', ans: 18 / 125 }, { t: 'num', label: 'c) mit weiterem O, ohne Zurücklegen:', ans: 1 / 5 }]
+  },
+  {
+    nr: 4, teil: 2, title: 'Kugeln im Beutel',
+    text: `<p>In einem Beutel sind 20 gleich große Kugeln in den Farben weiß, schwarz und rot. Man zieht ohne hinzusehen eine Kugel, notiert die Farbe und legt sie zurück. In Experiment A wird das 20-mal gemacht, in B 300-mal, in C 600-mal.</p>
+      <div class="tw"><table class="t"><tr><th>Experiment</th><th>weiß</th><th>schwarz</th><th>rot</th></tr><tr><th>A (20)</th><td>12</td><td>5</td><td>3</td></tr><tr><th>B (300)</th><td>148</td><td>105</td><td>47</td></tr><tr><th>C (600)</th><td>303</td><td>207</td><td>90</td></tr></table></div>
+      <ol class="sub"><li>Berechne jeweils die relativen Häufigkeiten in Prozent.</li><li>Stelle eine Vermutung auf, wie viele Kugeln jeder Farbe im Beutel sind. Begründe.</li><li>Stelle einen neuen Beutel mit weißen und schwarzen Kugeln zusammen. Jetzt wird <b>ohne Zurücklegen</b> gezogen. Beim 1. Zug soll weiß mit 40 % kommen, bei Gelingen beim 2. Zug nur noch mit 25 %. Welche Kugeln müssen zu Beginn im Beutel sein?</li></ol>`,
+    eh: [['a', 3, 'A: 60 %, 25 %, 15 %. B: 49,33 %, 35 %, 15,67 %. C: 50,5 %, 34,5 %, 15 %.'], ['b', 3, 'C hat die meisten Züge, darauf verlassen (1 P.). 50 % · 20 = 10 weiße, 35 % · 20 = 7 schwarze, 15 % · 20 = 3 rote (2 P.).'], ['c', 4, 'Ansatz/systematisches Probieren (1 P.). 2 weiße und 3 schwarze (2 P.). Probe: ' + fr(2, 5) + ' = 40 %, danach ' + fr(1, 4) + ' = 25 % (1 P.).']],
+    res: [{ t: 'table', label: 'a) Experiment C', corner: '', head: ['weiß', 'schwarz', 'rot'], rows: [{ label: 'C in %', cells: [303, 207, 90].map(v => ({ ans: v / 600, tol: .0006 })) }] }, { t: 'num', kind: 'num', label: 'b) weiße Kugeln:', ans: 10, tol: 0 }, { t: 'num', kind: 'num', label: 'b) schwarze Kugeln:', ans: 7, tol: 0 }, { t: 'num', kind: 'num', label: 'b) rote Kugeln:', ans: 3, tol: 0 }, { t: 'num', kind: 'num', label: 'c) weiße Kugeln im neuen Beutel:', ans: 2, tol: 0 }, { t: 'num', kind: 'num', label: 'c) schwarze Kugeln im neuen Beutel:', ans: 3, tol: 0 }]
+  },
+  {
+    nr: 5, teil: 2, title: 'Zwölferwürfel',
+    text: `<p>Ein Laplace-Würfel mit 12 Seiten (Zahlen 1 bis 12) wird 5-mal geworfen.</p>
+      <ol class="sub"><li>Erkläre kurz, was „Laplace-Würfel“ hier bedeutet.</li><li>Berechne die Wahrscheinlichkeit für (1) keine Zwölf, (2) mindestens eine Zwölf, (3) genau eine Zwölf.</li></ol>`,
+    eh: [['a', 2, 'Alle 12 Seiten fallen mit derselben Wahrscheinlichkeit ' + fr(1, 12) + '.'], ['b', 6, '(1) (' + fr(11, 12) + ')⁵ ≈ ' + pct(Math.pow(11 / 12, 5)) + ' (2 P.). (2) 1 − (' + fr(11, 12) + ')⁵ ≈ ' + pct(1 - Math.pow(11 / 12, 5)) + ' (2 P.). (3) 5 · ' + fr(1, 12) + ' · (' + fr(11, 12) + ')⁴ ≈ ' + pct(5 / 12 * Math.pow(11 / 12, 4)) + ' (2 P.).']],
+    res: [{ t: 'num', label: '(1) keine Zwölf:', ans: Math.pow(11 / 12, 5), tol: .0006 }, { t: 'num', label: '(2) mindestens eine Zwölf:', ans: 1 - Math.pow(11 / 12, 5), tol: .0006 }, { t: 'num', label: '(3) genau eine Zwölf:', ans: 5 / 12 * Math.pow(11 / 12, 4), tol: .0006 }]
+  },
+  {
+    nr: 6, teil: 2, title: 'Drei Kugeln aus der Dose',
+    text: `<p>In einer Dose liegen 5 Kugeln: 3 gelbe, 1 blaue und 1 lila Kugel. Es werden nacheinander drei Kugeln gezogen.</p>
+      <ol class="sub"><li>Zeichne den vollständigen Baum für den Fall, dass die Kugeln <b>nicht zurückgelegt</b> werden. Benutze g, b und l an den Knoten und schreibe die Wahrscheinlichkeiten als Brüche an die Äste.</li><li>Markiere alle Pfade, bei denen genau zwei gelbe Kugeln gezogen werden. Berechne jeweils die Pfadwahrscheinlichkeit und damit P(genau 2 gelbe).</li><li>Jetzt wird <b>mit Zurücklegen</b> gezogen. Berechne P(genau 2 gelbe).</li></ol>`,
+    eh: [['a', 4, 'Vollständiger Baum mit 13 Pfaden, Nenner 5, 4, 3, keine Äste für schon gezogene b oder l.'], ['b', 4, 'Pfade ggb, ggl, gbg, glg, bgg, lgg markiert (1 P.). Jeder Pfad ' + fr(6, 60) + ' = ' + fr(1, 10) + ' (2 P.). Summe ' + fr(6, 10) + ' = 60 % (1 P.).'], ['c', 3, 'Drei Lagen des Nicht-Gelb, je ' + fr(3, 5) + ' · ' + fr(3, 5) + ' · ' + fr(2, 5) + ' = ' + fr(18, 125) + '. Summe ' + fr(54, 125) + ' = 43,2 %.']],
+    res: [{ t: 'num', label: 'b) P(genau 2 gelbe) ohne Zurücklegen:', ans: .6 }, { t: 'num', label: 'c) P(genau 2 gelbe) mit Zurücklegen:', ans: 54 / 125 }],
+    tree: { depth: 3, dropZero: true, levelNames: ['1.', '2.', '3.'], branches: (p) => bagTree({ g: 3, b: 1, l: 1 })(p) }
+  }
+];
+
+PAGES.ka = (main) => {
+  main.style.setProperty('--c', '#43337f'); main.style.setProperty('--c-l', '#ece6fb');
+  main.appendChild(el(`<div class="band"><div><div class="nr">Generalprobe</div><h1>Probe-Klassenarbeit</h1><div class="prog">Aufgebaut wie die echte Arbeit, mit neuen Zahlen.</div></div>${iconFlag()}</div>`));
+  card(main, `<p>So geht’s: Löse die Aufgaben auf Papier oder in deinen Notizen. Wie in der Klassenarbeit gilt: Schreib alle Zwischenschritte auf. Runde auf zwei Nachkommastellen oder volle Prozente.</p>
+    <p>Danach tippst du deine Ergebnisse ein und vergibst mit dem Erwartungshorizont selbst Punkte.</p>
+    <div class="seg" role="tablist"><button data-tab="1" class="on">Teil 1 · ohne Hilfsmittel</button><button data-tab="2">Teil 2 · mit Taschenrechner</button><button data-tab="3">Auswertung</button></div>`);
+  const body = el('<div></div>'); main.appendChild(body);
+  let timer = null;
+  function sheet(teil) {
+    const mins = teil === 1 ? 25 : 40;
+    const w = el(`<div><div class="card row" style="justify-content:space-between"><div><b>Teil ${teil}</b> · ${teil === 1 ? 'keine Hilfsmittel' : 'wissenschaftlicher Taschenrechner erlaubt'} · Vorschlag: ${mins} Minuten</div><div class="row"><span class="timer">${mins}:00</span><button class="btn sm tgo">Start</button><button class="btn sm ghost trs">↺</button></div></div><div class="ka-sheet"></div></div>`);
+    const sh = $('.ka-sheet', w);
+    KA.filter(k => k.teil === teil).forEach(k => sh.appendChild(el(`<div><h3>Aufgabe ${k.nr}: ${k.title} <span class="chip">${k.eh.reduce((a, e) => a + e[1], 0)} P.</span></h3>${k.text}</div>`)));
+    sh.appendChild(el(`<p class="muted" style="margin-top:1.4em">Fertig? Dann weiter zu ${teil === 1 ? '<b>Teil 2</b>' : 'der <b>Auswertung</b>'}.</p>`));
+    let left = mins * 60, run = false;
+    const show = () => $('.timer', w).textContent = `${Math.floor(left / 60)}:${String(left % 60).padStart(2, '0')}`;
+    $('.tgo', w).onclick = () => { run = !run; $('.tgo', w).textContent = run ? 'Pause' : 'Weiter'; clearInterval(timer); if (run) timer = setInterval(() => { if (!document.body.contains(w)) return clearInterval(timer); left = Math.max(0, left - 1); show(); if (!left) { clearInterval(timer); owlSay('Die Zeit ist um! Schreib noch den Satz zu Ende.', 'think'); } }, 1000); };
+    $('.trs', w).onclick = () => { clearInterval(timer); run = false; left = mins * 60; show(); $('.tgo', w).textContent = 'Start'; };
+    return w;
+  }
+  function auswertung() {
+    const w = el('<div></div>');
+    const total = () => KA.reduce((a, k) => a + k.eh.reduce((b, e) => b + (S.ka[k.nr + e[0]] || 0), 0), 0);
+    const max = KA.reduce((a, k) => a + k.eh.reduce((b, e) => b + e[1], 0), 0);
+    const sum = el(`<div class="card merk" style="--c:#43337f;--c-l:#ece6fb"><h3>Deine Punkte</h3><p class="timer tot"></p><p class="small muted">Trag bei jeder Teilaufgabe ein, wie viele Punkte du dir nach dem Erwartungshorizont gibst.</p></div>`);
+    const upd = () => { const t = total(); $('.tot', sum).textContent = `${t} von ${max} Punkten (${Math.round(t / max * 100)} %)`; };
+    w.appendChild(sum);
+    KA.forEach(k => {
+      head(w, `Aufgabe ${k.nr}: ${k.title}`);
+      renderExercise({ id: 'ka-' + k.nr, st: 3, title: 'Ergebnisse prüfen', parts: k.res }, w);
+      const c = el(`<section class="card"><h3>Erwartungshorizont</h3><div class="ehs"></div><div class="treebox"></div></section>`); w.appendChild(c);
+      k.eh.forEach(([t, mx, txt]) => {
+        const key = k.nr + t; const row = el(`<div class="pts"><div><b>${t})</b> ${txt}</div><div class="stepper"><button aria-label="weniger">−</button><span class="v"></span><button aria-label="mehr">+</button></div></div>`);
+        const v = $('.v', row); const paint = () => v.textContent = `${S.ka[key] || 0} / ${mx}`;
+        const [mi, pl] = $$('button', row); mi.onclick = () => { S.ka[key] = Math.max(0, (S.ka[key] || 0) - 1); save(); paint(); upd(); }; pl.onclick = () => { S.ka[key] = Math.min(mx, (S.ka[key] || 0) + 1); save(); paint(); upd(); };
+        paint(); $('.ehs', c).appendChild(row);
+      });
+      if (k.tree) { const tb = $('.treebox', c); tb.appendChild(el('<p class="small muted" style="margin-top:12px">Musterbaum:</p>')); treeView(k.tree, tb); }
+    });
+    upd();
+    return w;
+  }
+  function tab(t) { clearInterval(timer); body.innerHTML = ''; body.appendChild(t === 3 ? auswertung() : sheet(t)); $$('[data-tab]', main).forEach(b => b.classList.toggle('on', +b.dataset.tab === t)); }
+  main.addEventListener('click', e => { const b = e.target.closest('[data-tab]'); if (b) tab(+b.dataset.tab); });
+  tab(1);
+};
+
+/* ===== Spickzettel ===== */
+PAGES.spick = (main) => {
+  main.style.setProperty('--c', '#c98410'); main.style.setProperty('--c-l', '#fdf0d4');
+  main.appendChild(el(`<div class="band"><div><div class="nr">Zum Wiederholen</div><h1>Spickzettel</h1><div class="prog">Alles Wichtige auf einer Seite</div></div><div style="font-size:3rem">📒</div></div>`));
+  card(main, `<h3>Häufigkeiten</h3><p>relative Häufigkeit = absolute Häufigkeit : Anzahl aller Versuche.<br>Gesetz der großen Zahlen: Bei vielen Versuchen liegen die relativen Häufigkeiten meist nah an den Wahrscheinlichkeiten. Bei wenigen Versuchen schwankt es stark.<br>Alle Wahrscheinlichkeiten zusammen = 1 = 100 %.</p>`, 'merk');
+  card(main, `<h3>Laplace</h3><p>Alle Ergebnisse gleich wahrscheinlich. <span class="formula">P(E) = günstige : mögliche</span><br>Summenregel: Wahrscheinlichkeiten der passenden Ergebnisse addieren.<br>Gegenereignis: P(Ā) = 1 − P(A).<br>Erwartete Anzahl: n · P.</p>`, 'merk');
+  card(main, `<h3>Baumdiagramm</h3><p><b>Entlang</b> eines Pfades multiplizieren (Pfadregel). Mehrere passende Pfade <b>addieren</b> (Summenregel). An jeder Verzweigung ergeben die Äste 1.</p><div class="t1"></div>`, 'merk');
+  treeView({ depth: 2, levelNames: ['1. Los', '2. Los'], branches: loseTree }, $('.t1', main.lastChild));
+  card(main, `<h3>Mit oder ohne Zurücklegen</h3><p>Mit: Brüche bleiben gleich. Ohne: Nenner wird bei jedem Zug um 1 kleiner, Zähler hängt vom Gezogenen ab.<br>Beispiel ohne Zurücklegen, Socke A A H H H, Wort AHA: ${fr(2, 5)} · ${fr(3, 4)} · ${fr(1, 3)} = ${fr(1, 10)}.</p>`, 'merk');
+  card(main, `<h3>Genau, mindestens, keiner (n Versuche, Treffer p, daneben q = 1 − p)</h3><p>keinmal: q<sup>n</sup><br>mindestens einmal: 1 − q<sup>n</sup><br>genau einmal: n · p · q<sup>n−1</sup><br>alle: p<sup>n</sup></p>`, 'merk');
+  card(main, `<h3>Dreiecke</h3><p>Planfigur → gegebene Größen farbig → Reihenfolge → konstruieren. Ecken A, B, C gegen den Uhrzeigersinn. a liegt A gegenüber.<br>Kongruenzsätze: sss, sws, wsw, Ssw (Winkel liegt der längeren Seite gegenüber).<br>Dreiecksungleichung: Zwei Seiten zusammen sind immer länger als die dritte.</p>`, 'merk');
+};
+
+boot();
+
+</script>
+</body>
+</html>
